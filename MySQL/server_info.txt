@@ -1,0 +1,28 @@
+# Current information about the database structure
+
+--ACCESS--
+MySQL server IP: 172.104.212.164
+MySQL port: 3306
+MySQL User: rabbit
+MySQL Password: rabbitIT490!
+
+--DATABASE INFO--
+Database Name: logindb
+
+Tables in database:
+	+-------------------+
+	| Tables_in_logindb |
+	+-------------------+
+	| users             |
+	+-------------------+
+
+Tables schema:
+
+	-- logindb --
+	+----------+--------------+------+-----+---------+----------------+
+	| Field    | Type         | Null | Key | Default | Extra          |
+	+----------+--------------+------+-----+---------+----------------+
+	| id       | int          | NO   | PRI | NULL    | auto_increment |
+	| username | varchar(50)  | YES  |     | NULL    |                |
+	| password | varchar(255) | YES  |     | NULL    |                |
+	+----------+--------------+------+-----+---------+----------------+
