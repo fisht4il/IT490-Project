@@ -1,0 +1,260 @@
+/* --ANIMATIONS-- */
+
+@keyframes fade-in {
+    0% {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(-0px);
+    }
+}
+
+
+/* --GENERAL-- */
+
+* {
+
+}
+
+html {
+
+}
+
+body { 
+    background-attachment: fixed;
+    background-color: rgba(0, 0, 0, 0.6);
+    background-blend-mode: darken;
+    background-size: cover;
+    color: #0566c7;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    background-color: #282C35;
+    color: white;
+
+}
+
+
+/* --HEADER-- */
+
+.main-header {
+    background-color: rgba(0, 0, 0, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 1125px;
+    margin-left: auto;
+    margin-right: auto;
+    animation: fade-in 0.5s;
+}
+
+/*maybe change*/
+.page-title {
+    margin-left: 25px;
+    font-size: 25px;
+    font-weight: 1000;
+    color: rgba(225, 225, 225, 1)
+}
+
+.header-nav {
+
+}
+
+.link-list {
+    list-style: none;
+    display: flex;
+}
+
+.link-item {
+    margin-right: 25px;
+}
+
+.btn {
+    background: none;
+    border: none;
+    width: 90px;
+    height: 60px;
+}
+
+.placeholder-link {
+    text-decoration: none;
+    color: rgba(225, 225, 225, 0.75);
+    font-weight: 500;
+    font-size: 20px;
+    transition: all 0.5s;
+}
+
+.placeholder-link:hover {
+    color: rgba(225, 225, 225, 1);
+}
+
+.signup {
+    width: 90px;
+    height: 60px;
+    border: none;
+    background-color: #020075;
+}
+
+/* --MAIN-- */
+
+.main-section {
+    height: max-content;
+    width: 1125px;
+    background-color: white;
+    margin-left: auto;
+    margin-right: auto;
+
+    
+}
+
+.login-section {
+    margin-left: 25px;
+    background-color: #282C35;
+    color: white;
+    margin-left: auto;
+    margin-right: auto;
+    padding-bottom: 10px;
+}
+
+.login-title {
+    font-size: 25px;
+    font-weight: 1000;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.login-input {
+    padding: 8px;
+    margin-bottom: 8px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.past-works {
+    color: black;
+    padding-top: 20px;
+    font-size: 25px;
+    font-weight: 1000;
+    margin-left: 500px;
+}
+
+.images {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+    row-gap: 4px;
+}
+
+.img-sec1 {
+    display: flex;
+    column-gap: 4px;
+}
+
+.img-sec2 {
+    display: flex;
+
+    column-gap: 4px;
+}
+
+.image1 {
+    width: 200px;
+    height: 200px;
+}
+
+.image2 {
+    width: 200px;
+    height: 200px;
+}
+
+.about-service {
+
+}
+
+.p-about-service {
+    color: black;
+    padding: 25px;
+}
+
+/* --FOOTER-- */
+
+.footer {
+    display: flex;
+    width: 1125px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: auto;
+    border-top: 1px solid rgba(255, 255, 255, 1);
+    background-color: rgba(0, 0, 0, 0.3);
+    padding-left: 2px;
+}
+
+.copyright {
+
+}
+
+
+/* --SIGNUP PAGE-- */
+
+.signup-section {
+
+}
+
+.signup-form {
+
+}
+
+.signup-title {
+    margin-right: auto;
+    margin-left: auto;
+}
+
+
+.email {
+    padding: 8px;
+    margin-bottom: 8px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.username {
+    padding: 8px;
+    margin-bottom: 8px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.pwd {
+    padding: 8px;
+    margin-bottom: 8px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.signup-label {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.signup-register {
+    padding: 8px;
+    margin-bottom: 8px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+input, label {
+    display:block;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+
+
