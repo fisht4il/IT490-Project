@@ -1,1 +1,1 @@
-IPv4 address for server: 172.104.212.164
+IPv4 address for MySQL server: 172.104.212.164
