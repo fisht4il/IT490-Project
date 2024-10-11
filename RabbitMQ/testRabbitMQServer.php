@@ -3,6 +3,7 @@
 require_once('path.inc');
 require_once('get_host_info.inc');
 require_once('rabbitMQLib.inc');
+$requestsCounter = 0;
 
 function doLogin($username,$password)
 {
@@ -40,8 +41,22 @@ function doLogin($username,$password)
 
 function requestProcessor($request)
 {
-  echo "received request".PHP_EOL;
-  var_dump($request);
+  // Added a message log file to keep track of messages
+  // As well as a different ouput message on the server side
+  global $requestsCounter;
+  $logFile = __DIR__ . '/received_messages.log';
+  date_default_timezone_set('America/New_York');
+  $logTime = date('m-d-Y H:i:s');
+  $logRequest = "[" . $logTime . "] Received request: " . print_r($request, true) . PHP_EOL;
+  file_put_contents($logFile, $logRequest, FILE_APPEND);
+  
+  // Clear the screen. Keeping the clutter minimal.
+  // Will probably not need this when automating it when system boots from sleep.
+  system('clear');
+  $requestsCounter += 1;
+  echo "Received request. Messages parsed: " . $requestsCounter . PHP_EOL;
+  // var_dump($request);
+  
   if(!isset($request['type']))
   {
     return "ERROR: unsupported message type";
