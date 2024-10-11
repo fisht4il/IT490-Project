@@ -58,7 +58,7 @@
         <main class="pg-main">
             <section class="sign-in">
                 <h2 class="login">Login</h2>
-                <form action="" class="login-form">
+                <form action="" class="login-form" method="post">
                     <label for="username">Username: </label><br>
                     <input type="text" class="login-input" name="username" placeholder="username"><br><br>
 
@@ -108,7 +108,7 @@
 
 
 <?php
-
+/*
 $username = $_POST["username"];
 
 $password = $_POST["password"];
@@ -137,5 +137,5 @@ else
 
 	echo "That is not the password. <br>";
 
-
+ */
 ?>
