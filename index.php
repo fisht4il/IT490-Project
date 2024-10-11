@@ -58,13 +58,13 @@
         <main class="pg-main">
             <section class="sign-in">
                 <h2 class="login">Login</h2>
-                <form action="" class="login-form" method="post">
-                    <label for="username">Username: </label><br>
+                <form action="login.php" class="login-form" method="post">
+                    <label for="username">Username </label><br>
                     <input type="text" class="login-input" name="username" placeholder="username"><br><br>
 
-                    <label for="password">Password: </label><br>
+                    <label for="password">Password </label><br>
                     <input type="password" class="login-input" name="password" placeholder="password" required><br>
-                    <input type="submit" class="submit" value="Sign In">
+                    <input type="submit" class="submit" value="login">
                 </form>
 	    </section>
 	<!-- 
