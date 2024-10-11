@@ -4,36 +4,41 @@ require_once('path.inc');
 require_once('get_host_info.inc');
 require_once('rabbitMQLib.inc');
 $requestsCounter = 0;
+date_default_timezone_set('America/New_York');
 
 function doLogin($username,$password)
 {
-    // May need to implement sanitation for increased security. I'm too lazy right now.
     try {
       // Database connection details
-      $dsn = 'mysql:host=96.126.110.191;dbname=logindb';
+      $dbLogin = 'mysql:host=96.126.110.191;dbname=logindb';
       $dbUsername = 'rabbit';
       $dbPassword = 'rabbitIT490!';
 
-      // Create a new PDO instance
-      $pdo = new PDO($dsn, $dbUsername, $dbPassword);
+      $pdo = new PDO($dbLogin, $dbUsername, $dbPassword);
       $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-      // Prepare and execute the query
-      $stmt = $pdo->prepare("SELECT * FROM users WHERE username = :username AND password = :password");
+      // Only fetch hashed password from database.
+      $stmt = $pdo->prepare("SELECT password FROM users WHERE username = :username");
       $stmt->bindParam(':username', $username);
-      $stmt->bindParam(':password', $password);  // Need to replace as hash. I was using basic login example
-
       $stmt->execute();
 
-      // Check if any rows were returned
-      if ($stmt->rowCount() > 0) {
-          return "Login successful!"; // Login successful
+      // Using password_verify to compare the hashed password to the database.
+      $user = $stmt->fetch(PDO::FETCH_ASSOC);
+      if ($user) {
+        if (password_verify($password, $user['password'])) {
+            // Update the last_login field on successful login
+            $stmt = $pdo->prepare("UPDATE users SET last_login = NOW() WHERE username = :username");
+            $stmt->bindParam(':username', $username);
+            $stmt->execute();
+            return "Login successful!";
+        } else {
+            return "Login failed. Invalid password.";
+        }
       } else {
-          return "Login failed. Please try again."; // Login failed
+          return "Login failed. User " . $user . " not found.";
       }
 
   } catch (PDOException $e) {
-      // Log error
       error_log('Database error: ' . $e->getMessage());
       return false;
   }
@@ -45,7 +50,6 @@ function requestProcessor($request)
   // As well as a different ouput message on the server side
   global $requestsCounter;
   $logFile = __DIR__ . '/received_messages.log';
-  date_default_timezone_set('America/New_York');
   $logTime = date('m-d-Y H:i:s');
   $logRequest = "[" . $logTime . "] Received request: " . print_r($request, true) . PHP_EOL;
   file_put_contents($logFile, $logRequest, FILE_APPEND);
