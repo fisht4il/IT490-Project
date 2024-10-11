@@ -10,7 +10,7 @@ function doLogin($username,$password)
 {
     try {
       // Database connection details
-      $dbLogin = 'mysql:host=96.126.110.191;dbname=logindb';
+      $dbLogin = 'mysql:host=10.0.0.10;dbname=logindb';
       $dbUsername = 'rabbit';
       $dbPassword = 'rabbitIT490!';
 
@@ -55,7 +55,7 @@ function requestProcessor($request)
   file_put_contents($logFile, $logRequest, FILE_APPEND);
   
   // Clear the screen. Keeping the clutter minimal.
-  // Will probably not need this when automating it when system boots from sleep.
+  // Will probably not need this when automating and persistence.
   system('clear');
   $requestsCounter += 1;
   echo "Received request. Messages parsed: " . $requestsCounter . PHP_EOL;
