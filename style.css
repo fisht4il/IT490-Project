@@ -1,3 +1,9 @@
 body {
-	background-color: 282C35;
+	background-color: white;
 }
+
+input {
+	padding: 8px;
+}
+
+
