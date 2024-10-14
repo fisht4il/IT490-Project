@@ -2,9 +2,15 @@
 <html>
 	<head>
 		<title>Title</title>
+		<link>rel="stylesheet" href="style.css"</link>
 	</head>
 
 	<body>
-		<h1>Body</h1>
+		<h1>Login</h1>
+		<form action="/login" method="post">
+			<input type="text" placeholder="Username" name= "username" required>
+			<input type="password" placeholder="Password" name="password" required>
+			<button type="submit">Login</button>
+		</form>
 	</body>
 </html>
