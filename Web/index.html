@@ -1,20 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login Form</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    $(document).ready(function () {
+      $('#login-form').on('submit', function (e) {
+        e.preventDefault();
+
+        var username = $('#username').val();
+        var password = $('#password').val();
+        var showRawJson = $('#show-json').is(':checked');
+
+        $.ajax({
+          url: '/php/login.php',
+          type: 'POST',
+          data: {
+            username: username,
+            password: password
+          },
+          success: function (response) {
+            try {
+              let result = typeof response === 'string' ? JSON.parse(response) : response;
+              let color = result.success ? 'green' : 'red';
+
+              let formattedResponse = `
+                <pre><strong style="color:${color};">${result.message}</strong></pre><br>
+              `;
+
+              let rawJsonResponse = showRawJson
+                ? `<h4>Raw JSON Response:</h4><pre>${JSON.stringify(result, null, 2)}</pre>`
+                : '';
+
+              $('#response').html(formattedResponse + rawJsonResponse);
+
+            } catch (error) {
+              console.error("JSON parse error:", error);
+              $('#response').html(
+                `<pre><strong style='color:red;'>Invalid JSON response.</strong></pre>`
+              );
+            }
+          },
+          error: function () {
+            $('#response').html("<strong style='color:red;'>An error occurred. Please try again.</strong>");
+          }
+        });
+      });
+    });
+  </script>
 </head>
+
 <body>
-  <h2>Login Form</h2>
-  <form action="login.php" method="post">
+  <h2>Login</h2>
+  <form id="login-form">
     <label for="username">Username:</label><br>
     <input type="text" id="username" name="username" required><br><br>
-    
+
     <label for="password">Password:</label><br>
     <input type="password" id="password" name="password" required><br><br>
-    
+
     <input type="submit" value="Login">
+    <label>
+      <br><br>Raw JSON Response<input type="checkbox" id="show-json">
+    </label>
   </form>
+
+  <div id="response"></div>
 </body>
+
 </html>
