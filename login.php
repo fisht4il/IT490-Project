@@ -26,11 +26,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     print_r($response);
     echo "</pre>";
 
-    header("Location: home.html"); 
 
 } else {
 	echo "Invalid request method.";
-	header("Location: index.html");
 }
 
 ?>
