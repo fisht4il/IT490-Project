@@ -1,10 +1,5 @@
 <?php
 $path = '/usr/local/lib/system_libs';
-	if (file_exists('local.ini'))
-	{
-		$parse = parse_ini_file('local.ini',true);
-		if (isset($parse['paths<?php
-$path = '/usr/local/lib/system_libs';
     if (file_exists('local.ini'))
     {
         $parse = parse_ini_file('local.ini',true);
