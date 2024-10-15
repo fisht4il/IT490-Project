@@ -17,3 +17,6 @@ Things to check if it's not working:
 4. Is the testRAbbitMQ.ini file configured correctly?
 
 
+Debugging Tip:
+- Use 'php -S localhost:8000' to help debug the webserver without having to constantly edit as root in /var/www/html
+- Then on your web browser, go to localhost:8000 and your index.html should pop up.

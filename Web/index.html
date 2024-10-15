@@ -28,20 +28,15 @@
               let color = result.success ? 'green' : 'red';
 
               let formattedResponse = `
-                <pre><strong style="color:${color};">${result.message}</strong></pre><br>
-              `;
+                <pre><strong style="color:${color};">${result.message}</strong></pre><br>`;
 
-              let rawJsonResponse = showRawJson
-                ? `<h4>Raw JSON Response:</h4><pre>${JSON.stringify(result, null, 2)}</pre>`
-                : '';
+              let rawJsonResponse = showRawJson ? `<h3>Raw JSON Response:</h3><pre>${JSON.stringify(result, null, 2)}</pre>` : '';
 
               $('#response').html(formattedResponse + rawJsonResponse);
 
             } catch (error) {
               console.error("JSON parse error:", error);
-              $('#response').html(
-                `<pre><strong style='color:red;'>Invalid JSON response.</strong></pre>`
-              );
+              $('#response').html(`<pre><strong style='color:red;'>Invalid JSON response.</strong></pre>`);
             }
           },
           error: function () {
