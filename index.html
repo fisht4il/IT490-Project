@@ -29,15 +29,20 @@
               let color = result.success ? 'green' : 'red';
 
               let formattedResponse = `
-                <pre><strong style="color:${color};">${result.message}</strong></pre><br>`;
+                <pre><strong style="color:${color};">${result.message}</strong></pre><br>
+              `;
 
-              let rawJsonResponse = showRawJson ? `<h3>Raw JSON Response:</h3><pre>${JSON.stringify(result, null, 2)}</pre>` : '';
+              let rawJsonResponse = showRawJson
+                ? `<h4>Raw JSON Response:</h4><pre>${JSON.stringify(result, null, 2)}</pre>`
+                : '';
 
               $('#response').html(formattedResponse + rawJsonResponse);
 
             } catch (error) {
               console.error("JSON parse error:", error);
-              $('#response').html(`<pre><strong style='color:red;'>Invalid JSON response.</strong></pre>`);
+              $('#response').html(
+                `<pre><strong style='color:red;'>Invalid JSON response.</strong></pre>`
+              );
             }
           },
           error: function () {
@@ -49,11 +54,10 @@
   </script>
 </head>
 
-    <!--<h1>login page</h1>-->
-    <body>
+<body>
 
         <header class="main-header">
-            <h1 class="title-pg">IT-490-Project</h1>
+            <h1 class="page-title">IT-490-Project</h1>
             <nav class="header-nav">
                 <ul class="link-list">
                     <li class="link-item">
@@ -66,7 +70,7 @@
                             <a href="#" class="placeholder-link">Link2</a>
                         </button>
                     </li>
-                    <li class="link-item">
+                     <li class="link-item">
                         <button class="signup">
                             <a href="signup.html" class="placeholder-link">Signup</a>
                         </button>
@@ -75,26 +79,36 @@
             </nav>
         </header>
 
-        <main class="pg-main">
-            <section class="sign-in">
-                <h2 class="login">Login</h2>
-                <form action="login.php" class="login-form" method="post">
-                    <label for="username">Username </label><br>
-                    <input type="text" class="login-input" id="username" name="username" placeholder="username" required><br><br>
+  <main class="main-section">
+        <section class="login-section">
+                <form id="login-form">
+                        <h2 class="login-title">Login</h2>
+                        <label for="username">Username</label><br>
+                        <input type="text" class="login-input" id="username" name="username" required><br><br>
 
-                    <label for="password">Password </label><br>
-                    <input type="password" class="login-input" id="password" name="password" placeholder="password" minlength="8" required><br>
-                    <input type="submit" class="submit" id="submit" value="login">
-		    <label>
-      			<br><br>Raw JSON Response<input type="checkbox" id="show-json">
-    		   </label>
-		   <div id="response"></div>
+                        <label for="password">Password</label><br>
+                        <input type="password" class="login-input" id="password" name="password" required><br><br>
+
+                        <input type="submit" class="login-input" value="Login">
+                        <label>
+                                <br><br>Raw JSON Response<input type="checkbox" id="show-json">
+                        </label>
                 </form>
-            </section>
-        </main>
+        </section>
+  </main>
+ <div id="response"></div>
 
-        <footer class="footer">
-            <p class="copyright">&copy; 2024. Copyright by IT-490-Project</p>
-        </footer>
-    </body>
+  <section class="about-service">
+                <p class="p-about-service">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi cupiditate magnam vero dignissimos dolorum inventore ratione ipsum quisquam porro odit non neque, rem doloremque molestiae quaerat explicabo at aspernatur hic.
+                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ad, aliquid! Porro explicabo dignissimos officia officiis, dolorum harum ipsa tenetur accusantium, nihil fuga deserunt ut, consectetur fugiat ipsam nobis rem vel.
+                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Reiciendis accusamus aliquid tempore sit, molestias aspernatur modi rerum vel non amet dolor nam repellat dignissimos veniam quasi itaque mollitia quibusdam eos.
+                </p>
+        </section>
+
+    <footer class="footer">
+        <p class="copyright">&copy; 2024. Copyright by IT-490-Project</p>
+    </footer>
+</body>
+
 </html>
