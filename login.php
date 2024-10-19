@@ -20,8 +20,4 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	print_r($response);
 	echo "\n\n";
 }
-
-else {
-	echo "Error";
-}
 ?>
