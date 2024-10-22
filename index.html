@@ -37,6 +37,11 @@
                 : '';
 
               $('#response').html(formattedResponse + rawJsonResponse);
+		
+	      if (result.success && result.redirect) {
+                window.location.href = result.redirect;
+                return;
+              }
 
             } catch (error) {
               console.error("JSON parse error:", error);
@@ -81,7 +86,7 @@
 
   <main class="main-section">
         <section class="login-section">
-                <form id="login-form">
+                <form action="login.php"  id="login-form">
                         <h2 class="login-title">Login</h2>
                         <label for="username">Username</label><br>
                         <input type="text" class="login-input" id="username" name="username" required><br><br>

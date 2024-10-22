@@ -1,20 +1,22 @@
 <?php
 
+
+
 session_start();
 
+/* This code will stop  people from getting into home without a session.
 if(!isset($_SESSION['username'])) {
         header("Location: ../index.html");
         exit();
 }
 
-echo "Welcome, " . htmlspecialchars($_SESSION['username']) . ".";
-
+ */
 ?>
 
 <html>
 
 <head>
-	<link rel="stylesheet" href="style.css">
+
 </head>
 
 <body>
@@ -34,6 +36,9 @@ echo "Welcome, " . htmlspecialchars($_SESSION['username']) . ".";
                         </button>
                     </li>
                      <li class="link-item">
+                     <?php
+                        echo "Welcome, " . htmlspecialchars($_SESSION['username']) . ".";
+                     ?>
                         <button class="logout">
                             <a href="logout.php" class="placeholder-link">Logout</a>
                         </button>
