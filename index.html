@@ -1,17 +1,76 @@
 <!DOCTYPE html>
-<html>
-	<head>
-		<title>Title</title>
-		<link rel="stylesheet" href="style.css">
-	</head>
+<html lang="en">
 
-	<body>
-		<!-- Login Form -->
-		<h1>Login</h1>
-		<form action="login.php" method="post">
-			<input type="text" placeholder="Username" name= "username" required><br><br>
-			<input type="password" placeholder="Password" name="password" required><br><br>
-			<button type="submit" value="login">Login</button>
-		</form>
-	</body>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login Form</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    $(document).ready(function () {
+      $('#login-form').on('submit', function (e) {
+        e.preventDefault();
+
+        var username = $('#username').val();
+        var password = $('#password').val();
+        var showRawJson = $('#show-json').is(':checked');
+
+        $.ajax({
+          url: '/php/login.php',
+          type: 'POST',
+          data: {
+            username: username,
+            password: password
+          },
+          success: function (response) {
+            try {
+              let result = typeof response === 'string' ? JSON.parse(response) : response;
+              let color = result.success ? 'green' : 'red';
+
+              let formattedResponse = `
+                <pre><strong style="color:${color};">${result.message}</strong></pre><br>`;
+
+              let rawJsonResponse = showRawJson ? `<h3>Raw JSON Response:</h3><pre>${JSON.stringify(result, null, 2)}</pre>` : '';
+
+              $('#response').html(formattedResponse + rawJsonResponse);
+
+			
+	      if (result.success && result.redirect) {
+                window.location.href = result.redirect;
+                return;
+              }
+
+            } catch (error) {
+              console.error("JSON parse error:", error);
+              $('#response').html(`<pre><strong style='color:red;'>Invalid JSON response.</strong></pre>`);
+            }
+          },
+          error: function () {
+            $('#response').html("<strong style='color:red;'>An error occurred. Please try again.</strong>");
+          }
+        });
+      });
+    });
+  </script>
+</head>
+
+<body>
+  <h2>Login</h2>
+  <form action="login.php"  id="login-form">
+    <label for="username">Username:</label><br>
+    <input type="text" id="username" name="username" required><br><br>
+
+    <label for="password">Password:</label><br>
+    <input type="password" id="password" name="password" required><br><br>
+
+    <input type="submit" value="Login">
+    <label>
+      <br><br>Raw JSON Response<input type="checkbox" id="show-json">
+    </label>
+  </form>
+
+  <div id="response"></div>
+</body>
+
 </html>
