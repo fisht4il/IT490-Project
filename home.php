@@ -2,9 +2,9 @@
 // Start the session
 session_start();
 //this one checks if user is loged in or not if not it will redirect to inde.html file
-if (!(isset($_SESSION['username']) ){
-        header ("Location:/html/index.html");
-}
+//if (!(isset($_SESSION['username']) ){
+        //header ("Location:/html/index.html");
+//}
 ?>
 
 <!DOCTYPE html>
