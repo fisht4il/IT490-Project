@@ -44,7 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             echo json_encode(value: [
                     "success" => true,
                     "message" => "Login successful.",
-                    "redirect" => "home.php"
+                    "redirect" => "/php/home.php"
             ]);
             exit;
     }
