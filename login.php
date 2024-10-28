@@ -1,13 +1,12 @@
-<?php
-// Start the session
+?php
+
 session_start();
 
-// Custom 403 page to deter unauthorized access
+// Custom 403 page to deter unauthorized access from fairytale creatures
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     http_response_code(403);
     header('Content-Type: image/gif');
-
-    // Serve a fun GIF or fallback message
+    // Serve a fun GIF or fallback message.. Hehehe
     $gifPath = __DIR__ . '/../media/swamp.gif';
     if (file_exists($gifPath)) {
         readfile($gifPath);
@@ -21,12 +20,10 @@ require_once('path.inc');
 require_once('get_host_info.inc');
 require_once('rabbitMQLib.inc');
 
-
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $username = $_POST['username'];
     $password = $_POST['password'];
 
-    
     $client = new rabbitMQClient("testRabbitMQ.ini", "testServer");
 
     $request = [
@@ -36,16 +33,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         'message' => "Login Request"
     ];
 
-    
     $response = $client->send_request($request);
-    $response = json_decode($response, true);
+
+    $response = json_decode(json: $response, associative: true);
 
     if (isset($response['success']) && $response['success']) {
-        // Setting up session
         $_SESSION['username'] = $username;
-
-        // Respond with redirect
-        echo json_encode([
+        echo json_encode(value: [
             "success" => true,
             "message" => "Login successful.",
             "redirect" => "/php/home.php"
@@ -53,14 +47,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         exit;
     }
 
-    
-    header('Content-Type: application/json');
-    echo json_encode($response);
+    header(header: 'Content-Type: application/json');
+
+    echo json_encode(value: $response);
 } else {
-    
-    http_response_code(405);
-    echo json_encode([
+    http_response_code(response_code: 405);
+    echo json_encode(value: [
         "success" => false,
         "message" => "Invalid request method."
     ]);
 }
+?>
