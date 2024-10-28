@@ -4,19 +4,17 @@
 
 session_start();
 
-/* This code will stop  people from getting into home without a session.
 if(!isset($_SESSION['username'])) {
         header("Location: ../index.html");
         exit();
 }
 
- */
 ?>
 
 <html>
 
 <head>
-
+        <link rel="stylesheet" href="../style.css">
 </head>
 
 <body>
