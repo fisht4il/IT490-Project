@@ -2,6 +2,9 @@
 <html lang="en">
 
 <head>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Titillium+Web:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -136,6 +139,7 @@ html {
 }
 
 body { 
+    font-family: "Titillium Web", sans-serif;
     background-attachment: fixed;
     background-color: rgba(0, 0, 0, 0.6);
     background-blend-mode: darken;
@@ -152,7 +156,6 @@ body {
 /* --HEADER-- */
 
 .main-header {
-    background-color: rgba(0, 0, 0, 0.3);
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -260,6 +263,7 @@ body {
     width: 55px;
     display: inline;
     padding-top: 10px;
+    margin-top: 90px;
 }
 
 .username-label {
@@ -273,15 +277,17 @@ body {
 }
 
 .user-div:focus-within .username-label {
-    top:-6px;
-    font-size: 12px;
+    top:-8px;
+    font-size: 15px;
+    background-color: #1e135e;
 }
 
 .input-username {
-    padding: 20px;
+    padding: 25px;
     margin-bottom: 10px;
-    border-radius: 2px solid;
+    border-radius: 2px solid black;
     border-radius: 10px;
+    border-style: solid;
     color: white;
     outline: none;
     background: none;
@@ -308,14 +314,16 @@ body {
 }
 
 .password-div:focus-within .password-label {
-    top:-6px;
-    font-size: 12px;
+    top:-8px;
+    font-size: 15px;
+    background-color: #1e135e;
 }
 
 .input-password {
-    padding: 20px;
+    padding: 25px;
     margin-bottom: 10px;
-    border-radius: 2px solid;
+    border-radius: 2px solid black;
+    border-style: solid;
     border-radius: 10px;
     color: white;
     outline: none;
@@ -357,10 +365,10 @@ body {
     margin-right: auto;
     margin-top: auto;
     border-top: 1px solid #5741d9;
-    background-color: rgba(0, 0, 0, 0.3);
     padding-left: 2px;
 }
 
 .copyright {
 
 }
+
