@@ -1,7 +1,5 @@
 <?php
 
-
-
 session_start();
 
 if(!isset($_SESSION['username'])) {
@@ -10,15 +8,12 @@ if(!isset($_SESSION['username'])) {
 }
 
 ?>
-
 <html>
+    <head>
+        <link rel="stylesheet" href="style.css">
+    </head>
 
-<head>
-        <link rel="stylesheet" href="../style.css">
-</head>
-
-<body>
-
+    <body>
         <header class="main-header">
             <h1 class="page-title">IT-490-Project</h1>
             <nav class="header-nav">
@@ -34,28 +29,26 @@ if(!isset($_SESSION['username'])) {
                         </button>
                     </li>
                      <li class="link-item">
-                     <?php
+                        <?php
                         echo "Welcome, " . htmlspecialchars($_SESSION['username']) . ".";
-                     ?>
-                        <button class="logout">
+                        ?>
+                        <button class="input-submit">
                             <a href="logout.php" class="placeholder-link">Logout</a>
                         </button>
                     </li>
                 </ul>
             </nav>
         </header>
-        <section class="about-service">
-                <p class="p-about-service">
+        <section class="section-text">
+                <p class="place-text">
                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi cupiditate magnam vero dignissimos dolorum inventore ratione ipsum quisquam porro odit non neque, rem doloremque molestiae quaerat explicabo at aspernatur hic.
                     Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ad, aliquid! Porro explicabo dignissimos officia officiis, dolorum harum ipsa tenetur accusantium, nihil fuga deserunt ut, consectetur fugiat ipsam nobis rem vel.
                     Lorem ipsum dolor, sit amet consectetur adipisicing elit. Reiciendis accusamus aliquid tempore sit, molestias aspernatur modi rerum vel non amet dolor nam repellat dignissimos veniam quasi itaque mollitia quibusdam eos.
                 </p>
         </section>
 
-            <footer class="footer">
-                <p class="copyright">&copy; 2024. Copyright by IT-490-Project</p>
-            </footer>
-
-</body>
-
+        <footer class="footer">
+            <p class="copyright">&copy; 2024. Copyright by IT-490-Project</p>
+        </footer>
+    </body>
 </html>
