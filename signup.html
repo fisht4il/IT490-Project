@@ -2,40 +2,33 @@
 <html lang="en">
 
 <head>
-  <link rel="stylesheet" href="../style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Titillium+Web:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Register Form</title>
+  
 </head>
-
    <body>
-    <h1 class="signup-title">Signup</h1>
-
-    <main class="signup-main">
-        <section class="signup-section">
-            <form action="register.php" class="signup-form" method="post">
-               <!-- <div>
-                    <label for="email" class="signup-label">Email</label>
-                    <input type="email" class="email" name="email" required />
-               </div>-->
-                <div>
-                    <label for="username" class="signup-label">Username</label>
-                    <input type="text" class="username" name="username" required maxlength="30">
-                </div>
-                <div>
-                    <label for="password" class="signup-label">Password</label>
-                    <input type="password" class="password" name="password" required minlength="8">
-                </div>
-                <!--<div>
-                    <label for="confirm">Confirm</label>
-                    <input type="password" name="confirm" required minlength="8" />
-                </div>-->
-                <input type="submit" class="signup-register" value="register">
-            </form>
-        </section>
+    <h2 class="h2-title">Signup</h2>
+    <main class="main-section">
+        <form action="register.php" class="form" method="post">
+            <div class="user-div">
+                <label for="username" class="username-label">Username</label>
+                <input type="text" class="input-username" name="username" required maxlength="30" required placeholder=" ">
+            </div>
+            <div class="password-div">
+                <label for="password" class="password-label">Password</label>
+                <input type="password" class="input-password" name="password" required minlength="8" required placeholder=" ">
+            </div>
+            <input type="submit" class="input-submit" value="register">
+        </form>
     </main>
     <footer class="footer">
         <p class="copyright">&copy; 2024. Copyright by IT-490-Project</p>
     </footer>
    </body>
 </html>
+
