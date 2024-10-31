@@ -1,12 +1,10 @@
 <?php
-
 session_start();
 
-// Custom 403 page to deter unauthorized access from fairytale creatures
+// Custom 403 page for unauthorized access
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     http_response_code(403);
     header('Content-Type: image/gif');
-    // Serve a fun GIF or fallback message.. Hehehe
     $gifPath = __DIR__ . '/../media/swamp.gif';
     if (file_exists($gifPath)) {
         readfile($gifPath);
@@ -26,33 +24,46 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $client = new rabbitMQClient("testRabbitMQ.ini", "testServer");
 
+
     $request = [
         'type' => "login",
         'username' => $username,
         'password' => $password,
         'message' => "Login Request"
     ];
-
-    $response = $client->send_request($request);
-
-    $response = json_decode(json: $response, associative: true);
-
-    if (isset($response['success']) && $response['success']) {
+    $response = json_decode($client->send_request($request), true);
+  if (isset($response['success']) && $response['success']) {
         $_SESSION['username'] = $username;
-        echo json_encode(value: [
-            "success" => true,
-            "message" => "Login successful.",
-            "redirect" => "/php/home.php"
-        ]);
+        $_SESSION['session_id'] = $response['session_id'];
+
+        // sending validation request
+        $validationRequest = [
+            'type' => "validate_session",
+            'username' => $_SESSION['username'],
+            'sessionId' => $_SESSION['session_id']
+        ];
+
+        $validationResponse = json_decode($client->send_request($validationRequest), true);
+
+         if (isset($validationRequest['success']
+            echo json_encode([
+                "success" => true,
+                "message" => "Login and session validation successful.",
+                "redirect" => "/php/home.php"
+            ]);
+        } else {
+            echo json_encode([
+                "success" => false,
+                "message" => "Session validation failed. Please log in again."
+            ]);
+        }
         exit;
     }
-
-    header(header: 'Content-Type: application/json');
-
-    echo json_encode(value: $response);
+    header('Content-Type: application/json');
+    echo json_encode($response);
 } else {
-    http_response_code(response_code: 405);
-    echo json_encode(value: [
+    http_response_code(405);
+    echo json_encode([
         "success" => false,
         "message" => "Invalid request method."
     ]);
