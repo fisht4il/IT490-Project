@@ -90,6 +90,7 @@ body {
     width: 300px;
     margin-left: auto;
     margin-right: auto;
+    margin-bottom: 20px;
 }
 
 .password-div {
@@ -118,19 +119,21 @@ body {
 .username-label {
     position: absolute;
     left: 16px;
-    top: 20px;
-    padding:0 8px;
+    top: -12px;
+    padding: 0 8px;
     color: white;
     cursor: text;
+    background-color: #1e135e;
     transition: top 200ms ease-in, left 200ms ease-in, font-size 200ms ease-in;
 }
 
+/*
 .user-div:focus-within .username-label {
     top:-8px;
     font-size: 15px;
     background-color: #1e135e;
 }
-
+*/
 
 .input-username {
     padding: 25px;
@@ -155,20 +158,22 @@ body {
 .password-label {
     position: absolute;
     left: 16px;
-    top: 20px;
+    top: -12px;
     padding: 0 8px;
     color: white;
     cursor: text;
+    background-color: #1e135e;
     transition: top 200ms ease-in, left 200ms ease-in, font-size 200ms ease-in;
 
 }
 
+/*
 .password-div:focus-within .password-label {
     top:-8px;
     font-size: 15px;
     background-color: #1e135e;
 }
-
+*/
 
 .input-password {
     padding: 25px;
