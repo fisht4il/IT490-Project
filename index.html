@@ -20,7 +20,7 @@
         var showRawJson = $('#show-json').is(':checked');
 
         $.ajax({
-          url: 'login.php',
+          url: '/php/login.php',
           type: 'POST',
           data: {
             username: username,
@@ -88,7 +88,7 @@
   </header>-->
 
   <main class="main-section">
-        <form action="/php/login.php"  class="form" method="post">  
+        <form id="login-form"  class="form">  
             <img src="kraken-svgrepo-com.png" alt="" class="logo-image">  
             <h2 class="h2-title">Login</h2>
             <div class="user-div">
@@ -100,7 +100,7 @@
               <input type="password" class="input-password" id="password" name="password" required placeholder=" "><br><br>
             </div>
             <input type="submit" class="input-submit" value="Login">
-            <p class="signup-link">No account? <a href="signup.html" class="link-signup">Signup</a></p>
+            <p class="signup-link">No account? <a href="/php/signup.html" class="link-signup">Signup</a></p>
             <label class="json-r">
                 <br><br>Raw JSON Response<input type="checkbox" id="show-json">
             </label>
