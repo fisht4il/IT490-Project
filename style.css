@@ -14,6 +14,10 @@ body {
 
 }
 
+.body-index, .body-signup {
+    overflow: hidden;
+}
+
 /* --HEADER-- */
 
 .main-header {
@@ -26,7 +30,7 @@ body {
 }
 
 .page-title {
-    margin-left: 25px;
+    margin-left: 95px;
     font-size: 25px;
     font-weight: 1000;
     color: rgba(225, 225, 225, 1)
@@ -103,10 +107,10 @@ body {
 }
 
 .logo-image {
-    display: inline-flex;
-    height: 55px;
-    width: 55px;
-    display: inline;
+    height: 65px;
+    width: 65px;
+    margin-left: auto;
+    margin-right: auto;
     padding-top: 10px;
     margin-top: 90px;
 }
@@ -205,6 +209,10 @@ body {
     margin-left: auto;
 }
 
+.link-signup:visited {
+    color: #a396ea;
+}
+
 .json-r {
     margin-right: auto;
     margin-left: auto;
@@ -222,4 +230,32 @@ body {
     margin-top: auto;
     border-top: 1px solid #5741d9;
     padding-left: 2px;
+}
+
+/* --HOME PAGE-- */
+
+.section-text {
+    display: flex;
+    flex-direction: column; 
+}
+
+.home-title {
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 80px;
+}
+
+.place-text {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    inline-size: 650px;
+    text-wrap: pretty;
+}
+
+.logo-home {
+    position: absolute;
+    margin-left: 27px;
+    height: 55px;
+    width: 55px;
 }
