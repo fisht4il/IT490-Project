@@ -44,7 +44,7 @@ function doLogin($username, $password) {
             return [
                 "success" => true,
                 "message" => "Login successful!",
-                "session_id" => $sessionId // Send session ID back
+                "session_id" => $sessionId 
             ];
         } else {
             return [
