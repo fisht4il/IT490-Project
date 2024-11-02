@@ -20,13 +20,14 @@ function doLogin($username, $password) {
         $pdo = new PDO($dbLogin, $dbUsername, $dbPassword);
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-        // Fetch hashed password and check login
+
         $stmt = $pdo->prepare("SELECT password FROM users WHERE username = :username");
         $stmt->bindParam(':username', $username);
         $stmt->execute();
 
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
         if ($user && password_verify($password, $user['password'])) {
+
 
             $stmt = $pdo->prepare("UPDATE users SET last_login = NOW() WHERE username = :username");
             $stmt->bindParam(':username', $username);
@@ -36,15 +37,28 @@ function doLogin($username, $password) {
             $sessionId = bin2hex(random_bytes(16));
 
 
-            $stmt = $pdo->prepare("INSERT INTO sessions (username, session_id, session_start) VALUES (:username, :session_id, UNIX_TIMESTAMP())");
+            $stmt = $pdo->prepare("SELECT * FROM sessions WHERE username = :username");
             $stmt->bindParam(':username', $username);
-            $stmt->bindParam(':session_id', $sessionId);
             $stmt->execute();
+
+            if ($stmt->rowCount() > 0) {
+
+                $stmt = $pdo->prepare("UPDATE sessions SET session_id = :session_id, session_start = UNIX_TIMESTAMP(), session_end = NULL WHERE username = :username");
+                $stmt->bindParam(':session_id', $sessionId);
+                $stmt->bindParam(':username', $username);
+                $stmt->execute();
+            } else {
+
+                $stmt = $pdo->prepare("INSERT INTO sessions (username, session_id, session_start) VALUES (:username, :session_id, UNIX_TIMESTAMP())");
+                $stmt->bindParam(':username', $username);
+                $stmt->bindParam(':session_id', $sessionId);
+                $stmt->execute();
+            }
 
             return [
                 "success" => true,
                 "message" => "Login successful!",
-                "session_id" => $sessionId 
+                "session_id" => $sessionId
             ];
         } else {
             return [
@@ -61,6 +75,35 @@ function doLogin($username, $password) {
     }
 }
 
+function doLogout($sessionId) {
+    try {
+        global $config;
+        $dbhost = $config['DBHOST'];
+        $logindb = $config['LOGINDATABASE'];
+        $dbLogin = "mysql:host=$dbhost;dbname=$logindb";
+        $dbUsername = $config['DBUSER'];
+        $dbPassword = $config['DBPASSWORD'];
+
+        $pdo = new PDO($dbLogin, $dbUsername, $dbPassword);
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+
+        $stmt = $pdo->prepare("UPDATE sessions SET session_end = UNIX_TIMESTAMP() WHERE session_id = :session_id");
+        $stmt->bindParam(':session_id', $sessionId);
+        $stmt->execute();
+
+        return [
+            "success" => true,
+            "message" => "Logout successful."
+        ];
+    } catch (PDOException $e) {
+        error_log('Database error: ' . $e->getMessage());
+        return [
+          "success" => false,
+          "message" => "An error occurred during logout. Please try again later."
+        ];
+    }
+}
 
 function requestProcessor($request) {
     $logFile = __DIR__ . '/received_messages.log';
@@ -76,8 +119,11 @@ function requestProcessor($request) {
     }
 
     switch ($request['type']) {
-      case "login":
+        case "login":
             $response = doLogin($request['username'], $request['password']);
+            break;
+        case "logout":
+            $response = doLogout($request['session_id']);
             break;
         case "validate_session":
             $response = doValidate($request['session_id']);
@@ -88,15 +134,12 @@ function requestProcessor($request) {
                 "message" => "ERROR: Unknown request type"
             ];
     }
-
     return json_encode($response);
 }
 
 $server = new rabbitMQServer("testRabbitMQ.ini", "testServer");
-
-echo "testRabbitMQServer BEGIN" . PHP_EOL;
 $server->process_requests('requestProcessor');
-echo "testRabbitMQServer END" . PHP_EOL;
-exit();
+?>
+
 
 
