@@ -3,6 +3,7 @@ CREATE TABLE sessions (
     username VARCHAR(255) NOT NULL,
     session_id VARCHAR(255) NOT NULL UNIQUE,
     session_start BIGINT DEFAULT NULL,
-    session_end BIGINT NOT NULL DEFAULT NULL,
-    FOREIGN KEY (username) REFERENCES users(username) ON DELETE CASCADE
+    session_end BIGINT DEFAULT NULL,
+    FOREIGN KEY (username) REFERENCES users(username) ON DELETE CASCADE,
+    CONSTRAINT unique_username UNIQUE (username)
 );
