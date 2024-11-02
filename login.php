@@ -1,4 +1,4 @@
-<?php
+?php
 
 session_start();
 
@@ -39,7 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         $_SESSION['username'] = $username;
         $_SESSION['session_id'] = $response['session_id'];
-      
+
         echo json_encode([
             "success" => true,
             "message" => "Login successful.",
@@ -59,4 +59,4 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 }
 ?>
 
-      
+
