@@ -8,6 +8,7 @@ $config = include('dbClient.php');
 
 date_default_timezone_set('America/New_York');
 
+
 function doLogin($username, $password) {
     try {
         global $config;
@@ -20,7 +21,6 @@ function doLogin($username, $password) {
         $pdo = new PDO($dbLogin, $dbUsername, $dbPassword);
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-
         $stmt = $pdo->prepare("SELECT password FROM users WHERE username = :username");
         $stmt->bindParam(':username', $username);
         $stmt->execute();
@@ -28,32 +28,19 @@ function doLogin($username, $password) {
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
         if ($user && password_verify($password, $user['password'])) {
 
-
             $stmt = $pdo->prepare("UPDATE users SET last_login = NOW() WHERE username = :username");
             $stmt->bindParam(':username', $username);
             $stmt->execute();
 
-
             $sessionId = bin2hex(random_bytes(16));
+            $timeLimit = 30;
 
-
-            $stmt = $pdo->prepare("SELECT * FROM sessions WHERE username = :username");
+            $stmt = $pdo->prepare("REPLACE INTO sessions (username, session_id, session_start, session_end) 
+                                   VALUES (:username, :session_id, UNIX_TIMESTAMP(), UNIX_TIMESTAMP() + :timelimit)");
             $stmt->bindParam(':username', $username);
-            $stmt->execute();
-
-            if ($stmt->rowCount() > 0) {
-
-                $stmt = $pdo->prepare("UPDATE sessions SET session_id = :session_id, session_start = UNIX_TIMESTAMP(), session_end = NULL WHERE username = :username");
-                $stmt->bindParam(':session_id', $sessionId);
-                $stmt->bindParam(':username', $username);
-                $stmt->execute();
-            } else {
-
-                $stmt = $pdo->prepare("INSERT INTO sessions (username, session_id, session_start) VALUES (:username, :session_id, UNIX_TIMESTAMP())");
-                $stmt->bindParam(':username', $username);
-                $stmt->bindParam(':session_id', $sessionId);
-                $stmt->execute();
-            }
+            $stmt->bindParam(':session_id', $sessionId);
+            $stmt->bindParam(':timelimit', $timeLimit);
+             $stmt->execute();
 
             return [
                 "success" => true,
@@ -75,6 +62,60 @@ function doLogin($username, $password) {
     }
 }
 
+
+function doValidate($sessionId) {
+    try {
+        global $config;
+        $dbhost = $config['DBHOST'];
+        $logindb = $config['LOGINDATABASE'];
+        $dbLogin = "mysql:host=$dbhost;dbname=$logindb";
+        $dbUsername = $config['DBUSER'];
+        $dbPassword = $config['DBPASSWORD'];
+
+        $pdo = new PDO($dbLogin, $dbUsername, $dbPassword);
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+        $stmt = $pdo->prepare("SELECT session_end FROM sessions WHERE session_id = :session_id");
+        $stmt->bindParam(':session_id', $sessionId);
+        $stmt->execute();
+        $session = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if ($session) {
+            $currentTime = time();
+
+            if ($currentTime > $session['session_end']) {
+                return [
+                    "success" => false,
+                    "message" => "Session expired. Please log in again."
+                ];
+            } else {
+                $endTime = $currentTime + 30;
+                $stmt = $pdo->prepare("UPDATE sessions SET session_end = :end_time WHERE session_id = :session_id");
+                $stmt->bindParam(':end_time', $endTime);
+                $stmt->bindParam(':session_id', $sessionId);
+                $stmt->execute();
+
+                return [
+                    "success" => true,
+                    "message" => "Session validated."
+                ];
+            }
+        } else {
+            return [
+                "success" => false,
+                "message" => "Invalid session ID."
+            ];
+        }
+    } catch (PDOException $e) {
+        error_log('Database error: ' . $e->getMessage());
+        return [
+            "success" => false,
+            "message" => "An error occurred during session validation."
+        ];
+    }
+}
+
+
 function doLogout($sessionId) {
     try {
         global $config;
@@ -87,7 +128,6 @@ function doLogout($sessionId) {
         $pdo = new PDO($dbLogin, $dbUsername, $dbPassword);
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-
         $stmt = $pdo->prepare("UPDATE sessions SET session_end = UNIX_TIMESTAMP() WHERE session_id = :session_id");
         $stmt->bindParam(':session_id', $sessionId);
         $stmt->execute();
@@ -99,18 +139,14 @@ function doLogout($sessionId) {
     } catch (PDOException $e) {
         error_log('Database error: ' . $e->getMessage());
         return [
-          "success" => false,
-          "message" => "An error occurred during logout. Please try again later."
+            "success" => false,
+            "message" => "An error occurred during logout. Please try again later."
         ];
     }
 }
 
-function requestProcessor($request) {
-    $logFile = __DIR__ . '/received_messages.log';
-    $logTime = date('m-d-Y H:i:s');
-    $logRequest = "[" . $logTime . "] Received request: " . print_r($request, true) . PHP_EOL;
-    file_put_contents($logFile, $logRequest, FILE_APPEND);
 
+function requestProcessor($request) {
     if (!isset($request['type'])) {
         return json_encode([
             "success" => false,
@@ -122,11 +158,11 @@ function requestProcessor($request) {
         case "login":
             $response = doLogin($request['username'], $request['password']);
             break;
-        case "logout":
-            $response = doLogout($request['session_id']);
-            break;
         case "validate_session":
             $response = doValidate($request['session_id']);
+            break;
+        case "logout":
+            $response = doLogout($request['session_id']);
             break;
         default:
             $response = [
@@ -140,6 +176,4 @@ function requestProcessor($request) {
 $server = new rabbitMQServer("testRabbitMQ.ini", "testServer");
 $server->process_requests('requestProcessor');
 ?>
-
-
 
