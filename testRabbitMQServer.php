@@ -128,7 +128,7 @@ function doLogout($sessionId) {
         $pdo = new PDO($dbLogin, $dbUsername, $dbPassword);
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-        $stmt = $pdo->prepare("UPDATE sessions SET session_end = UNIX_TIMESTAMP() WHERE session_id = :session_id");
+        $stmt = $pdo->prepare("DELETE from sessions WHERE session_id = :session_id");
         $stmt->bindParam(':session_id', $sessionId);
         $stmt->execute();
 
