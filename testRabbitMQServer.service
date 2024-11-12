@@ -1,0 +1,13 @@
+[Unit]
+Description=Test RabbitMQ Server
+After=network.target
+
+
+ExecStart=/usr/bin/php /home/rtg490/IT490-Project/testRabbitMQServer.php
+Restart=always
+User=rtg490
+Group=rtg490
+PIDFile=/var/run/testRabbitMQServer.pid
+
+[Install]
+WantedBy=multi-user.target
