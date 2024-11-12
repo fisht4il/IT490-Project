@@ -3,7 +3,7 @@ Description=Test RabbitMQ Server
 After=network.target
 
 [Service]
-ExecStart=/usr/bin/php /home/rtg490/IT490-Project/testRabbitMQServer.php
+ExecStart=/usr/bin/php /var/www/sample/IT490-Project/testRabbitMQServer.php
 Restart=always
 User=rtg490
 Group=rtg490
