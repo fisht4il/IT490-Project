@@ -1,5 +1,5 @@
 [Unit]
-Description=Start ZeroTier, RabbitMQ, Apache2, testRabbitMQServer.service
+Description=Start ZeroTier, RabbitMQ, Apache2, testRabbitMQServer
 After=network.target
 
 [Service]
