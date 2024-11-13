@@ -1,6 +1,106 @@
 /* --GENERAL-- */
 
-body { 
+@media screen and (max-width: 768px) {
+
+    .main-header {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .page-title {
+        margin-left: 0;
+        font-size: 20px;
+    }
+
+    .link-list {
+        flex-direction: column;
+        align-items: center; 
+    }
+
+    .link-item {
+        margin-right: 0;
+        margin-bottom: 15px;
+    }
+
+    .form {
+        width: 100%;
+        max-width: 400px;
+    }
+
+    .home-title {
+        font-size: 60px;
+    }
+
+    .place-text {
+        inline-size: 90%;
+    }
+
+    .chat-window {
+        width: 250px; 
+        height: 350px;
+    }
+
+    .chat-btn {
+        font-size: 20px;
+        padding: 12px;
+    }
+
+    .footer {
+        flex-direction: column; 
+        padding-top: 10px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+
+    .main-header {
+        padding: 10px;
+    }
+
+    .page-title {
+        font-size: 18px;
+    }
+
+    .link-list {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .form {
+        max-width: 90%; 
+    }
+
+    .logo-image {
+        height: 50px;
+        width: 50px;
+        margin-top: 30px;
+    }
+
+    .home-title {
+        font-size: 40px; 
+    }
+
+    .place-text {
+        inline-size: 100%; 
+        font-size: 16px; 
+    }
+
+    .chat-window {
+        width: 200px; 
+        height: 300px;
+    }
+
+    .chat-btn {
+        font-size: 18px; 
+        padding: 10px;
+    }
+
+    .chat-input textarea {
+        min-height: 80px;
+    }
+}
+
+body {
     font-family: "Titillium Web", sans-serif;
     background-attachment: fixed;
     background-color: rgba(0, 0, 0, 0.6);
@@ -9,9 +109,9 @@ body {
     display: flex;
     flex-direction: column;
     height: 100vh;
-    background-color: #1e135e;
+    background-color: #0e1c0b;
     color: white;
-
+    padding: 0 15px;
 }
 
 .body-index, .body-signup {
@@ -24,25 +124,29 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: 1125px;
-    margin-left: auto;
-    margin-right: auto;
+    width: 100%;
+    max-width: 1125px; 
+    margin: 0 auto;
+    padding: 10px;
 }
 
 .page-title {
     margin-left: 95px;
     font-size: 25px;
     font-weight: 1000;
-    color: rgba(225, 225, 225, 1)
+    color: rgba(225, 225, 225, 1);
 }
 
 .link-list {
     list-style: none;
     display: flex;
+    flex-wrap: wrap; 
+    justify-content: center; 
 }
 
 .link-item {
     margin-right: 25px;
+    margin-bottom: 10px; 
 }
 
 .btn {
@@ -64,21 +168,21 @@ body {
     color: rgba(225, 225, 225, 1);
 }
 
-
 /* --MAIN-- */
 
 .main-section {
     display: flex;
     justify-content: center;
     align-items: center;
-
+    flex-direction: column;
 }
 
 .form {
     position: relative;
     display: flex;
     flex-direction: column;
-    width: 300px;
+    width: 100%;
+    max-width: 300px;
     margin-left: auto;
     margin-right: auto;
 }
@@ -87,7 +191,8 @@ body {
     position: relative;
     display: flex;
     flex-direction: column;
-    width: 300px;
+    width: 100%;
+    max-width: 300px;
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 20px;
@@ -97,11 +202,12 @@ body {
     position: relative;
     display: flex;
     flex-direction: column;
-    width: 300px;
+    width: 100%;
+    max-width: 300px;
     margin-left: auto;
     margin-right: auto;
+    margin-bottom: 20px;
 }
-
 
 .h2-title {
     text-align: center;
@@ -123,37 +229,9 @@ body {
     padding: 0 8px;
     color: white;
     cursor: text;
-    background-color: #1e135e;
+    background-color: #0e1c0b;
     transition: top 200ms ease-in, left 200ms ease-in, font-size 200ms ease-in;
 }
-
-/*
-.user-div:focus-within .username-label {
-    top:-8px;
-    font-size: 15px;
-    background-color: #1e135e;
-}
-*/
-
-.input-username {
-    padding: 25px;
-    margin-bottom: 10px;
-    border-radius: 2px solid black;
-    border-radius: 10px;
-    border-style: solid;
-    color: white;
-    outline: none;
-    background: none;
-}
-
-.input-username:hover {
-    border-color: #5741d9
-}
-
-.input-username:focus {
-    border-color: blue;
-}
-
 
 .password-label {
     position: absolute;
@@ -162,32 +240,42 @@ body {
     padding: 0 8px;
     color: white;
     cursor: text;
-    background-color: #1e135e;
+    background-color: #0e1c0b;
     transition: top 200ms ease-in, left 200ms ease-in, font-size 200ms ease-in;
-
 }
 
-/*
-.password-div:focus-within .password-label {
-    top:-8px;
-    font-size: 15px;
-    background-color: #1e135e;
+.input-username {
+    padding: 25px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    border-style: solid;
+    color: white;
+    outline: none;
+    background: none;
+    width: 100%;
 }
-*/
 
 .input-password {
     padding: 25px;
     margin-bottom: 10px;
-    border-radius: 2px solid black;
-    border-style: solid;
     border-radius: 10px;
+    border-style: solid;
     color: white;
     outline: none;
     background: none;
+    width: 100%;
+}
+
+.input-username:hover {
+    border-color: #96d287;
 }
 
 .input-password:hover {
-    border-color: #5741d9
+    border-color: #96d287;
+}
+
+.input-username:focus {
+    border-color: blue;
 }
 
 .input-password:focus {
@@ -195,7 +283,7 @@ body {
 }
 
 .input-submit {
-    background-color: #5741d9;
+    background-color: #59b142;
     color: white;
     border: none;
     padding: 20px;
@@ -206,7 +294,7 @@ body {
 }
 
 .input-submit:hover {
-    background-color: #a396ea;
+    background-color: #96d287;
 }
 
 .signup-link {
@@ -214,8 +302,12 @@ body {
     margin-left: auto;
 }
 
+.link-signup {
+    color: #59b142;
+}
+
 .link-signup:visited {
-    color: #a396ea;
+    color: #96d287;
 }
 
 .json-r {
@@ -223,31 +315,32 @@ body {
     margin-left: auto;
 }
 
-
-
 /* --FOOTER-- */
 
 .footer {
     display: flex;
-    width: 1125px;
+    width: 100%;
+    max-width: 1125px;
     margin-left: auto;
     margin-right: auto;
     margin-top: auto;
-    border-top: 1px solid #5741d9;
+    border-top: 1px solid #59b142;
     padding-left: 2px;
+    padding-top: 20px;
 }
 
 /* --HOME PAGE-- */
 
 .section-text {
     display: flex;
-    flex-direction: column; 
+    flex-direction: column;
+    align-items: center;
 }
 
 .home-title {
-    margin-left: auto;
-    margin-right: auto;
     font-size: 80px;
+    text-align: center;
+    margin: 20px 0;
 }
 
 .place-text {
@@ -263,4 +356,75 @@ body {
     margin-left: 27px;
     height: 55px;
     width: 55px;
+}
+
+/* --CHAT-- */
+
+.chat-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    padding: 15px;
+    background-color: #59b142;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 24px;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.chat-window {
+    position: fixed;
+    bottom: 80px;
+    right: 20px;
+    width: 340px;
+    height: 600px;
+    background: none;
+    border: 2px solid #59b142;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+}
+
+.chat-header {
+    background-color: #59b142;
+    border-radius: 5px;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.chat-content {
+    flex-grow: 1;
+    padding: 10px;
+    overflow-y: auto;
+}
+
+.input-chat {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+}
+
+.input-chat textarea {
+    width: 100%;
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #59b142;
+    min-height: 100px;
+    resize: none;
+}
+
+.input-chat button {
+    padding: 8px 12px;
+    margin-top: 10px;
+    background-color: #59b142;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
 }
