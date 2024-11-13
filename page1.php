@@ -44,12 +44,12 @@ if (!$response['success']) {
             <ul class="link-list">
                 <li class="link-item">
                     <button class="btn">
-                        <a href="home.html" class="placeholder-link">Home</a>
+                        <a href="home.php" class="placeholder-link">Home</a>
                     </button>
                 </li>
                 <li class="link-item">
                     <button class="btn">
-                        <a href="page2.html" class="placeholder-link">Page-2</a>
+                        <a href="page2.php" class="placeholder-link">Page-2</a>
                     </button>
                 </li>
                 <li class="link-item">
