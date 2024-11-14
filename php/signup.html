@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Titillium+Web:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register Form</title>
+  
+</head>
+   <body class="body-signup">
+    <img src="../finnhub-logo.png" alt="" class="logo-image">
+    <h2 class="h2-title">Signup</h2>
+    <main class="main-section">
+        <form action="register.php" class="form" method="post">
+            <div class="user-div">
+                <label for="username" class="username-label">Username</label>
+                <input type="text" class="input-username" id="username" name="username" required maxlength="30" required placeholder=" ">
+            </div>
+            <div class="password-div">
+                <label for="password" class="password-label">Password</label>
+                <input type="password" class="input-password" id="password" name="password" required minlength="8" required placeholder=" ">
+            </div>
+            <input type="submit" class="input-submit" value="register">
+            <p class="signup-link">Already have an account? <a href="../index.html" class="link-signup">Login</a></p>
+        </form>
+    </main>
+    <?php include` 'footer.php'; ?>
+   </body>
+</html>
