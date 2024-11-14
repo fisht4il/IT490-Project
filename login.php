@@ -42,7 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     if (isset($response['success']) && $response['success']) {
         // Setting up session
-        $_SESSION['username'] = $username;
+        $_SESSION['session_id'] = $response['session_id'];
 
         // Respond with redirect
         echo json_encode([
