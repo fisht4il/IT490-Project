@@ -39,7 +39,7 @@ if (!$response['success']) {
     <?php include 'partials/navbar.php'; ?>
 
     <section class="section-text">
-        <h2 class="home-title">Portfolio</h2>
+        <h2 class="home-title">Recommendations</h2>
     </section>
 
     <!--  <?php include 'partials/chat.php'; ?> -->

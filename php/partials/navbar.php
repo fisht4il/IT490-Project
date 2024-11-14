@@ -1,13 +1,13 @@
 <header class="main-header">
         <a href="home.php">
-        <img src="../finnhub-logo.png" alt="Logo" class="logo-home">
+        <img src="../media/finnhub-logo.png" alt="Logo" class="logo-home">
         <h1 class="page-title">IT-490-Project</h1>
 
         <nav class="header-nav">
             <ul class="link-list">
                 <li class="link-item">
                     <button class="btn">
-                        <a href="portfolio.php" class="placeholder-link">Portfolio</a>
+                        <a href="recommendations.php" class="placeholder-link">Recommendations</a>
                     </button>
                 </li>
                 <li class="link-item">
