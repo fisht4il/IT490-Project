@@ -53,6 +53,7 @@
 
 @media screen and (max-width: 480px) {
 
+    /* --HEADER-- */
     .main-header {
         padding: 10px;
     }
@@ -183,29 +184,16 @@ body {
     flex-direction: column;
     width: 100%;
     max-width: 300px;
-    margin-left: auto;
-    margin-right: auto;
+    margin:0 auto;
 }
 
-.user-div {
+.user-div, .password-div {
     position: relative;
     display: flex;
     flex-direction: column;
     width: 100%;
     max-width: 300px;
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 20px;
-}
-
-.password-div {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    max-width: 300px;
-    margin-left: auto;
-    margin-right: auto;
+    margin:0 auto;
     margin-bottom: 20px;
 }
 
@@ -216,13 +204,12 @@ body {
 .logo-image {
     height: 65px;
     width: 65px;
-    margin-left: auto;
-    margin-right: auto;
+    margin:0 auto;
     padding-top: 10px;
     margin-top: 90px;
 }
 
-.username-label {
+.username-label, .password-label {
     position: absolute;
     left: 16px;
     top: -12px;
@@ -230,21 +217,9 @@ body {
     color: white;
     cursor: text;
     background-color: #0e1c0b;
-    transition: top 200ms ease-in, left 200ms ease-in, font-size 200ms ease-in;
 }
 
-.password-label {
-    position: absolute;
-    left: 16px;
-    top: -12px;
-    padding: 0 8px;
-    color: white;
-    cursor: text;
-    background-color: #0e1c0b;
-    transition: top 200ms ease-in, left 200ms ease-in, font-size 200ms ease-in;
-}
-
-.input-username {
+.input-username, .input-password  {
     padding: 25px;
     margin-bottom: 10px;
     border-radius: 10px;
@@ -255,34 +230,15 @@ body {
     width: 100%;
 }
 
-.input-password {
-    padding: 25px;
-    margin-bottom: 10px;
-    border-radius: 10px;
-    border-style: solid;
-    color: white;
-    outline: none;
-    background: none;
-    width: 100%;
-}
-
-.input-username:hover {
+.input-username:hover, .input-password:hover {
     border-color: #96d287;
 }
 
-.input-password:hover {
-    border-color: #96d287;
-}
-
-.input-username:focus {
+.input-username:focus, .input-password:focus {
     border-color: blue;
 }
 
-.input-password:focus {
-    border-color: blue;
-}
-
-.input-submit {
+.input-btn {
     background-color: #59b142;
     color: white;
     border: none;
@@ -293,13 +249,12 @@ body {
     border-radius: 10px;
 }
 
-.input-submit:hover {
+.input-btn:hover {
     background-color: #96d287;
 }
 
-.signup-link {
-    margin-right: auto;
-    margin-left: auto;
+.signup-link, .json-r {
+    margin:0 auto;
 }
 
 .link-signup {
@@ -310,19 +265,13 @@ body {
     color: #96d287;
 }
 
-.json-r {
-    margin-right: auto;
-    margin-left: auto;
-}
-
 /* --FOOTER-- */
 
 .footer {
     display: flex;
     width: 100%;
     max-width: 1125px;
-    margin-left: auto;
-    margin-right: auto;
+    margin:0 auto;
     margin-top: auto;
     border-top: 1px solid #59b142;
     padding-left: 2px;
@@ -345,10 +294,8 @@ body {
 
 .place-text {
     text-align: center;
-    margin-left: auto;
-    margin-right: auto;
+    margin:0 auto;
     inline-size: 650px;
-    text-wrap: pretty;
 }
 
 .logo-home {
@@ -369,7 +316,7 @@ body {
     color: white;
     border: none;
     border-radius: 10px;
-    font-size: 24px;
+    font-size: 15px;
     cursor: pointer;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
@@ -380,7 +327,7 @@ body {
     right: 20px;
     width: 340px;
     height: 600px;
-    background: none;
+    background-color: #0e1c0b;
     border: 2px solid #59b142;
     border-radius: 10px;
     display: flex;
@@ -413,18 +360,9 @@ body {
 .input-chat textarea {
     width: 100%;
     padding: 8px;
+    margin-bottom: 4px;
     border-radius: 5px;
     border: 1px solid #59b142;
     min-height: 100px;
     resize: none;
-}
-
-.input-chat button {
-    padding: 8px 12px;
-    margin-top: 10px;
-    background-color: #59b142;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
 }
