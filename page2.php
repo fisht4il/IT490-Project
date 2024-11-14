@@ -44,12 +44,12 @@ if (!$response['success']) {
             <ul class="link-list">
                 <li class="link-item">
                     <button class="btn">
-                        <a href="home.php" class="placeholder-link">Home</a>
+                        <a href="home.html" class="placeholder-link">Home</a>
                     </button>
                 </li>
                 <li class="link-item">
                     <button class="btn">
-                        <a href="page1.php" class="placeholder-link">Page-1</a>
+                        <a href="page1.html" class="placeholder-link">Page-1</a>
                     </button>
                 </li>
                 <li class="link-item">
@@ -58,7 +58,7 @@ if (!$response['success']) {
                         echo "Welcome, " . htmlspecialchars($_SESSION['username']) . ".";
                         ?>
                     </div>
-                    <button class="input-submit">
+                    <button class="input-btn">
                         <a href="logout.php" class="placeholder-link">Logout</a>
                     </button>
                 </li>
@@ -77,7 +77,7 @@ if (!$response['success']) {
         </div>
         <div class="input-chat">
             <textarea id="chatinput" placeholder="Message..."></textarea>
-            <button onclick="messageSend()">Send</button>
+            <button class="input-btn" onclick="messageSend()">Send</button>
         </div>
     </section>
 
