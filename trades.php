@@ -24,7 +24,6 @@ if (!$response['success']) {
 }
 ?>
 
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -38,14 +37,14 @@ if (!$response['success']) {
 </head>
 <body class="body-home">
 
-    <?php include 'navbar.php'; ?>
+    <?php include 'partials/navbar.php'; ?>
 
     <section class="section-text">
         <h2 class="home-title">Trades</h2>
     </section>
 
-    <!--  <?php include 'chat.php'; ?> -->
+    <!--  <?php include 'partials/chat.php'; ?> -->
 
-    <?php include 'footer.php'; ?>
+    <?php include 'partials/footer.php'; ?>
 </body>
 </html>

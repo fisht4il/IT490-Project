@@ -35,8 +35,8 @@ if (!$response['success']) {
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Titillium+Web:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../style.css">
 </head>
-
-    <?php include 'navbar.php'; ?>
+<body class="body-home">
+    <?php include 'partials/navbar.php'; ?>
 
     <section class="section-text">
         <h2 class="home-title">Dashboard</h2>
@@ -47,7 +47,6 @@ if (!$response['success']) {
         <div class="chart">CHART GOES HERE</div>
     </div>
 
-    <h3>Recommendations</h3>
     <div class="container">
         <h3>Recommendations</h3>
         <ul>Recommendation 1</ul>
@@ -55,10 +54,8 @@ if (!$response['success']) {
         <ul>Recommendation 3</ul>
     </div>
 
-    <!--  <?php include 'chat.php'; ?> -->
+    <!--  <?php include 'partials/chat.php'; ?> -->
 
-    <?php include 'footer.php'; ?>
-
+    <?php include 'partials/footer.php'; ?>
 </body>
-
 </html>
