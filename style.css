@@ -1,5 +1,5 @@
 /* --GENERAL-- */
-/*
+
 @media screen and (max-width: 768px) {
 
     .main-header {
@@ -14,7 +14,7 @@
 
     .link-list {
         flex-direction: column;
-        align-items: center; 
+        align-items: center;
     }
 
     .link-item {
@@ -36,7 +36,7 @@
     }
 
     .chat-window {
-        width: 250px; 
+        width: 250px;
         height: 350px;
     }
 
@@ -46,13 +46,13 @@
     }
 
     .footer {
-        flex-direction: column; 
+        flex-direction: column;
         padding-top: 10px;
     }
 }
 
 @media screen and (max-width: 480px) {
-
+    /* --HEADER-- */
     .main-header {
         padding: 10px;
     }
@@ -67,7 +67,7 @@
     }
 
     .form {
-        max-width: 90%; 
+        max-width: 90%;
     }
 
     .logo-image {
@@ -77,21 +77,21 @@
     }
 
     .home-title {
-        font-size: 40px; 
+        font-size: 40px;
     }
 
     .place-text {
-        inline-size: 100%; 
-        font-size: 16px; 
+        inline-size: 100%;
+        font-size: 16px;
     }
 
     .chat-window {
-        width: 200px; 
+        width: 200px;
         height: 300px;
     }
 
     .chat-btn {
-        font-size: 18px; 
+        font-size: 18px;
         padding: 10px;
     }
 
@@ -99,7 +99,6 @@
         min-height: 80px;
     }
 }
-*/
 
 body {
     font-family: "Titillium Web", sans-serif;
@@ -193,7 +192,7 @@ body {
     margin-right: auto;
 }
 
-.user-div {
+.user-div, .password-div, .submit-div {
     position: relative;
     display: flex;
     flex-direction: column;
@@ -203,29 +202,6 @@ body {
     margin-right: auto;
     margin-bottom: 20px;
 }
-
-.password-div {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    max-width: 300px;
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 20px;
-}
-
-.submit-div {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    max-width: 300px;
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 20px;
-}
-
 
 .h2-title {
     text-align: center;
@@ -234,13 +210,12 @@ body {
 .logo-image {
     height: 65px;
     width: 65px;
-    margin-left: auto;
-    margin-right: auto;
+    margin: 0 auto;
     padding-top: 10px;
     margin-top: 90px;
 }
 
-.username-label {
+.username-label, .password-label {
     position: absolute;
     left: 16px;
     top: -12px;
@@ -248,18 +223,6 @@ body {
     color: white;
     cursor: text;
     background-color: #0e1c0b;
-    transition: top 200ms ease-in, left 200ms ease-in, font-size 200ms ease-in;
-}
-
-.password-label {
-    position: absolute;
-    left: 16px;
-    top: -12px;
-    padding: 0 8px;
-    color: white;
-    cursor: text;
-    background-color: #0e1c0b;
-    transition: top 200ms ease-in, left 200ms ease-in, font-size 200ms ease-in;
 }
 
 .input-username, .input-password {
@@ -273,6 +236,16 @@ body {
     width: 100%;
 }
 
+.input-submit {
+    background-color: #59b142;
+    color: white;
+    border: none;
+    padding: 25px;
+    cursor: pointer;
+    width: 100%;
+    border-radius: 10px;
+}
+
 .input-username:hover, .input-password:hover {
     border-color: #96d287;
 }
@@ -281,22 +254,11 @@ body {
     border-color: #96d287;
 }
 
-.input-submit {
-    background-color: #59b142;
-    color: white;
-    border: none;
-    padding: 25px;
-    cursor: pointer;
-    transition: background-color 0.5s;
-    width: 100%;
-    border-radius: 10px;
-}
-
 .input-submit:hover {
     background-color: #96d287;
 }
 
-.signup-link {
+.signup-link, .json-r {
     margin-right: auto;
     margin-left: auto;
 }
@@ -307,11 +269,6 @@ body {
 
 .link-signup:visited {
     color: #96d287;
-}
-
-.json-r {
-    margin-right: auto;
-    margin-left: auto;
 }
 
 /* --FOOTER-- */
@@ -342,10 +299,8 @@ body {
 
 .place-text {
     text-align: center;
-    margin-left: auto;
-    margin-right: auto;
+    margin: 0 auto;
     inline-size: 650px;
-    text-wrap: pretty;
 }
 
 .logo-home {
@@ -366,7 +321,7 @@ body {
     color: white;
     border: none;
     border-radius: 10px;
-    font-size: 24px;
+    font-size: 10px;
     cursor: pointer;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
@@ -377,7 +332,7 @@ body {
     right: 20px;
     width: 340px;
     height: 600px;
-    background: none;
+    background: #59b142;
     border: 2px solid #59b142;
     border-radius: 10px;
     display: flex;
@@ -410,6 +365,7 @@ body {
 .input-chat textarea {
     width: 100%;
     padding: 8px;
+    margin-bottom: 4px;
     border-radius: 5px;
     border: 1px solid #59b142;
     min-height: 100px;
@@ -426,7 +382,7 @@ body {
     cursor: pointer;
 }
 
-
+/* --WEBSITE ELEMENTS-- */
 .container {
         /* background-color: white; */
         background-color: 0e1c0b;
@@ -438,6 +394,10 @@ body {
         border: 1px solid white;
 }
 
+.container h3 {
+        color: white;
+}
+
 .chart {
         width: 100%;
         height: 300px;
@@ -447,9 +407,4 @@ body {
         justify-content: center;
         align-items: center;
         color: #7f8c8d;
-}
-
-.container h3 {
-        color: white;
-        margin: 0;
 }
