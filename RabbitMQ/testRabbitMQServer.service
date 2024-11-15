@@ -1,0 +1,15 @@
+[Unit]
+Description=Test RabbitMQ Server
+After=network.target
+
+[Service]
+# Change /home/jude/IT490-Project/testRabbitMQServer.php
+# It must match the absolute path where the php script is located
+ExecStart=/usr/bin/php /home/mike-it490/RabbitMQ/testRabbitMQServer.php
+Restart=always
+User=mike-it490
+Group=mike-it490
+PIDFile=/run/testRabbitMQServer.pid
+
+[Install]
+WantedBy=multi-user.target
