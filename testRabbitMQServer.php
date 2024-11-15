@@ -62,6 +62,7 @@ function doLogin($username, $password) {
     }
 }
 
+
 function doValidate($sessionId) {
     try {
         global $config;
@@ -113,6 +114,7 @@ function doValidate($sessionId) {
         ];
     }
 }
+
 
 function doLogout($sessionId) {
     try {
@@ -173,4 +175,5 @@ function requestProcessor($request) {
 
 $server = new rabbitMQServer("testRabbitMQ.ini", "testServer");
 $server->process_requests('requestProcessor');
-?>                                                        
+?>
+
