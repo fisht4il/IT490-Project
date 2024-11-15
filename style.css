@@ -136,7 +136,7 @@ body {
     background: none;
     border: none;
     width: 90px;
-    height: 60px;
+    height: 53px;
 }
 
 .placeholder-link {
@@ -234,7 +234,7 @@ body {
     background-color: #42dca3;
     color: #051a12;
     border: none;
-    padding: 25px;
+    padding: 15px;
     cursor: pointer;
     transition: background-color 0.5s;
     width: 100%;
@@ -294,7 +294,7 @@ body {
 
 .logo-home {
     margin-left: 27px;
-    height: 60px;
+    height: 53px;
     width: 225px;
 }
 
@@ -358,4 +358,42 @@ body {
     border: 1px solid #42dca3;
     min-height: 100px;
     resize: none;
+}
+
+/*--DASHBOARD--*/
+/*--Mikes Code--*/
+
+.container {
+    background-color: 0e1c0b;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
+    color: white;
+    border: 1px solid #42dca3; /*--> changed color.*/
+    position: relative; /*--> changed position.*/
+    width: 100%; /*--> changed width.*/
+    max-width: 1080px; /*--> changed max width.*/
+    margin:0 auto; /*--> changed margin.*/
+    margin-bottom: 20px; /*--> changed margin top.*/
+}
+
+.container h3 {
+    color: #42dca3; /*--> changed color.*/
+    position: absolute; /*--> changed position.*/
+    left: 50px; /*--> changed position.*/
+    top: -35px; /*--> changed position.*/
+    padding: 0 8px; /*--> added padding.*/
+    background-color: #051a12; /*--> added background color.*/
+}
+
+.chart {
+    width: 100%;
+    height: 300px;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #7f8c8d;
+    border-radius: 10px; /*--> changed radius.*/
 }
