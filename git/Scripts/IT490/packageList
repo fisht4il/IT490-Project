@@ -1,0 +1,10 @@
+git
+vim
+curl
+mysql-server
+rabbitmq-server
+php-amqp
+php-mysql
+apache2
+php8.3
+wireguard
