@@ -7,11 +7,6 @@
         text-align: center;
     }
 
-    .page-title {
-        margin-left: 0;
-        font-size: 20px;
-    }
-
     .link-list {
         flex-direction: column;
         align-items: center; 
@@ -58,10 +53,6 @@
         padding: 10px;
     }
 
-    .page-title {
-        font-size: 18px;
-    }
-
     .link-list {
         flex-direction: column;
         align-items: center;
@@ -104,13 +95,11 @@
 body {
     font-family: "Titillium Web", sans-serif;
     background-attachment: fixed;
-    background-color: rgba(0, 0, 0, 0.6);
     background-size: cover;
-    color: #0566c7;
     display: flex;
     flex-direction: column;
     height: 100vh;
-    background-color: #0e1c0b;
+    background-color: #051a12;
     color: white;
     padding: 0 15px;
 }
@@ -129,13 +118,6 @@ body {
     max-width: 1125px; 
     margin: 0 auto;
     padding: 10px;
-}
-
-.page-title {
-    margin-left: 95px;
-    font-size: 25px;
-    font-weight: 1000;
-    color: rgba(225, 225, 225, 1);
 }
 
 .link-list {
@@ -159,14 +141,22 @@ body {
 
 .placeholder-link {
     text-decoration: none;
-    color: rgba(225, 225, 225, 0.75);
+    color: #42dca3;
     font-weight: 500;
     font-size: 20px;
     transition: all 0.5s;
 }
 
 .placeholder-link:hover {
-    color: rgba(225, 225, 225, 1);
+    color: #98eccd;
+}
+
+.logout-btn {
+    text-decoration: none;
+    color: #051a12;
+    font-weight: 500;
+    font-size: 20px;
+    transition: all 0.5s;
 }
 
 /* --MAIN-- */
@@ -202,8 +192,8 @@ body {
 }
 
 .logo-image {
-    height: 65px;
-    width: 65px;
+    height: 48px;
+    width: 98px;
     margin:0 auto;
     padding-top: 10px;
     margin-top: 90px;
@@ -216,14 +206,15 @@ body {
     padding: 0 8px;
     color: white;
     cursor: text;
-    background-color: #0e1c0b;
+    background-color: #051a12;
 }
 
 .input-username, .input-password  {
-    padding: 25px;
+    padding: 25px 0;
     margin-bottom: 10px;
     border-radius: 10px;
     border-style: solid;
+    border-color: #454645;
     color: white;
     outline: none;
     background: none;
@@ -231,7 +222,7 @@ body {
 }
 
 .input-username:hover, .input-password:hover {
-    border-color: #96d287;
+    border-color: #42dca3;
 }
 
 .input-username:focus, .input-password:focus {
@@ -239,30 +230,33 @@ body {
 }
 
 .input-btn {
-    background-color: #59b142;
-    color: white;
+    margin-left: 2px;
+    background-color: #42dca3;
+    color: #051a12;
     border: none;
-    padding: 20px;
+    padding: 25px;
     cursor: pointer;
     transition: background-color 0.5s;
     width: 100%;
     border-radius: 10px;
+    font-weight: 500;
+    font-size: 20px;
 }
 
 .input-btn:hover {
-    background-color: #96d287;
+    background-color: #98eccd;
 }
 
 .signup-link, .json-r {
-    margin:0 auto;
+    margin:15px auto;
 }
 
 .link-signup {
-    color: #59b142;
+    color: #42dca3;
 }
 
 .link-signup:visited {
-    color: #96d287;
+    color: #42dca3;
 }
 
 /* --FOOTER-- */
@@ -273,7 +267,7 @@ body {
     max-width: 1125px;
     margin:0 auto;
     margin-top: auto;
-    border-top: 1px solid #59b142;
+    border-top: 1px solid #42dca3;
     padding-left: 2px;
     padding-top: 20px;
 }
@@ -299,10 +293,9 @@ body {
 }
 
 .logo-home {
-    position: absolute;
     margin-left: 27px;
-    height: 55px;
-    width: 55px;
+    height: 60px;
+    width: 225px;
 }
 
 /* --CHAT-- */
@@ -312,8 +305,8 @@ body {
     bottom: 20px;
     right: 20px;
     padding: 15px;
-    background-color: #59b142;
-    color: white;
+    background-color: #42dca3;
+    color: #051a12;
     border: none;
     border-radius: 10px;
     font-size: 15px;
@@ -327,8 +320,8 @@ body {
     right: 20px;
     width: 340px;
     height: 600px;
-    background-color: #0e1c0b;
-    border: 2px solid #59b142;
+    background-color: #051a12;
+    border: 2px solid #42dca3;
     border-radius: 10px;
     display: flex;
     flex-direction: column;
@@ -337,9 +330,9 @@ body {
 }
 
 .chat-header {
-    background-color: #59b142;
+    background-color: #42dca3;
     border-radius: 5px;
-    color: white;
+    color: #051a12;
     padding: 10px;
     text-align: center;
     font-weight: bold;
@@ -362,7 +355,7 @@ body {
     padding: 8px;
     margin-bottom: 4px;
     border-radius: 5px;
-    border: 1px solid #59b142;
+    border: 1px solid #42dca3;
     min-height: 100px;
     resize: none;
 }
