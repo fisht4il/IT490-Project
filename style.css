@@ -1,54 +1,7 @@
 /* --GENERAL-- */
 
-@media screen and (max-width: 768px) {
-
-    .main-header {
-        flex-direction: column;
-        text-align: center;
-    }
-
-    .link-list {
-        flex-direction: column;
-        align-items: center; 
-    }
-
-    .link-item {
-        margin-right: 0;
-        margin-bottom: 15px;
-    }
-
-    .form {
-        width: 100%;
-        max-width: 400px;
-    }
-
-    .home-title {
-        font-size: 60px;
-    }
-
-    .place-text {
-        inline-size: 90%;
-    }
-
-    .chat-window {
-        width: 250px; 
-        height: 350px;
-    }
-
-    .chat-btn {
-        font-size: 20px;
-        padding: 12px;
-    }
-
-    .footer {
-        flex-direction: column; 
-        padding-top: 10px;
-    }
-}
-
 @media screen and (max-width: 480px) {
 
-    /* --HEADER-- */
     .main-header {
         padding: 10px;
     }
@@ -59,7 +12,7 @@
     }
 
     .form {
-        max-width: 90%; 
+        max-width: 90%;
     }
 
     .logo-image {
@@ -92,6 +45,46 @@
     }
 }
 
+@media screen and (max-width: 768px) {
+
+    .main-header {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .header-nav {
+        display: flex;
+    }
+
+    .form {
+        width: 100%;
+        max-width: 400px;
+    }
+
+    .home-title {
+        font-size: 60px;
+    }
+
+    .place-text {
+        inline-size: 90%;
+    }
+
+    .chat-window {
+        width: 250px; 
+        height: 350px;
+    }
+
+    .chat-btn {
+        font-size: 20px;
+        padding: 12px;
+    }
+
+    .footer {
+        flex-direction: column; 
+        padding-top: 10px;
+    }
+}
+
 body {
     font-family: "Titillium Web", sans-serif;
     background-attachment: fixed;
@@ -104,8 +97,8 @@ body {
     padding: 0 15px;
 }
 
-.body-index, .body-signup {
-    overflow: hidden;
+.body-index, .body-signup, .body-home {
+    overflow-x: hidden;
 }
 
 /* --HEADER-- */
@@ -376,6 +369,7 @@ body {
     max-width: 1080px; /*--> changed max width.*/
     margin:0 auto; /*--> changed margin.*/
     margin-bottom: 20px; /*--> changed margin top.*/
+    box-sizing: border-box;
 }
 
 .container h3 {
@@ -385,6 +379,7 @@ body {
     top: -35px; /*--> changed position.*/
     padding: 0 8px; /*--> added padding.*/
     background-color: #051a12; /*--> added background color.*/
+    border-radius: 5px;
 }
 
 .chart {
@@ -396,4 +391,5 @@ body {
     align-items: center;
     color: #7f8c8d;
     border-radius: 10px; /*--> changed radius.*/
+    box-sizing: border-box;
 }
