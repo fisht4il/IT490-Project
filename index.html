@@ -87,6 +87,14 @@
   </main>
   <div id="response"></div>
 
-  <?php include 'partials/footer.php'; ?>
+  <div id="footer"></div>
+
+  <!-- index.html footer -->
+  <script>
+        fetch('php/partials/footer.php')
+                .then(response => response.text())
+                .then(data => {document.getElementById('footer').innerHTML = data});
+  </script>
+
 </body>
 </html>
