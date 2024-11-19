@@ -33,7 +33,7 @@ if (!$response['success']) {
     <link rel="stylesheet" href="../style.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Page-1</title>
+    <title>Recommendations</title>
 </head>
 <body class="body-home">
     <?php include 'partials/navbar.php'; ?>

@@ -66,7 +66,7 @@
 <body class="body-index">
   <main class="main-section">
         <form id="login-form"  class="form">
-            <img src="media/finnhub-logo.png" alt="" class="logo-image">
+            <img src="media/logo.png" alt="" class="logo-image">
             <h2 class="h2-title">Login</h2>
             <div class="user-div">
               <label class="username-label" for="username">Username</label>
@@ -87,6 +87,14 @@
   </main>
   <div id="response"></div>
 
-  <?php include 'partials/footer.php'; ?>
+  <div id="footer"></div>
+
+  <!-- index.html footer -->
+  <script>
+        fetch('php/partials/footer.php')
+                .then(response => response.text())
+                .then(data => {document.getElementById('footer').innerHTML = data});
+  </script>
+
 </body>
 </html>
