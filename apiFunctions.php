@@ -26,27 +26,51 @@ print_r($data);
 //seriesInterval
 //=====
 function seriesInterval($duration, $stockSym){
-	global $apiKey;
+        global $apiKey;
 
-	$json = file_get_contents(
-		'https://www.alphavantage.co/query?function=TIME_SERIES_' . $duration . 
-		'&symbol=' . $stockSym  . 
-		'&apikey=' . $apiKey
-	);
-	$data = json_decode($json, true);
+        $json = file_get_contents(
+                'https://www.alphavantage.co/query?function=TIME_SERIES_' . $duration .
+                '&symbol=' . $stockSym  .
+                '&apikey=' . $apiKey
+        );
+        $data = json_decode($json, true);
 
-	if (!empty($data)){
-		return $data; // todo do the function below, not just returning here
+        if (!empty($data)){
+              //return $data; // this line is for testing console-output
 
-		/* TODO implement this so that you can prepare data to insert into mysql db
+                        $symbol = $data['Meta Data']['2. Symbol'];
+                        //$lastRefreshed = $data['Meta Data']['3. Last Refreshed'];
+                        $timeSeries = $data['Time Series (Daily)'];
+                        $dates = array_keys($timeSeries);
 
-		foreach ($data as $entry){
-			//TODO
-		}
+                for ($i = 0 ; $i < count($dates) ; $i++){
+                        $date = $dates[$i];
+	
+                        $open = $timeSeries[$date]['1. open'];
+                        $high = $timeSeries[$date]['2. high'];
+                        $low = $timeSeries[$date]['3. low'];
+                        $close = $timeSeries[$date]['4. close'];
+                        $volume = $timeSeries[$date]['5. volume'];
+                        $insertQuery = "
+                                INSERT INTO stock_prices 
+                                (symbol, date, open, high, low, close, volume) 
+                                VALUES 
+                                ('$symbol', '$date', '$open', '$high', '$low', '$close', '$volume')
+				ON DUPLICATE KEY UPDATE
+				open = VALUES(open),
+				high = VALUES(high),
+				low = VALUES(low),
+				close = VALUES(close),
+				volume = VALUES(volume)
+				";
+                        insertData($insertQuery);
+                }
 
-		 */
-	}
+
+        }
 }
+
+
 
 //=====
 //seriesIntraday
@@ -62,18 +86,34 @@ function seriesIntraday($stockSym, //TODO theres options for outputsize and mont
 //insertData
 //=====
 //all the functions will call this at end to have $data inserted into table
-/*TODO implement this
-
 function insertData($insertQuery){
-	//db stuff here
+        $dbHost = $_ENV['DB_HOST'];
+        $dbUser = $_ENV['DB_USER'];
+        $dbPass = $_ENV['DB_PASS'];
+        $dbName = $_ENV['DB_API'];
 
-	//pdo stuff here
 
-	//close everything at the end
+        try{
+                $dbLogin = "mysql:host=$dbHost;dbname=$dbName";
+                $pdo = new PDO($dbLogin, $dbUser, $dbPass);
+                $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+                $stmt = $pdo->prepare($insertQuery);
+
+                $stmt->execute();
+
+        } catch (PDOException $e) {
+                echo "Exception " . $e->getMessage();
+                exit();
+        } finally {
+                if ($stmt){
+                        $stmt=null;
+                }
+                $conn=null;
+        }
 
 }
 
- */
 
 
 #==========
