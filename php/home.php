@@ -1,8 +1,8 @@
 <?php
 session_start();
-require_once('path.inc');
-require_once('get_host_info.inc');
-require_once('rabbitMQLib.inc');
+require_once('../path.inc');
+require_once('../get_host_info.inc');
+require_once('../rabbitMQLib.inc');
 
 if (!isset($_SESSION['session_id'])) {
     header("Location: ../index.html");
