@@ -1,6 +1,6 @@
 <header class="main-header">
         <a href="home.php">
-        <img src="../media/finnhub-logo.png" alt="Logo" class="logo-home">
+        <img src="../media/logo.png" alt="Logo" class="logo-home">
         <h1 class="page-title">IT-490-Project</h1>
 
         <nav class="header-nav">
