@@ -8,6 +8,36 @@ $config = include('dbClient.php');
 
 date_default_timezone_set('America/New_York');
 
+function doRegister($username, $password) {
+    try {
+        global $config;
+        $dbhost = $config['DBHOST'];
+        $logindb = $config['LOGINDATABASE'];
+        $dbLogin = "mysql:host=$dbhost;dbname=$logindb";
+        $dbUsername = $config['DBUSER'];
+        $dbPassword = $config['DBPASSWORD'];
+
+        $pdo = new PDO($dbLogin, $dbUsername, $dbPassword);
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+        $stmt = $pdo->prepare("INSERT INTO users (username, password, last_login) VALUES (:username, :password, NULL)");
+        $stmt->bindParam(':username', $username);
+        $stmt->bindParam(':password', $password);
+        $stmt->execute();
+
+        return [
+            "success" => true,
+            "message" => "Registration successful!"
+        ];
+
+    } catch (PDOException $e) {
+        error_log('Database error: ' . $e->getMessage());
+        return [
+            "success" => false,
+            "message" => "An error occurred during registeration. Please try again later."
+        ];
+    }
+}
 
 function doLogin($username, $password) {
     try {
@@ -153,6 +183,9 @@ function requestProcessor($request) {
     }
 
     switch ($request['type']) {
+        case "register":
+            $response = doRegister($request['username'], $request['password']);
+            break;
         case "login":
             $response = doLogin($request['username'], $request['password']);
             break;

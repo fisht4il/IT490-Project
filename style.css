@@ -112,61 +112,50 @@ body {
     background-color: #0e1c0b;
     color: white;
     padding: 0 15px;
-    /* margin: auto;
-    max-width: 1125px; */
+/* margin: auto;
+max-width: 1125px; */
 }
 
 .body-index, .body-signup {
-    overflow: hidden;
+overflow: hidden;
 }
 
 /* --HEADER-- */
 
 .main-header {
-    /* background-color: white; */
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
-    /* max-width: 1125px; */
-    margin: 0 auto;
-    /* position: fixed; */
+display: flex;
+align-items: center;
+justify-content: space-between;
+width: 100%;
+margin: 0 auto;
+}
+
+.header-nav {
+display: flex;
+gap: 15px;
+}
+
+.logo-home {
+position: absolute;
+height: 55px;
+width: 55px;
 }
 
 .page-title {
     margin-left: 95px;
     font-size: 25px;
-    font-weight: 1000;
+    font-weight: bold;
     color: rgba(225, 225, 225, 1);
-}
-
-.link-list {
-    list-style: none;
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-}
-
-/*
-.link-item {
-    margin-right: 25px;
-    margin-bottom: 10px; 
-}
-*/
-
-.btn {
-    background: none;
-    border: none;
-    width: 90px;
-    height: 60px;
+    align-items: center;
 }
 
 .placeholder-link {
     text-decoration: none;
     color: rgba(225, 225, 225, 0.75);
-    font-weight: 500;
-    font-size: 20px;
-    transition: all 0.5s;
+    font-size: 25px;
+    font-weight: bold;
+    color: rgba(225, 225, 225, 0.75);
 }
 
 .placeholder-link:hover {
@@ -176,10 +165,10 @@ body {
 /* --MAIN-- */
 
 .main-section {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+display: flex;
+justify-content: center;
+align-items: center;
+flex-direction: column;
 }
 
 .form {
@@ -226,7 +215,7 @@ body {
 }
 
 .input-username, .input-password {
-    padding: 25px;
+    padding: 25px 0;
     margin-bottom: 10px;
     border-radius: 10px;
     border-style: solid;
@@ -303,18 +292,11 @@ body {
     inline-size: 650px;
 }
 
-.logo-home {
-    position: absolute;
-    margin-left: 27px;
-    height: 55px;
-    width: 55px;
-}
-
 /* --CHAT-- */
 
 .chat-btn {
-    position: fixed;
-    bottom: 20px;
+        position: fixed;
+        bottom: 20px;
     right: 20px;
     padding: 15px;
     background-color: #59b142;
