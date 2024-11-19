@@ -8,31 +8,92 @@
   <link rel="stylesheet" href="../style.css">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Register Form</title>
-  
+  <title>Signup Form</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    $(document).ready(function () {
+      $('#signup-form').on('submit', function (e) {
+        e.preventDefault();
+
+        var username = $('#username').val();
+        var password = $('#password').val();
+        var showRawJson = $('#show-json').is(':checked');
+
+        $.ajax({
+          url: 'register.php',
+          type: 'POST',
+          data: {
+            username: username,
+            password: password
+          },
+          success: function (response) {
+            try {
+              let result = typeof response === 'string' ? JSON.parse(response) : response;
+              let color = result.success ? 'green' : 'red';
+
+              let formattedResponse = `
+                <pre><strong style="color:${color};">${result.message}</strong></pre><br>
+              `;
+
+              let rawJsonResponse = showRawJson
+                ? `<h4>Raw JSON Response:</h4><pre>${JSON.stringify(result, null, 2)}</pre>`
+                : '';
+
+              $('#response').html(formattedResponse + rawJsonResponse);
+                
+              if (result.success && result.redirect) {
+                window.location.href = result.redirect;
+                return;
+              }
+
+            } catch (error) {
+              console.error("JSON parse error:", error);
+              $('#response').html(
+                `<pre><strong style='color:red;'>Invalid JSON response.</strong></pre>`
+              );
+            }
+          },
+          error: function () {
+            $('#response').html("<strong style='color:red;'>An error occurred. Please try again.</strong>");
+          }
+        });
+      });
+    });
+  </script>
+
 </head>
-   <body class="body-signup">
-    <img src="../media/finnhub-logo.png" alt="" class="logo-image">
-    <h2 class="h2-title">Signup</h2>
-    <main class="main-section">
-        <form action="register.php" class="form" method="post">
+
+<body class="body-signup">
+  <main class="main-section">
+        <form id="signup-form"  class="form">
+            <img src="../media/finnhub-logo.png" alt="" class="logo-image">
+            <h2 class="h2-title">Signup</h2>
             <div class="user-div">
-                <label for="username" class="username-label">Username</label>
-                <input type="text" class="input-username" id="username" name="username" required maxlength="30" required placeholder=" ">
+              <label class="username-label" for="username">Username</label>
+              <input type="text" class="input-username" id="username" name="username" required placeholder=" "><br><br>
             </div>
             <div class="password-div">
-                <label for="password" class="password-label">Password</label>
-                <input type="password" class="input-password" id="password" name="password" required minlength="8" required placeholder=" ">
+              <label class="password-label" for="password">Password</label>
+              <input type="password" class="input-password" id="password" name="password" required placeholder=" "><br><br>
             </div>
-            <input type="submit" class="input-submit" value="Register">
-            <p class="signup-link">Already have an account? <a href="../index.html" class="link-signup">Login</a></p>
+            <div class="submit-div">
+              <input type="submit" class="input-submit" value="Register">
+              <p class="signup-link">Already have an account? <a href="../index.html" class="link-signup">Login</a></p>
+            </div>
+            <label class="json-r">
+                <br><br>Raw JSON Response<input type="checkbox" id="show-json">
+            </label>
         </form>
-    </main>
-    <div id="footer"></div>
-    <script>
-        fetch('partials/footer.php')
+  </main>
+
+  <div id="response"></div>
+
+  <div id="footer"></div>
+  <script>
+        fetch('php/partials/footer.php')
                 .then(response => response.text())
                 .then(data => {document.getElementById('footer').innerHTML = data});
-    </script>
-   </body>
+  </script>
+
+</body>
 </html>
