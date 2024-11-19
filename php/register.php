@@ -6,7 +6,6 @@ require_once('path.inc');
 require_once('get_host_info.inc');
 require_once('rabbitMQLib.inc');
 
-
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $username = $_POST['username'];
     $password = $_POST['password'];
@@ -21,30 +20,31 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     ];
 
     $response = $client->send_request($request);
+    $response = json_decode($response, true);
 
-    $response = json_decode(json: $response, associative: true);
+    if (isset($response['success']) && $response['success']) {
 
-    if(isset($response['success']) && $response['success']) {
-            $_SESSION['username'] = $username;
-            echo json_encode(value: [
-                    "success" => true,
-                    "message" => "Registration successful.",
-                    "redirect" => "/php/home.php"
-            ]);
-            exit;
+        $_SESSION['username'] = $username;
+        $_SESSION['session_id'] = $response['session_id'];
+
+        echo json_encode([
+            "success" => true,
+            "message" => "Login successful.",
+            "redirect" => "../index.html"
+        ]);
+        exit;
     }
 
-    header(header: 'Content-Type: application/json');
+    header('Content-Type: application/json');
+    echo json_encode($response);
+}
 
-    echo json_encode(value: $response);
-
-} else {
-    http_response_code(response_code: 405);
-    echo json_encode(value: [
+else {
+    http_response_code(405);
+    echo json_encode([
         "success" => false,
         "message" => "Invalid request method."
     ]);
 }
-
 
 ?>
