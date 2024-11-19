@@ -30,4 +30,16 @@ abstract class trading_data
         }
     }
 }
+
+class intraday_trading_data_collection extends trading_data_collector
+{
+    function construct($query, $query_result)
+    {
+        $this->construct_trading_data_collector($query, $query_result);
+    }
+    protected function get_record_object_id()
+    {
+        return 'Time Series'(file_get_contents('https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=IBM&interval=5min&apikey=GZ60FPOU8DHW2HSR'));
+    }
+}
 ?>
