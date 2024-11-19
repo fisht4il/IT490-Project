@@ -1,33 +1,13 @@
 <header class="main-header">
         <a href="home.php">
-        <img src="../media/logo.png" alt="Logo" class="logo-home">
-        <h1 class="page-title">IT-490-Project</h1>
-
+            <img src="../media/logo.png" alt="Logo" class="logo-home">
+        </a>
+        <?php echo "Welcome, " . htmlspecialchars($_SESSION['username']) . "."; ?>
+        <!-- <h1 class="page-title">IT-490-Project</h1> -->
         <nav class="header-nav">
-            <ul class="link-list">
-                <li class="link-item">
-                    <button class="btn">
-                        <a href="recommendations.php" class="placeholder-link">Recommendations</a>
-                    </button>
-                </li>
-                <li class="link-item">
-                    <button class="btn">
-                        <a href="trades.php" class="placeholder-link">Trades</a>
-                    </button>
-                </li>
-                <li class="link-item">
-                    <button class="btn">
-                        <a href="orders.php" class="placeholder-link">Orders</a>
-                    </button>
-                </li>
-                <li class="link-item">
-                    <div>
-                        <?php echo "Welcome, " . htmlspecialchars($_SESSION['username']) . "."; ?>
-                    </div>
-                    <button class="input-submit">
-                        <a href="logout.php" class="placeholder-link">Logout</a>
-                    </button>
-                </li>
-            </ul>
+            <a href="recommendations.php" class="placeholder-link">Recommendations</a>
+            <a href="trades.php" class="placeholder-link">Trades</a>
+            <a href="orders.php" class="placeholder-link">Orders</a>
+            <a href="logout.php" class="placeholder-link">Logout</a>
         </nav>
 </header>

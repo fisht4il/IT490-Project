@@ -12,16 +12,6 @@
         font-size: 20px;
     }
 
-    .link-list {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .link-item {
-        margin-right: 0;
-        margin-bottom: 15px;
-    }
-
     .form {
         width: 100%;
         max-width: 400px;
@@ -53,17 +43,13 @@
 
 @media screen and (max-width: 480px) {
     /* --HEADER-- */
+
     .main-header {
         padding: 10px;
     }
 
     .page-title {
         font-size: 18px;
-    }
-
-    .link-list {
-        flex-direction: column;
-        align-items: center;
     }
 
     .form {
@@ -137,9 +123,13 @@ body {
 }
 
 .logo-home {
-    position: absolute;
     height: 55px;
     width: 55px;
+    opacity: 0.75;
+}
+
+.logo-home:hover {
+    opacity: 1;
 }
 
 .page-title {
@@ -391,8 +381,6 @@ body {
         align-items: center;
         color: #7f8c8d;
 }
-
-
 
 .container {
     background-color: 0e1c0b;
