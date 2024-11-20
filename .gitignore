@@ -1,0 +1,7 @@
+*.tmp
+*.swp
+*.idea
+vendor/
+*.env
+*.vscode
+*.lock
