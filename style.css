@@ -45,6 +45,7 @@
     }
 }
 
+
 @media screen and (max-width: 768px) {
 
     .main-header {
@@ -113,43 +114,17 @@ body {
     padding: 10px;
 }
 
-.link-list {
-    list-style: none;
-    display: flex;
-    flex-wrap: wrap; 
-    justify-content: center; 
-}
-
-.link-item {
-    margin-right: 25px;
-    margin-bottom: 10px; 
-}
-
-.btn {
-    background: none;
-    border: none;
-    width: 90px;
-    height: 53px;
-}
-
-.placeholder-link {
+.nav-link {
     text-decoration: none;
     color: #42dca3;
     font-weight: 500;
     font-size: 20px;
     transition: all 0.5s;
+    margin-right: 15px;
 }
 
-.placeholder-link:hover {
+.nav-link:hover {
     color: #98eccd;
-}
-
-.logout-btn {
-    text-decoration: none;
-    color: #051a12;
-    font-weight: 500;
-    font-size: 20px;
-    transition: all 0.5s;
 }
 
 /* --MAIN-- */
@@ -287,8 +262,8 @@ body {
 
 .logo-home {
     margin-left: 27px;
-    height: 53px;
-    width: 225px;
+    height: 45px;
+    width: 95px;
 }
 
 /* --CHAT-- */
