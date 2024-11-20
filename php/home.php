@@ -35,6 +35,21 @@ if (!$response['success']) {
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Titillium+Web:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../style.css">
 </head>
+
+<header class="main-header">
+    <a href="home.php">
+        <img src="../media/logo.png" alt="Logo" class="logo-home">
+    </a>
+    <?php echo "Welcome, " . htmlspecialchars($_SESSION['username']) . "."; ?>
+    <!-- <h1 class="page-title">IT-490-Project</h1> -->
+    <nav class="header-nav">
+        <a href="recommendations.php" class="placeholder-link">Recommendations</a>
+        <a href="trades.php" class="placeholder-link">Trades</a>
+        <a href="orders.php" class="placeholder-link">Orders</a>
+        <a href="logout.php" class="placeholder-link">Logout</a>
+    </nav>
+</header>
+
 <body class="body-home">
     <?php include 'partials/navbar.php'; ?>
 
