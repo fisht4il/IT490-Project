@@ -36,11 +36,10 @@ if (!$response['success']) {
     <title>Trades</title>
 </head>
 <body class="body-home">
-
     <?php include 'partials/navbar.php'; ?>
 
     <section class="section-text">
-        <h2 class="home-title">Trades</h2>
+        <h2>Trades</h2>
     </section>
 
     <!--  <?php include 'partials/chat.php'; ?> -->

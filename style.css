@@ -1,49 +1,7 @@
 /* --GENERAL-- */
 
-@media screen and (max-width: 768px) {
-
-    .main-header {
-        flex-direction: column;
-        text-align: center;
-    }
-
-    .page-title {
-        margin-left: 0;
-        font-size: 20px;
-    }
-
-    .form {
-        width: 100%;
-        max-width: 400px;
-    }
-
-    .home-title {
-        font-size: 60px;
-    }
-
-    .place-text {
-        inline-size: 90%;
-    }
-
-    .chat-window {
-        width: 250px;
-        height: 350px;
-    }
-
-    .chat-btn {
-        font-size: 20px;
-        padding: 12px;
-    }
-
-    .footer {
-        flex-direction: column;
-        padding-top: 10px;
-    }
-}
-
 @media screen and (max-width: 480px) {
     /* --HEADER-- */
-
     .main-header {
         padding: 10px;
     }
@@ -86,21 +44,58 @@
     }
 }
 
+@media screen and (max-width: 720px) {
+
+    .main-header {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .page-title {
+        margin-left: 0;
+        font-size: 20px;
+    }
+
+    .form {
+        width: 100%;
+        max-width: 400px;
+    }
+
+    .home-title {
+        font-size: 60px;
+    }
+
+    .place-text {
+        inline-size: 90%;
+    }
+
+    .chat-window {
+        width: 250px;
+        height: 350px;
+    }
+
+    .chat-btn {
+        font-size: 20px;
+        padding: 12px;
+    }
+
+    .footer {
+        flex-direction: column;
+        padding-top: 10px;
+    }
+}
+
 body {
     font-family: "Titillium Web", sans-serif;
     background-attachment: fixed;
-    background-color: rgba(0, 0, 0, 0.6);
     background-size: cover;
-    color: #0566c7;
+    color: white;
     display: flex;
     flex-direction: column;
     height: 100vh;
-    background-color: #0e1c0b;
+    background-color: #051a12;
     color: white;
     padding: 0 15px;
-
-    /* margin: auto;
-    max-width: 1125px; */
 }
 
 .body-index, .body-signup {
@@ -150,7 +145,7 @@ body {
 }
 
 .placeholder-link:hover {
-        color: rgba(225, 225, 225, 1);
+        color: rgba(49, 188, 128, 1);
 }
 
 /* --MAIN-- */
@@ -217,7 +212,7 @@ body {
 }
 
 .input-submit {
-    background-color: #59b142;
+    background-color: #31bc80;
     color: white;
     border: none;
     padding: 25px;
@@ -226,16 +221,12 @@ body {
     border-radius: 10px;
 }
 
-.input-username:hover, .input-password:hover {
-    border-color: #96d287;
-}
-
-.input-username:focus, .input-password:focus {
-    border-color: #96d287;
+.input-username:hover, .input-password:hover, .input-username:focus, .input-password:focus {
+    border-color: #31bc80;
 }
 
 .input-submit:hover {
-    background-color: #96d287;
+    background-color: #2ea972; /* #96d287;*/
 }
 
 .signup-link, .json-r {
@@ -243,12 +234,8 @@ body {
     margin-left: auto;
 }
 
-.link-signup {
-    color: #59b142;
-}
-
-.link-signup:visited {
-    color: #96d287;
+.link-signup, .link-signup:visited {
+    color: #42dca3;
 }
 
 /* --FOOTER-- */
@@ -263,17 +250,14 @@ body {
     bottom: 0;
 }
 
-/* --HOME PAGE-- */
+/* --PAGES-- */
 
 .section-text {
     display: flex;
     flex-direction: column;
     align-items: center;
-}
-
-.home-title {
-    font-size: 80px;
     text-align: center;
+    font-size: 30px;
     margin: 20px 0;
 }
 
@@ -365,11 +349,21 @@ body {
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         margin-bottom: 30px;
         color: white;
-        border: 1px solid white;
+     /* border: 1px solid white; */
+        border: 1px solid #31bc80;
+        position: relative; /*--> changed position.*/
+        width: 100%; /*--> changed width.*/
+        margin: 0 auto; /*--> changed margin.*/
+        margin-bottom: 20px; /*--> changed margin top.*/
+        box-sizing: border-box;
 }
 
 .container h3 {
-        color: white;
+        color: white; /* #42dca3; /*--> changed color.*/
+       /* padding: 0 8px; /*--> added padding.*/
+        margin: 0;
+        background-color: #051a12; /*--> added background color.*/
+
 }
 
 .chart {
@@ -380,39 +374,7 @@ body {
         justify-content: center;
         align-items: center;
         color: #7f8c8d;
-}
+        border-radius: 10px; /*--> changed radius.*/
+        box-sizing: border-box;
 
-.container {
-    background-color: 0e1c0b;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    margin-bottom: 30px;
-    color: white;
-    border: 1px solid #42dca3; /*--> changed color.*/
-    position: relative; /*--> changed position.*/
-    width: 100%; /*--> changed width.*/
-    max-width: 1080px; /*--> changed max width.*/
-    margin:0 auto; /*--> changed margin.*/
-    margin-bottom: 20px; /*--> changed margin top.*/
-}
-
-.container h3 {
-    color: #42dca3; /*--> changed color.*/
-    position: absolute; /*--> changed position.*/
-    left: 50px; /*--> changed position.*/
-    top: -35px; /*--> changed position.*/
-    padding: 0 8px; /*--> added padding.*/
-    background-color: #051a12; /*--> added background color.*/
-}
-
-.chart {
-    width: 100%;
-    height: 300px;
-    background-color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: #7f8c8d;
-    border-radius: 10px; /*--> changed radius.*/
 }

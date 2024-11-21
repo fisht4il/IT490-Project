@@ -39,8 +39,16 @@ if (!$response['success']) {
     <?php include 'partials/navbar.php'; ?>
 
     <section class="section-text">
-        <h2 class="home-title">Dashboard</h2>
+        <h2>Dashboard</h2>
     </section>
+
+    <div class="container">
+        Investments<br>
+        Account #: LAST 4 DIGITS<br>
+        Value as of TIME AND DAY: $1000<br>
+        Day change<br>
+        Red or green<br>
+    </div>
 
     <div class="container">
         <h3>Stock Performance</h3>
