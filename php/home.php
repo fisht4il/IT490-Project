@@ -1,8 +1,8 @@
 <?php
 session_start();
-require_once('../path.inc');
-require_once('../get_host_info.inc');
-require_once('../rabbitMQLib.inc');
+require_once('path.inc');
+require_once('get_host_info.inc');
+require_once('rabbitMQLib.inc');
 
 if (!isset($_SESSION['session_id'])) {
     header("Location: ../index.html");
@@ -51,8 +51,27 @@ if (!$response['success']) {
     </div>
 
     <div class="container">
+        <h3>Portfolio</h3>
+        <table>
+                <tr>
+                        <th>Stock</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
+                        <th>Total</th>
+                </tr>
+        </table>
+    </div>
+
+    <div class="container">
         <h3>Stock Performance</h3>
         <div class="chart">CHART GOES HERE</div>
+    </div>
+
+    <div class="container">
+        <h3>Recommendations</h3>
+        Recommendation 1<br>
+        Recommendation 2<br>
+        Recommendation 3<br>
     </div>
 
     <!--  <?php include 'partials/chat.php'; ?> -->
