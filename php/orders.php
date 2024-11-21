@@ -37,26 +37,34 @@ if (!$response['success']) {
     <title>Orders</title>
 </head>
 
-<header class="main-header">
-    <a href="home.php">
-        <img src="../media/logo.png" alt="Logo" class="logo-home">
-    </a>
-    <?php echo "Welcome, " . htmlspecialchars($_SESSION['username']) . "."; ?>
-    <!-- <h1 class="page-title">IT-490-Project</h1> -->
-    <nav class="header-nav">
-        <a href="home.php" class="placeholder-link">Dashboard</a>
-        <a href="recommendations.php" class="placeholder-link">Recommendations</a>
-        <a href="trades.php" class="placeholder-link">Trades</a>
-        <a href="logout.php" class="placeholder-link">Logout</a>
-    </nav>
-</header>
-
 <body class="body-home">
     <?php include 'partials/navbar.php'; ?>
 
     <section class="section-text">
         <h2 class="home-title">Orders</h2>
     </section>
+
+    <div class="container">
+        <h2 class="limit-orders">Create and Manage Limit Orders</h2>
+        <form action="" class="order-form" method="post">
+            <label for="" class="input-label">Stock Symbol</label>
+            <input type="text" class="input-field">
+
+            <label for="" class="input-label">Order Type</label>
+            <select name="" id="" class="input-field">
+                <option value="" class="options">Buy</option>
+                <option value="" class="options">Sell</option>
+            </select>
+
+            <label for="" class="input-label">Quantity</label>
+            <input type="number" class="input-field">
+
+            <label for="" class="input-label">Limit Price</label>
+            <input type="text" class="input-field">
+
+            <input type="submit" class="input-button" value="Submit Order">
+        </form>
+    </div>
 
     <!--  <?php include 'partials/chat.php'; ?> -->
 
