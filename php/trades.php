@@ -36,20 +36,6 @@ if (!$response['success']) {
     <title>Trades</title>
 </head>
 
-<header class="main-header">
-    <a href="home.php">
-        <img src="../media/logo.png" alt="Logo" class="logo-home">
-    </a>
-    <?php echo "Welcome, " . htmlspecialchars($_SESSION['username']) . "."; ?>
-    <!-- <h1 class="page-title">IT-490-Project</h1> -->
-    <nav class="header-nav">
-        <a href="home.php" class="placeholder-link">Dashboard</a>
-        <a href="recommendations.php" class="placeholder-link">Recommendations</a>
-        <a href="orders.php" class="placeholder-link">Orders</a>
-        <a href="logout.php" class="placeholder-link">Logout</a>
-    </nav>
-</header>
-
 <body class="body-home">
 
     <?php include 'partials/navbar.php'; ?>
@@ -57,6 +43,38 @@ if (!$response['success']) {
     <section class="section-text">
         <h2 class="home-title">Trades</h2>
     </section>
+
+    <div class="container">
+        <h2 class="limit-orders">Buy Stocks</h2>
+        <form action="" class="order-form" method="post">
+            <label for="" class="input-label">Stock Symbol</label>
+            <input type="text" class="input-field">
+
+            <label for="" class="input-label">Quantity</label>
+            <input type="number" class="input-field">
+
+            <label for="" class="input-label">Price</label>
+            <input type="text" class="input-field">
+
+            <input type="submit" class="input-button" value="Buy">
+        </form>
+    </div>
+
+    <div class="container">
+        <h2 class="limit-orders">Sell Stocks</h2>
+        <form action="" class="order-form" method="post">
+            <label for="" class="input-label">Stock Symbol</label>
+            <input type="text" class="input-field">
+
+            <label for="" class="input-label">Quantity</label>
+            <input type="number" class="input-field">
+
+            <label for="" class="input-label">Limit Price</label>
+            <input type="text" class="input-field">
+
+            <input type="submit" class="input-button" value="Sell">
+        </form>
+    </div>
 
     <!--  <?php include 'partials/chat.php'; ?> -->
 
