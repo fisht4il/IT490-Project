@@ -45,10 +45,10 @@ if (!$response['success']) {
     </section>
 
     <div class="container">
-        <h2 class="limit-orders">Create and Manage Limit Orders</h2>
+        <h3 class="limit-orders">Create and Manage Limit Orders</h3>
         <form action="" class="order-form" method="post">
             <label for="" class="input-label">Stock Symbol</label>
-            <input type="text" class="input-field">
+            <input type="text" class="input-field" placeholder="e.g., TSLA">
 
             <label for="" class="input-label">Order Type</label>
             <select name="" id="" class="input-field">
@@ -57,10 +57,10 @@ if (!$response['success']) {
             </select>
 
             <label for="" class="input-label">Quantity</label>
-            <input type="number" class="input-field">
+            <input type="number" class="input-field" placeholder="e.g., 15">
 
             <label for="" class="input-label">Limit Price</label>
-            <input type="text" class="input-field">
+            <input type="text" class="input-field" placeholder="e.g., 700.00">
 
             <input type="submit" class="input-button" value="Submit Order">
         </form>
