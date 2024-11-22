@@ -203,8 +203,8 @@ body {
 }
 
 .input-button {
-    background-color: #31bc80;
-    color: white;
+    background-color: #42dca3;
+    color: #051a12;;
     border: none;
     padding: 25px;
     cursor: pointer;
@@ -213,7 +213,7 @@ body {
 }
 
 .input-field:hover, .input-field:focus {
-    border-color: #31bc80;
+    border-color: #42dca3;
 }
 
 .input-button:hover {
@@ -265,8 +265,8 @@ body {
     bottom: 20px;
     right: 20px;
     padding: 15px;
-    background-color: #59b142;
-    color: white;
+    background-color: #42dca3;
+    color: #051a12;
     border: none;
     border-radius: 10px;
     font-size: 10px;
@@ -280,8 +280,8 @@ body {
     right: 20px;
     width: 340px;
     height: 600px;
-    background: #59b142;
-    border: 2px solid #59b142;
+    background: #051a12;
+    border: 2px solid #42dca3;
     border-radius: 10px;
     display: flex;
     flex-direction: column;
@@ -290,9 +290,9 @@ body {
 }
 
 .chat-header {
-    background-color: #59b142;
+    background-color: #42dca3;
     border-radius: 5px;
-    color: white;
+    color: #051a12;
     padding: 10px;
     text-align: center;
     font-weight: bold;
@@ -315,7 +315,7 @@ body {
     padding: 8px;
     margin-bottom: 4px;
     border-radius: 5px;
-    border: 1px solid #59b142;
+    border: 1px solid #42dca3;
     min-height: 100px;
     resize: none;
 }
@@ -323,8 +323,8 @@ body {
 .input-chat button {
     padding: 8px 12px;
     margin-top: 10px;
-    background-color: #59b142;
-    color: white;
+    background-color: #42dca3;
+    color: #051a12;
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -341,7 +341,7 @@ body {
         margin-bottom: 30px;
         color: white;
      /* border: 1px solid white; */
-        border: 1px solid #31bc80;
+        border: 1px solid #42dca3;
         position: relative; /*--> changed position.*/
         width: 100%; /*--> changed width.*/
         margin: 0 auto; /*--> changed margin.*/
@@ -350,8 +350,9 @@ body {
 }
 
 .container h3 {
-        color: white; /* #42dca3; /*--> changed color.*/
+        color: white; /*--> changed color.*/
        /* padding: 0 8px; /*--> added padding.*/
+       padding-bottom: 15px;
         margin: 0;
         background-color: #051a12; /*--> added background color.*/
 
