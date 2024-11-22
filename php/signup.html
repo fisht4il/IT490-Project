@@ -5,14 +5,14 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Titillium+Web:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="../style.css">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login Form</title>
+  <title>Signup Form</title>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script>
     $(document).ready(function () {
-      $('#login-form').on('submit', function (e) {
+      $('#signup-form').on('submit', function (e) {
         e.preventDefault();
 
         var username = $('#username').val();
@@ -20,7 +20,7 @@
         var showRawJson = $('#show-json').is(':checked');
 
         $.ajax({
-          url: '/php/login.php',
+          url: 'register.php',
           type: 'POST',
           data: {
             username: username,
@@ -50,11 +50,7 @@
               console.error("JSON parse error:", error);
               $('#response').html(
                 `<pre><strong style='color:red;'>Invalid JSON response.</strong></pre>`
-
               );
-
-                 );
-
             }
           },
           error: function () {
@@ -65,14 +61,13 @@
     });
   </script>
 
-
 </head>
 
 <body class="body-form">
   <main class="main-section">
-        <form id="login-form"  class="form">
-            <img src="media/logo.png" alt="" class="logo-image">
-            <h2 class="h2-title">Login</h2>
+        <form id="signup-form"  class="form">
+            <img src="../media/logo.png" alt="" class="logo-image">
+            <h2 class="h2-title">Signup</h2>
             <div class="form-div">
               <label class="input-label" for="username">Username</label>
               <input type="text" class="input-field" id="username" name="username" required placeholder=" "><br><br>
@@ -82,48 +77,23 @@
               <input type="password" class="input-field" id="password" name="password" required placeholder=" "><br><br>
             </div>
             <div class="form-div">
-              <input type="submit" class="input-button" value="Login">
-              <p class="signup-link">No account? <a href="/php/signup.html" class="link-signup">Signup</a></p>
+              <input type="submit" class="input-button" value="Signup">
+              <p class="signup-link">Already have an account? <a href="../index.html" class="link-signup">Login</a></p>
             </div>
             <label class="json-r">
                 <br><br>Raw JSON Response<input type="checkbox" id="show-json">
             </label>
         </form>
   </main>
+
   <div id="response"></div>
 
   <div id="footer"></div>
-
-  <!-- index.html footer -->
   <script>
-        fetch('php/partials/footer.php')
+        fetch('partials/footer.php')
                 .then(response => response.text())
                 .then(data => {document.getElementById('footer').innerHTML = data});
   </script>
 
 </body>
 </html>
-
-</head>
-
-<body>
-  <h2>Login</h2>
-  <form id="login-form">
-    <label for="username">Username:</label><br>
-    <input type="text" id="username" name="username" required><br><br>
-
-    <label for="password">Password:</label><br>
-    <input type="password" id="password" name="password" required><br><br>
-
-    <input type="submit" value="Login">
-    <label>
-      <br><br>Raw JSON Response<input type="checkbox" id="show-json">
-    </label>
-  </form>
-
-  <div id="response"></div>
-</body>
-</html>
-
-
-

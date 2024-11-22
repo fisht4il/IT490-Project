@@ -1,0 +1,94 @@
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #1e1e1e;
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+.logo {
+    width: 100px;
+    height: auto;
+    margin: 10px 0 10px;
+}
+
+.login-form {
+    width: 300px;
+    padding: 20px;
+    border-radius: 8px;
+    box-sizing: border-box;
+    text-align: left;
+}
+
+.login-form h2 {
+    margin-bottom: 20px;
+    color: white;
+    text-align: center;
+}
+
+.login-form label {
+    display: block;
+    margin-bottom: 5px;
+    color: white;
+    font-weight: bold;
+}
+
+.login-form input[type="text"],
+.login-form input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 2px solid #333;
+    border-radius: 4px;
+    font-size: 16px;
+    box-sizing: border-box;
+    background-color: #fff;
+    transition: border-color 0.3s;
+}
+
+.login-form input[type="text"]:focus,
+.login-form input[type="password"]:focus {
+    border-color: #5741d9;
+    outline: none;
+}
+
+.login-form button {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    background-color: #333;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.login-form button:hover {
+    background-color: #444;
+}
+
+.login-form label.json-label {
+    text-align: center;
+    margin-top: -20px;
+}
+
+.register-section {
+    text-align: center;
+    margin-top: -20px;
+}
+
+.register-section p {
+    color: white;
+}
+
+.signup-link {
+    color: #5741d9; /* Change link color */
+    text-decoration: none; /* Remove underline from link */
+}
+
+.signup-link:hover {
+    text-decoration: underline; /* Underline on hover */
+}
