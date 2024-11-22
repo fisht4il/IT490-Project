@@ -63,21 +63,21 @@
 
 </head>
 
-<body class="body-signup">
+<body class="body-form">
   <main class="main-section">
         <form id="signup-form"  class="form">
             <img src="../media/logo.png" alt="" class="logo-image">
             <h2 class="h2-title">Signup</h2>
-            <div class="user-div">
-              <label class="username-label" for="username">Username</label>
-              <input type="text" class="input-username" id="username" name="username" required placeholder=" "><br><br>
+            <div class="form-div">
+              <label class="input-label" for="username">Username</label>
+              <input type="text" class="input-field" id="username" name="username" required placeholder=" "><br><br>
             </div>
-            <div class="password-div">
-              <label class="password-label" for="password">Password</label>
-              <input type="password" class="input-password" id="password" name="password" required placeholder=" "><br><br>
+            <div class="form-div">
+              <label class="input-label" for="password">Password</label>
+              <input type="password" class="input-field" id="password" name="password" required placeholder=" "><br><br>
             </div>
-            <div class="submit-div">
-              <input type="submit" class="input-submit" value="Register">
+            <div class="form-div">
+              <input type="submit" class="input-button" value="Signup">
               <p class="signup-link">Already have an account? <a href="../index.html" class="link-signup">Login</a></p>
             </div>
             <label class="json-r">
@@ -90,7 +90,7 @@
 
   <div id="footer"></div>
   <script>
-        fetch('php/partials/footer.php')
+        fetch('partials/footer.php')
                 .then(response => response.text())
                 .then(data => {document.getElementById('footer').innerHTML = data});
   </script>

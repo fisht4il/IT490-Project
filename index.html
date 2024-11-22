@@ -20,7 +20,7 @@
         var showRawJson = $('#show-json').is(':checked');
 
         $.ajax({
-          url: 'php/login.php',
+          url: '/php/login.php',
           type: 'POST',
           data: {
             username: username,
@@ -63,21 +63,21 @@
 
 </head>
 
-<body class="body-index">
+<body class="body-form">
   <main class="main-section">
         <form id="login-form"  class="form">
             <img src="media/logo.png" alt="" class="logo-image">
             <h2 class="h2-title">Login</h2>
-            <div class="user-div">
-              <label class="username-label" for="username">Username</label>
-              <input type="text" class="input-username" id="username" name="username" required placeholder=" "><br><br>
+            <div class="form-div">
+              <label class="input-label" for="username">Username</label>
+              <input type="text" class="input-field" id="username" name="username" required placeholder=" "><br><br>
             </div>
-            <div class="password-div">
-              <label class="password-label" for="password">Password</label>
-              <input type="password" class="input-password" id="password" name="password" required placeholder=" "><br><br>
+            <div class="form-div">
+              <label class="input-label" for="password">Password</label>
+              <input type="password" class="input-field" id="password" name="password" required placeholder=" "><br><br>
             </div>
-            <div class="submit-div">
-              <input type="submit" class="input-submit" value="Login">
+            <div class="form-div">
+              <input type="submit" class="input-button" value="Login">
               <p class="signup-link">No account? <a href="/php/signup.html" class="link-signup">Signup</a></p>
             </div>
             <label class="json-r">
