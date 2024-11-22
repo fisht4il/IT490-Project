@@ -45,32 +45,32 @@ if (!$response['success']) {
     </section>
 
     <div class="container">
-        <h2 class="limit-orders">Buy Stocks</h2>
+        <h3 class="limit-orders">Buy Stocks</h3>
         <form action="" class="order-form" method="post">
             <label for="" class="input-label">Stock Symbol</label>
-            <input type="text" class="input-field">
+            <input type="text" class="input-field" placeholder="e.g., AAPL">
 
             <label for="" class="input-label">Quantity</label>
-            <input type="number" class="input-field">
+            <input type="number" class="input-field" placeholder="e.g., 10">
 
             <label for="" class="input-label">Price</label>
-            <input type="text" class="input-field">
+            <input type="text" class="input-field" placeholder="e.g., 150.50">
 
             <input type="submit" class="input-button" value="Buy">
         </form>
     </div>
 
     <div class="container">
-        <h2 class="limit-orders">Sell Stocks</h2>
+        <h3 class="limit-orders">Sell Stocks</h3>
         <form action="" class="order-form" method="post">
             <label for="" class="input-label">Stock Symbol</label>
-            <input type="text" class="input-field">
+            <input type="text" class="input-field" placeholder="e.g., AAPL">
 
             <label for="" class="input-label">Quantity</label>
-            <input type="number" class="input-field">
+            <input type="number" class="input-field" placeholder="e.g., 5">
 
             <label for="" class="input-label">Limit Price</label>
-            <input type="text" class="input-field">
+            <input type="text" class="input-field" placeholder="e.g., 155.00">
 
             <input type="submit" class="input-button" value="Sell">
         </form>
