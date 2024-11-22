@@ -8,6 +8,7 @@ $config = include('dbClient.php');
 
 date_default_timezone_set('America/New_York');
 
+
 function doRegister($username, $password) {
     try {
         global $config;
@@ -40,6 +41,7 @@ function doRegister($username, $password) {
         ];
     }
 }
+
 
 function doLogin($username, $password) {
     try {
@@ -187,9 +189,11 @@ function requestProcessor($request) {
     }
 
     switch ($request['type']) {
+
         case "register":
             $response = doRegister($request['username'], $request['password']);
             break;
+
         case "login":
             $response = doLogin($request['username'], $request['password']);
             break;
