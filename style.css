@@ -191,6 +191,16 @@ body {
     margin-top: 90px;
 }
 
+.input-label {
+    position: absolute;
+    left: 16px;
+    top: -12px;
+    padding: 0 8px;
+    color: white;
+    cursor: text;
+    background-color: #051a12;
+}
+
 .input-field {
     box-sizing: border-box;
     padding: 25px;
