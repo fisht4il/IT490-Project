@@ -50,7 +50,7 @@ if (!$response['success']) {
 <!-- HEADER -->
 <header class="main-header">
   <a href="home.php">
-	<img src="../media/logo.png" alt="Logo" class="logo-home">
+	<img src="../media/logo.png" alt="Logo" class="nav-logo">
  </a>
   <?php echo "Welcome, " . htmlspecialchars($_SESSION['username']) . "."; ?>
   <!-- <h1 class="page-title">IT-490-Project</h1> -->
@@ -78,22 +78,22 @@ if (!$response['success']) {
   <div class="container">
     <h3 class="limit-orders">Create and Manage Limit Orders</h3>
     <form action="" class="order-form" method="post">
-      <label for="" class="input-label">Stock Symbol</label>
+      <label for="" class="con-label">Stock Symbol</label>
       <input type="text" class="input-field" placeholder="e.g., TSLA">
 
 
-      <label for="" class="input-label">Order Type</label>
+      <label for="" class="con-label">Order Type</label>
       <select name="" id="" class="input-field">
         <option value="" class="options">Buy</option>
         <option value="" class="options">Sell</option>
       </select>
 
 
-      <label for="" class="input-label">Quantity</label>
+      <label for="" class="con-label">Quantity</label>
       <input type="number" class="input-field" placeholder="e.g., 15">
 
 
-      <label for="" class="input-label">Limit Price</label>
+      <label for="" class="con-label">Limit Price</label>
       <input type="text" class="input-field" placeholder="e.g., 700.00">
 
 

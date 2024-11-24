@@ -48,7 +48,7 @@ if (!$response['success']) {
 <!-- HEADER -->
 <header class="main-header">
   <a href="home.php">
-	<img src="../media/logo.png" alt="Logo" class="logo-home">
+	<img src="../media/logo.png" alt="Logo" class="nav-logo">
  </a>
   <?php echo "Welcome, " . htmlspecialchars($_SESSION['username']) . "."; ?>
   <!-- <h1 class="page-title">IT-490-Project</h1> -->
@@ -76,15 +76,15 @@ if (!$response['success']) {
   <div class="container">
     <h3 class="limit-orders">Buy Stocks</h3>
     <form action="" class="order-form" method="post">
-      <label for="" class="input-label">Stock Symbol</label>
+      <label for="" class="con-label">Stock Symbol</label>
       <input type="text" class="input-field" placeholder="e.g., AAPL">
 
 
-      <label for="" class="input-label">Quantity</label>
+      <label for="" class="con-label">Quantity</label>
       <input type="number" class="input-field" placeholder="e.g., 10">
 
 
-      <label for="" class="input-label">Price</label>
+      <label for="" class="con-label">Price</label>
       <input type="text" class="input-field" placeholder="e.g., 150.50">
 
 
@@ -96,15 +96,15 @@ if (!$response['success']) {
   <div class="container">
     <h3 class="limit-orders">Sell Stocks</h3>
     <form action="" class="order-form" method="post">
-      <label for="" class="input-label">Stock Symbol</label>
+      <label for="" class="con-label">Stock Symbol</label>
       <input type="text" class="input-field" placeholder="e.g., AAPL">
 
 
-      <label for="" class="input-label">Quantity</label>
+      <label for="" class="con-label">Quantity</label>
       <input type="number" class="input-field" placeholder="e.g., 5">
 
 
-      <label for="" class="input-label">Limit Price</label>
+      <label for="" class="con-label">Limit Price</label>
       <input type="text" class="input-field" placeholder="e.g., 155.00">
 
 
