@@ -1,5 +1,6 @@
 /* --GENERAL-- */
 
+
 @media screen and (max-width: 480px) {
   .main-header {
     padding: 10px;
@@ -140,8 +141,8 @@ body {
 
 
 .nav-logo {
-  height: 55px;
-  width: 55px;
+  height: 48px;
+  width: 98px;
   opacity: 0.75;
 }
 
@@ -216,11 +217,22 @@ body {
 
 
 .logo-image {
-  height: 65px;
-  width: 65px;
+  height: 48px;
+  width: 98px;
   margin: 0 auto;
   padding-top: 10px;
   margin-top: 90px;
+}
+
+
+.input-label {
+  position: absolute;
+  left: 16px;
+  top: -12px;
+  padding: 0 8px;
+  color: white;
+  cursor: text;
+  background-color: #051a12;
 }
 
 
@@ -254,7 +266,7 @@ body {
 
 
 .input-button:hover {
-  background-color: #2ea972; /* #96d287;*/
+  background-color: #2ea972;
 }
 
 
@@ -334,7 +346,7 @@ body {
   flex-direction: column;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   padding: 10px;
-} 
+}
 
 
 .chat-header {
@@ -403,8 +415,8 @@ body {
     box-sizing: border-box;
 }
 
+
 .container h3 {
-  color: white;
   padding-bottom: 15px;
   margin: 0;
   background-color: #051a12;
@@ -415,6 +427,8 @@ body {
   color: white;
   cursor: text;
 }
+
+
 
 .chart {
   width: 100%;
