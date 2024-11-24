@@ -1,0 +1,9 @@
+*.tmp
+*.swp
+*.idea
+vendor/
+*.env
+*.vscode
+*.lock
+IT202-mike/
+old/

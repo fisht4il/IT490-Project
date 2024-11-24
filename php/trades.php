@@ -47,4 +47,3 @@ if (!$response['success']) {
     <?php include 'partials/footer.php'; ?>
 </body>
 </html>
-

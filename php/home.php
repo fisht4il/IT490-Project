@@ -36,40 +36,47 @@ if (!$response['success']) {
     <link rel="stylesheet" href="../style.css">
 </head>
 <body class="body-home">
-    <?php include 'partials/navbar.php'; ?> 
+    <?php include 'partials/navbar.php'; ?>
 
     <section class="section-text">
-	<h2>Dashboard</h2>
+        <h2>Dashboard</h2>
     </section>
 
     <div class="container">
-	Investments<br>
-	Account #: LAST 4 DIGITS<br>
-	Value as of TIME AND DAY: $1000<br>
-	Day change<br>
-	Red or green<br>
+        Investments<br>
+        Account #: LAST 4 DIGITS<br>
+        Value as of TIME AND DAY: $1000<br>
+        Day change<br>
+        Red or green<br>
     </div>
 
     <div class="container">
-	<h3>Portfolio</h3>
-	<table>
-		<tr>
-			<th>Stock</th>
-			<th>Quantity</th>
-			<th>Price</th>
-			<th>Total</th>
-		</tr>
-	</table>
+        <h3>Portfolio</h3>
+        <table>
+                <tr>
+                        <th>Stock</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
+                        <th>Total</th>
+                </tr>
+        </table>
     </div>
 
     <div class="container">
-    	<h3>Stock Performance</h3>
-	<div class="chart">CHART GOES HERE</div>
+        <h3>Stock Performance</h3>
+        <div class="chart">CHART GOES HERE</div>
+    </div>
+
+    <div class="container">
+        <h3>Recommendations</h3>
+        Recommendation 1<br>
+        Recommendation 2<br>
+        Recommendation 3<br>
     </div>
 
     <!--  <?php include 'partials/chat.php'; ?> -->
-    
+
     <?php include 'partials/footer.php'; ?>
- 
+
 </body>
 </html>
