@@ -51,7 +51,7 @@ function quoteEndpoint($stockSym){
 		$changePercent = $globalQuote['10. change percent'];
 		
 		$insertQuery = "
-		INSERT INTO stock_query
+		INSERT INTO stock_quotes
 		(symbol, open, high, low, price, volume, latest_trading_day, prev_close, change_point, change_percent) 
 		VALUES 
 		('$symbol', '$open', '$high', '$low', '$price', '$volume', '$ltd', '$prevClose', '$changePoint', '$changePercent')
@@ -189,7 +189,10 @@ function requestApi($request){
 				break;
 			case 'MONTHLY':
 				$results = seriesInterval($request['type'], $stockSym);
-	  			break;
+				break;
+			case 'QUOTE':
+				$results = quoteEndpoint($stockSym);
+				break;
 		}
 		print_r($results);
 	} else {
