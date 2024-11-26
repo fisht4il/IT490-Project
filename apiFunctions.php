@@ -21,6 +21,60 @@ print_r($data);
 //
 //
 
+//=====
+//quoteEndpoint
+//=====
+function quoteEndpoint($stockSym){
+	global $apiKey;
+
+	$json = file_get_contents(
+                'https://www.alphavantage.co/query?function=GLOBAL_QUOTE' . 
+                '&symbol=' . $stockSym  .
+                '&apikey=' . $apiKey
+        );
+        $data = json_decode($json, true);
+
+
+	if (!empty($data)){
+		//TODO stuff to get data parse
+		$globalQuote = $data['Global Quote'];
+		
+		$symbol = $globalQuote['01. symbol'];
+		$open = $globalQuote['02. open'];
+		$high = $globalQuote['03. high'];
+		$low = $globalQuote['04. low'];
+		$price = $globalQuote['05. price'];
+		$volume = $globalQuote['06. volume'];
+		$ltd = $globalQuote['07. latest trading day'];
+		$prevClose = $globalQuote['08. previous close'];
+		$changePoint = $globalQuote['09. change'];
+		$changePercent = $globalQuote['10. change percent'];
+		
+		$insertQuery = "
+		INSERT INTO stock_query
+		(symbol, open, high, low, price, volume, latest_trading_day, prev_close, change_point, change_percent) 
+		VALUES 
+		('$symbol', '$open', '$high', '$low', '$price', '$volume', '$ltd', '$prevClose', '$changePoint', '$changePercent')
+		ON DUPLICATE KEY UPDATE 
+		open = VALUES(open),
+		high = VALUES(high),
+		low = VALUES(low),
+		price = VALUES(price),
+		volume = VALUES(volume),
+		latest_trading_day = VALUES(latest_trading_day),
+		prev_close = VALUES(prev_close),
+		change_point = VALUES(change_point),
+		change_percent = VALUES(change_percent)
+		";       
+                insertData($insertQuery);
+                
+
+
+        }
+
+
+}
+
 
 //=====
 //seriesInterval
