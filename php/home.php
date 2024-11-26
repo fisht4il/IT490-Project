@@ -103,7 +103,7 @@ if (!$response['success']) {
 
 
   <div class="container">
-    <h3>Recommendations</h3>
+    <h3>Recommendations</h3><br>
     Recommendation 1<br>
     Recommendation 2<br>
     Recommendation 3<br>

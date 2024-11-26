@@ -328,6 +328,7 @@ body {
     border: 1px solid #42dca3;
     min-height: 100px;
     resize: none;
+    box-sizing: border-box;
 }
 
 .input-chat button {
@@ -337,6 +338,8 @@ body {
     color: #051a12;
     border: none;
     border-radius: 5px;
+    justify-content: center;
+    align-items: center;
     cursor: pointer;
 }
 
@@ -370,7 +373,6 @@ body {
     color: white;
     cursor: text;
 }
-
 
 .chart {
     width: 100%;
