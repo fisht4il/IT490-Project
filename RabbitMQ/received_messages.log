@@ -1,0 +1,417 @@
+[10-16-2024 14:09:52] Received request: Array
+(
+    [type] => login
+    [username] => steve
+    [password] => password
+    [message] => Login Request
+)
+
+[10-16-2024 14:11:30] Received request: Array
+(
+    [type] => login
+    [username] => steve
+    [password] => password
+    [message] => Login Request
+)
+
+[10-16-2024 14:16:09] Received request: Array
+(
+    [type] => login
+    [username] => steve
+    [password] => password
+    [message] => Login Request
+)
+
+[10-17-2024 10:07:26] Received request: Array
+(
+    [type] => login
+    [username] => steve
+    [password] => password
+    [message] => Login Request
+)
+
+[10-17-2024 10:44:16] Received request: Array
+(
+    [type] => login
+    [username] => steve
+    [password] => password
+    [message] => Login Request
+)
+
+[10-17-2024 10:45:02] Received request: Array
+(
+    [type] => login
+    [username] => steve
+    [password] => password
+    [message] => Login Request
+)
+
+[10-17-2024 10:47:45] Received request: Array
+(
+    [type] => login
+    [username] => steve
+    [password] => password
+    [message] => Login Request
+)
+
+[10-28-2024 22:19:16] Received request: Array
+(
+    [type] => login
+    [username] => steve
+    [password] => password
+    [message] => Login Request
+)
+
+[10-28-2024 22:28:05] Received request: Array
+(
+    [type] => login
+    [username] => steve
+    [password] => password
+    [message] => Login Request
+)
+
+[10-31-2024 10:20:17] Received request: Array
+(
+    [type] => login
+    [username] => steve
+    [password] => password
+    [message] => Login Request
+)
+
+[10-31-2024 10:22:03] Received request: Array
+(
+    [type] => login
+    [username] => steve
+    [password] => password
+    [message] => Login Request
+)
+
+[10-31-2024 10:24:12] Received request: Array
+(
+    [type] => login
+    [username] => steve
+    [password] => password
+    [message] => Login Request
+)
+
+[10-31-2024 10:31:28] Received request: Array
+(
+    [type] => login
+    [username] => steve
+    [password] => password
+    [message] => Login Request
+)
+
+[10-31-2024 10:31:45] Received request: Array
+(
+    [type] => login
+    [username] => steve
+    [password] => password
+    [message] => Login Request
+)
+
+[10-31-2024 10:38:58] Received request: Array
+(
+    [type] => login
+    [username] => steve
+    [password] => password
+    [message] => Login Request
+)
+
+[10-31-2024 10:39:19] Received request: Array
+(
+    [type] => login
+    [username] => steve
+    [password] => password
+    [message] => Login Request
+)
+
+[11-01-2024 10:02:08] Received request: Array
+(
+    [type] => login
+    [username] => steve
+    [password] => password
+    [message] => Login Request
+)
+
+[11-01-2024 15:19:59] Received request: Array
+(
+    [type] => login
+    [username] => steve
+    [password] => password
+    [message] => Login Request
+)
+
+[11-01-2024 16:10:10] Received request: Array
+(
+    [type] => login
+    [username] => steve
+    [password] => password
+    [message] => Login Request
+)
+
+[11-01-2024 16:10:43] Received request: Array
+(
+    [type] => login
+    [username] => steve
+    [password] => password
+    [message] => Login Request
+)
+
+[11-01-2024 16:12:03] Received request: Array
+(
+    [type] => login
+    [username] => steve
+    [password] => password
+    [message] => Login Request
+)
+
+[11-01-2024 16:27:51] Received request: Array
+(
+    [type] => login
+    [username] => steve
+    [password] => password
+    [message] => Login Request
+)
+
+[11-01-2024 16:28:15] Received request: Array
+(
+    [type] => login
+    [username] => steve
+    [password] => password
+    [message] => Login Request
+)
+
+[11-01-2024 16:29:58] Received request: Array
+(
+    [type] => login
+    [username] => steve
+    [password] => password
+    [message] => Login Request
+)
+
+[11-01-2024 16:43:22] Received request: Array
+(
+    [type] => login
+    [username] => steve
+    [password] => password
+    [message] => Login Request
+)
+
+[11-01-2024 16:55:14] Received request: Array
+(
+    [type] => login
+    [username] => steve
+    [password] => password
+    [message] => Login Request
+)
+
+[11-01-2024 16:55:39] Received request: Array
+(
+    [type] => login
+    [username] => steve
+    [password] => password
+    [message] => Login Request
+)
+
+[11-01-2024 17:55:45] Received request: Array
+(
+    [type] => login
+    [username] => steve
+    [password] => password
+    [message] => Login Request
+)
+
+[11-01-2024 17:56:21] Received request: Array
+(
+    [type] => login
+    [username] => steve
+    [password] => password
+    [message] => Login Request
+)
+
+[11-01-2024 17:57:55] Received request: Array
+(
+    [type] => login
+    [username] => steve
+    [password] => password
+    [message] => Login Request
+)
+
+[11-01-2024 18:47:15] Received request: Array
+(
+    [type] => login
+    [username] => steve
+    [password] => password
+    [message] => Login Request
+)
+
+[11-01-2024 18:47:38] Received request: Array
+(
+    [type] => login
+    [username] => steve
+    [password] => password
+    [message] => Login Request
+)
+
+[11-01-2024 19:13:57] Received request: Array
+(
+    [type] => login
+    [username] => steve
+    [password] => password
+    [message] => Login Request
+)
+
+[11-01-2024 19:14:13] Received request: Array
+(
+    [type] => login
+    [username] => steve
+    [password] => password
+    [message] => Login Request
+)
+
+[11-01-2024 19:23:23] Received request: Array
+(
+    [type] => login
+    [username] => steve
+    [password] => password
+    [message] => Login Request
+)
+
+[11-01-2024 19:24:37] Received request: Array
+(
+    [type] => login
+    [username] => steve
+    [password] => password
+    [message] => Login Request
+)
+
+[11-02-2024 17:48:47] Received request: Array
+(
+    [type] => login
+    [username] => steve
+    [password] => password
+    [message] => Login Request
+)
+
+[11-02-2024 17:49:18] Received request: Array
+(
+    [type] => login
+    [username] => steve
+    [password] => password
+    [message] => Login Request
+)
+
+[11-02-2024 17:49:19] Received request: Array
+(
+    [type] => login
+    [username] => steve
+    [password] => password
+    [message] => Login Request
+)
+
+[11-02-2024 17:50:08] Received request: Array
+(
+    [type] => login
+    [username] => steve
+    [password] => password
+    [message] => Login Request
+)
+
+[11-02-2024 17:50:15] Received request: Array
+(
+    [type] => login
+    [username] => steve
+    [password] => password
+    [message] => Login Request
+)
+
+[11-02-2024 17:50:17] Received request: Array
+(
+    [type] => login
+    [username] => steve
+    [password] => password
+    [message] => Login Request
+)
+
+[11-02-2024 18:21:46] Received request: Array
+(
+    [type] => login
+    [username] => steve
+    [password] => password
+    [message] => Login Request
+)
+
+[11-02-2024 18:22:39] Received request: Array
+(
+    [type] => logout
+    [session_id] => e737e867ffa28dd5c9117d847dd9a28c
+    [message] => Logout Request
+)
+
+[11-02-2024 18:24:29] Received request: Array
+(
+    [type] => login
+    [username] => steve
+    [password] => password
+    [message] => Login Request
+)
+
+[11-02-2024 18:24:34] Received request: Array
+(
+    [type] => login
+    [username] => steve
+    [password] => password
+    [message] => Login Request
+)
+
+[11-02-2024 18:24:47] Received request: Array
+(
+    [type] => logout
+    [session_id] => 28b680440b0690b23c591b2ac9ce19df
+    [message] => Logout Request
+)
+
+[11-02-2024 18:37:36] Received request: Array
+(
+    [type] => login
+    [username] => steve
+    [password] => password
+    [message] => Login Request
+)
+
+[11-02-2024 18:38:00] Received request: Array
+(
+    [type] => logout
+    [session_id] => b9771d005d1eda614914fbf62eab4793
+    [message] => Logout Request
+)
+
+[11-19-2024 10:20:39] Received request: Array
+(
+    [type] => login
+    [username] => steve
+    [password] => password
+    [message] => Login Request
+)
+
+[11-19-2024 10:20:40] Received request: Array
+(
+    [type] => validate_session
+    [session_id] => e4dd56710a0205506cf5a7ca60729278
+)
+
+[11-19-2024 10:27:38] Received request: Array
+(
+    [type] => login
+    [username] => steve
+    [password] => password
+    [message] => Login Request
+)
+
+[11-19-2024 10:27:38] Received request: Array
+(
+    [type] => validate_session
+    [session_id] => 9caf6d4e510264b8ce1e5341f63483b9
+)
+
