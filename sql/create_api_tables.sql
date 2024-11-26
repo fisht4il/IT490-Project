@@ -26,24 +26,24 @@ CREATE TABLE stock_quotes (
     volume INT NOT NULL,
     latest_trading_day DATETIME,
     prev_close DECIMAL(10, 4),
-    change DECIMAL(10, 4),
+    change_point DECIMAL(10, 4),
     change_percent VARCHAR(10) --there is a percent symbol. I do not think we are doing many calculations, hence storing as varchar.
 );
 
 --
 
 CREATE TABLE limit_orders (
-    id INT AUTO_INCREMENT,
+    id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT NOT NULL,
     symbol VARCHAR(10) NOT NULL,
     request_date DATETIME DEFAULT CURRENT_TIMESTAMP,
-    close_date DATETIME DEFAULT NULL. --close is for both 'filled' and 'canceled' status
+    close_date DATETIME DEFAULT NULL,
     request_price DECIMAL (10,4) NOT NULL,
     request_quantity INT UNSIGNED NOT NULL,
     order_type ENUM('buy', 'sell') NOT NULL,
     status ENUM('open', 'filled', 'canceled') DEFAULT 'open',
-    PRIMARY KEY (user_id, symbol, id),
-    FOREIGN KEY (user_id) REFERENCES users(id)
+    FOREIGN KEY (user_id) REFERENCES logindb.users(id),
+    FOREIGN KEY (symbol) REFERENCES stock_quotes(symbol)
 );
 
 
