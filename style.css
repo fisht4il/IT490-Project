@@ -96,6 +96,7 @@ body {
     background-color: #051a12;
     color: white;
     padding: 0 15px;
+    padding: 0 70px;
 }
 
 .body-form {
@@ -260,7 +261,6 @@ body {
     align-items: center;
     text-align: center;
     font-size: 30px;
-    margin: 20px 0;
 }
 
 .place-text {

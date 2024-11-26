@@ -40,7 +40,33 @@ if (!$response['success']) {
 
     <section class="section-text">
         <h2>Orders</h2>
-    </section>
+    </section> 
+
+    <main>
+	<form id="" class="form">
+		<h2 class="h2-title">Limit Orders</h2>
+		<div class="form-div">
+			<label class="input-label" for="stock-symbol">Stock Symbol</label>
+			<input type="text" class="input-field" id="stock-symbol" name="stock_symbol" required placeholder="Enter stock symbol">
+		</div>
+		<div class="form-div">
+			 <label class="input-label" for="order-type">Order Type</label>
+		         <select name="order-type=" id="order-type" class="input-field">
+				<option value="" selected>Select order type</option>
+				<option value="buy">Buy</option>
+				<option value="sell">Sell</option>
+		 	</select>
+		</div>
+                <div class="form-div">
+                        <label class="input-label" for="quantity">Quantity</label>
+                        <input type="number" class="input-field" id="quantity" name="quantity" required placeholder="Enter quantity">
+                </div>
+                <div class="form-div">
+                        <label class="input-label" for="total-price">Total Price</label>
+                        <input type="number" class="input-field" id="total-price" name="total-price" required placeholder="Enter total price">
+                </div>
+	</form>
+    </main>
 
     <!--  <?php include 'partials/chat.php'; ?> -->
 
