@@ -1,6 +1,6 @@
 CREATE TABLE user_wallet (
+    id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT NOT NULL,
     current_balance DECIMAL (15, 2) DEFAULT 0.00,
-    PRIMARY KEY (user_id),
-    FOREIGN KEY (user_id) REFERENCES users(id)
+    FOREIGN KEY (user_id) REFERENCES logindb.users(id)
 );
