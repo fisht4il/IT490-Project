@@ -69,9 +69,10 @@ if (!$response['success']) {
 
     <div class="container">
         <h3>Recommendations</h3>
-        Recommendation 1<br>
+	Growth:<br>
+	Recommendation 1<br>
         Recommendation 2<br>
-        Recommendation 3<br>
+	Recommendation 3<br>
     </div>
 
     <!--  <?php include 'partials/chat.php'; ?> -->
