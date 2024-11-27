@@ -93,6 +93,9 @@ if (!$response['success']) {
 
 <section class="buy-sell">
 
+    <label for="buying-selling" class="buy-sell-label">Buy</label>
+    <label for="buying-selling" class="buy-sell-label">Sell</label>
+    <input id="buying-selling" type="range" value="0" class="bs-slider" min="0" max="1">
 
     <div class="trade-container" id="buy-div">
         <h3 class="limit-orders">Buy Stocks</h3>
@@ -122,7 +125,7 @@ if (!$response['success']) {
 
 
 
-    <div class="trade-container" id="sell-div">
+    <div class="trade-container" id="sell-div" style="display: none;">
         <h3 class="limit-orders">Sell Stocks</h3>
         <form action="" class="order-form" method="post">
             <label for="" class="con-label">Stock Symbol</label>
@@ -148,7 +151,21 @@ if (!$response['success']) {
     </div>
 </section>
 
+<script>
+  document.getElementById('buying-selling').addEventListener('input', function(){
 
+	  const buydiv = document.getElementById('buy-div');
+	  const selldiv = document.getElementById('sell-div');
+
+	  if(this.value == 0) {
+		  buydiv.style.display = 'block';
+		  selldiv.style.display = 'none';
+	  } else {
+		  buydiv.style.display = 'none';
+		  selldiv.style.display = 'block';
+	  }
+  });
+</script>
 
 
 <!-- CHAT -->
