@@ -1,6 +1,6 @@
 <button class="chat-btn" onclick="funcChat()">Help Chat</button>
 
-<section id="chatwindow" class="chat-window">
+<section id="chatwindow" class="chat-window" style="display: none;">
     <div class="chat-header">What can we help with</div>
     <div class="chat-content" id="chatcontent">
     </div>

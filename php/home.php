@@ -1,5 +1,5 @@
 <?php
-
+/*
 session_start();
 require_once('path.inc');
 require_once('get_host_info.inc');
@@ -28,7 +28,7 @@ if (!$response['success']) {
   header("Location: ../index.html");
   exit();
 }
-
+*/
 ?>
 
 
@@ -114,7 +114,7 @@ if (!$response['success']) {
 <button class="chat-btn" onclick="funcChat()">Help Chat</button>
 
 
-<section id="chatwindow" class="chat-window">
+<section id="chatwindow" class="chat-window" style="display: none;">
   <div class="chat-header">What can we help with</div>
   <div class="chat-content" id="chatcontent">
   </div>
