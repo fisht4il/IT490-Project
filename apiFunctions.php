@@ -106,16 +106,10 @@ function seriesInterval($duration, $stockSym){
                         $close = $timeSeries[$date]['4. close'];
                         $volume = $timeSeries[$date]['5. volume'];
                         $insertQuery = "
-                                INSERT INTO stock_prices 
+                                INSERT IGNORE INTO stock_prices 
                                 (symbol, date, open, high, low, close, volume) 
                                 VALUES 
                                 ('$symbol', '$date', '$open', '$high', '$low', '$close', '$volume')
-				ON DUPLICATE KEY UPDATE
-				open = VALUES(open),
-				high = VALUES(high),
-				low = VALUES(low),
-				close = VALUES(close),
-				volume = VALUES(volume)
 				";
                         insertData($insertQuery);
                 }
