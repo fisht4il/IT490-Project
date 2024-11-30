@@ -39,7 +39,7 @@ function quoteEndpoint($stockSym){
 		//TODO stuff to get data parse
 		$globalQuote = $data['Global Quote'];
 		
-		$symbol = $globalQuote['01. symbol'];
+		$symbol = $stockSym;
 		$open = $globalQuote['02. open'];
 		$high = $globalQuote['03. high'];
 		$low = $globalQuote['04. low'];
@@ -92,9 +92,9 @@ function seriesInterval($duration, $stockSym){
         if (!empty($data)){
               //return $data; // this line is for testing console-output
 
-                        $symbol = $data['Meta Data']['2. Symbol'];
+                        $symbol = $stockSym;
                         //$lastRefreshed = $data['Meta Data']['3. Last Refreshed'];
-                        $timeSeries = $data['Time Series (Daily)'];
+			$timeSeries = $data['Time Series (Daily)'];
                         $dates = array_keys($timeSeries);
 
                 for ($i = 0 ; $i < count($dates) ; $i++){
