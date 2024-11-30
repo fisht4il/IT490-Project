@@ -1,0 +1,6 @@
+CREATE TABLE stock_list (
+	symbol VARCHAR(10) UNIQUE,
+	name VARCHAR(255) NOT NULL,
+	exchange VARCHAR(50) NOT NULL,
+	type VARCHAR(25) NOT NULL
+);
