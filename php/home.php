@@ -43,7 +43,7 @@ if (!$response['success']) {
     </section>
 
     <div class="container">
-       <h3>Balance: BALANCE GOES HERE</h3>
+   	 <h3>Balance: $<?php echo number_format((float)$balance, 2, '.', ','); ?></h3>
     </div>
 
     <div class="container">
@@ -71,7 +71,7 @@ if (!$response['success']) {
 	Recommendation 3<br>
     </div>
 
-    <!--  <?php include 'partials/chat.php'; ?> -->
+    <!-- <?php include 'partials/chat.php'; ?> -->
 
     <?php include 'partials/footer.php'; ?>
 
