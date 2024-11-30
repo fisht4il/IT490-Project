@@ -5,7 +5,9 @@ require_once('apiFunctions.php');
 
 //================
 
-$url = 'https://www.alphavantage.co/query?function=LISTING_STATUS&apikey=demo';
+global $apiKey;
+
+$url = 'https://www.alphavantage.co/query?function=LISTING_STATUS&apikey=' . $apiKey;
 
 $ch = curl_init($url);
 
