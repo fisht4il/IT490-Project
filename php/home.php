@@ -43,11 +43,7 @@ if (!$response['success']) {
     </section>
 
     <div class="container">
-        Investments<br>
-        Account #: LAST 4 DIGITS<br>
-        Value as of TIME AND DAY: $1000<br>
-        Day change<br>
-        Red or green<br>
+       <h3>Balance: BALANCE GOES HERE</h3>
     </div>
 
     <div class="container">
@@ -55,9 +51,9 @@ if (!$response['success']) {
         <table>
                 <tr>
                         <th>Stock</th>
-                        <th>Quantity</th>
-                        <th>Price</th>
-                        <th>Total</th>
+                        <th>Chart</th>
+                        <th>Day Change</th>
+                        <th>Overall Change</th>
                 </tr>
         </table>
     </div>
