@@ -43,7 +43,7 @@ CREATE TABLE limit_orders (
     order_type ENUM('buy', 'sell') NOT NULL,
     status ENUM('open', 'filled', 'canceled') DEFAULT 'open',
     FOREIGN KEY (user_id) REFERENCES logindb.users(id),
-    FOREIGN KEY (symbol) REFERENCES stock_quotes(symbol)
+    FOREIGN KEY (symbol) REFERENCES popular_stocks(symbol)
 );
 
 
