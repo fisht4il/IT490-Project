@@ -43,7 +43,7 @@ if (!$response['success']) {
     </section>
 
     <div class="container">
-   	 <h3>Balance: $<?php echo number_format((float)$balance, 2, '.', ','); ?></h3>
+   	 <h3>Balance: $<?php echo number_format((float)$current_balance, 2, '.', ','); ?></h3>
     </div>
 
     <div class="container">

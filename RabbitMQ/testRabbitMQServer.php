@@ -12,40 +12,32 @@ function doRegister($username, $password) {
     try {
         global $config;
         $dbhost = $config['DBHOST'];
-        $logindb = $config['LOGINDATABASE'];
-        $dbLogin = "mysql:host=$dbhost;dbname=$logindb";
+	$logindb = $config['LOGINDATABASE'];
+	$stockdb = $config['STOCKDATABASE'];
+	$dbLogin = "mysql:host=$dbhost;dbname=$logindb";
+	$dbStock = "mysql:host=$dbhost;dbname=$stockdb";
         $dbUsername = $config['DBUSER'];
         $dbPassword = $config['DBPASSWORD'];
 
         $pdo = new PDO($dbLogin, $dbUsername, $dbPassword);
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
+        $pdoStock = new PDO($dbStock, $dbUsername, $dbPassword);
+        $pdoStock->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
 	$hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-
-//	$stmt = $pdo->prepare("SELECT * FROM users WHERE username = :username");
-//	$stmt->bindParam(':username', $username);
-//	$stmt->execute();
-//	$stmt->store_result();
-//	$count = $stmt->fetchColumn();
-
-//	if ($count > 0) {
-//		return [
-//			"success" => false,
-//			"message" => "Username already taken."
-//		];
-//	}
-
-//	if ($existingUser) {
-//		return [
-//			"success" => false,
-//			"message" => "Username already taken."
-//			];
-//	}
 
         $stmt = $pdo->prepare("INSERT INTO users (username, password, last_login) VALUES (:username, :password, NULL)");
         $stmt->bindParam(':username', $username);
         $stmt->bindParam(':password', $hashedPassword);
         $stmt->execute();
+
+        $userId = $pdo->lastInsertId();
+
+        $stmtStock = $pdoStock->prepare("INSERT INTO user_wallet (user_id, current_balance) VALUES (:user_id, :current_balance)");
+        $stmtStock->bindParam(':user_id', $userId);
+        $stmtStock->bindValue(':current_balance', 1000.00);
+        $stmtStock->execute();
 
         return [
             "success" => true,
