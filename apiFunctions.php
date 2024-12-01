@@ -9,6 +9,22 @@ $dotenv->load();
 
 $apiKey = $_ENV['API_KEY']; //global
 
+$dbHost = $_ENV['DB_HOST'];
+$dbUser = $_ENV['DB_USER'];
+$dbPass = $_ENV['DB_PASS'];
+$dbName = $_ENV['DB_API'];
+
+try{
+        $dbLogin = "mysql:host=$dbHost;dbname=$dbName";
+        $pdo = new PDO($dbLogin, $dbUser, $dbPass);
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+} catch (PDOException $e) {
+        echo "Exception " . $e->getMessage();
+        exit();
+}
+
+
+
 /* this works
 $json = file_get_contents('https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=IBM&apikey=' . $apiKey);
 
@@ -135,19 +151,9 @@ function seriesIntraday($stockSym, //TODO theres options for outputsize and mont
 //=====
 //all the functions will call this at end to have $data inserted into table
 function insertData($insertQuery){
-        $dbHost = $_ENV['DB_HOST'];
-        $dbUser = $_ENV['DB_USER'];
-        $dbPass = $_ENV['DB_PASS'];
-        $dbName = $_ENV['DB_API'];
-
-
+	global $pdo;
         try{
-                $dbLogin = "mysql:host=$dbHost;dbname=$dbName";
-                $pdo = new PDO($dbLogin, $dbUser, $dbPass);
-                $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
                 $stmt = $pdo->prepare($insertQuery);
-
                 $stmt->execute();
 
         } catch (PDOException $e) {
