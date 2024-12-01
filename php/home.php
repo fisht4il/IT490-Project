@@ -22,6 +22,21 @@ if (!$response['success']) {
     header("Location: ../index.html");
     exit();
 }
+
+/*
+else {
+	$userId = $response['user_id'];
+	
+	$request = [
+  		'type' => 'get_balance',
+  		'user_id' => $userId
+	];
+
+	$response = json_decode($client->send_request($request), true);
+	
+	$current_balance = $response['balance'];	
+} */
+
 ?>
 
 <html lang="en">
@@ -43,7 +58,7 @@ if (!$response['success']) {
     </section>
 
     <div class="container">
-   	 <h3>Balance: $<?php echo number_format((float)$current_balance, 2, '.', ','); ?></h3>
+        <h3>Balance: $<?php echo number_format((float)$current_balance, 2, '.', ','); ?></h3>
     </div>
 
     <div class="container">

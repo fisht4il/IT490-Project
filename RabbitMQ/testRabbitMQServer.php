@@ -84,7 +84,7 @@ function doLogin($username, $password) {
             $stmt->bindParam(':username', $username);
             $stmt->bindParam(':session_id', $sessionId);
             $stmt->bindParam(':timelimit', $timeLimit);
-             $stmt->execute();
+            $stmt->execute();
 
             return [
                 "success" => true,
@@ -140,7 +140,8 @@ function doValidate($sessionId) {
 
                 return [
                     "success" => true,
-                    "message" => "Session validated."
+		    "message" => "Session validated.",
+		    "user_id" => $user['user_id']
                 ];
             }
         } else {
@@ -156,6 +157,32 @@ function doValidate($sessionId) {
             "message" => "An error occurred during session validation."
         ];
     }
+}
+
+function doGetBalance($userId) {
+        global $config;
+        $dbhost = $config['DBHOST'];
+        $stockdb = $config['STOCKDATABASE'];
+        $dbStock = "mysql:host=$dbhost;dbname=$stockdb";
+        $dbUsername = $CONFIG['DBUSER'];
+        $dbPassword = $config['DBPASSWORD'];
+
+        $pdoStock = new PDO($dbStock, $dbUsername, $dbPassword);
+        $pdoStock->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+        $stmtStock = $pdoStock->prepare("SELECT current_balance FROM user_wallet WHERE user_id = :user_id");
+        $stmtStock->bindParam(':user_id', $userId);
+        $stmtStock->execute();
+
+        $balance = $stmtStock->fetchColumn();
+
+	if($balance != null) {
+		return [
+			"success" = true,
+			"message" = "Get dat bag",
+			"balance" = $balance
+		];
+	}
 }
 
 function doLogout($sessionId) {
@@ -205,9 +232,12 @@ function requestProcessor($request) {
         case "validate_session":
             $response = doValidate($request['session_id']);
             break;
-        case "logout":
-            $response = doLogout($request['session_id']);
+        case "get_balance":
+            $response = doGetBalance($request['user_id']);
             break;
+	case "logout":
+            $response = doLogout($request['session_id']);
+	    break;
 	default:
             $response = [
                 "success" => false,
