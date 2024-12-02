@@ -6,33 +6,19 @@ require_once('get_host_info.inc');
 require_once('rabbitMQLib.inc');
 
 
-
-
 if (!isset($_SESSION['session_id'])) {
   header("Location: ../index.html");
   exit();
 }
 
-
-
-
 $client = new rabbitMQClient("testRabbitMQ.ini", "testServer");
-
-
-
 
 $request = [
   'type' => "validate_session",
   'session_id' => $_SESSION['session_id']
 ];
 
-
-
-
 $response = json_decode($client->send_request($request), true);
-
-
-
 
 if (!$response['success']) {
   header("Location: ../index.html");
@@ -40,10 +26,6 @@ if (!$response['success']) {
 }
 */
 ?>
-
-
-
-
 
 
 <!DOCTYPE html>
@@ -57,8 +39,6 @@ if (!$response['success']) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Orders</title>
 </head>
-
-
 
 
 <!-- HEADER -->
@@ -81,19 +61,12 @@ if (!$response['success']) {
 </header>
 
 
-
-
 <body class="body-home">
-
-
 
 
   <section class="section-text">
     <h2 class="home-title">Orders</h2>
   </section>
-
-
-
 
   <div class="order-container">
     <h3 class="limit-orders">Create and Manage Limit Orders</h3>
@@ -101,42 +74,24 @@ if (!$response['success']) {
       <label for="" class="con-label">Stock Symbol</label>
       <input type="text" class="input-field" placeholder="e.g., TSLA">
 
-
-
-
       <label for="" class="con-label">Order Type</label>
       <select name="" id="" class="input-field">
         <option value="" class="options">Buy</option>
         <option value="" class="options">Sell</option>
       </select>
 
-
-
-
       <label for="" class="con-label">Quantity</label>
       <input type="number" class="input-field" placeholder="e.g., 15">
 
-
-
-
       <label for="" class="con-label">Limit Price</label>
       <input type="text" class="input-field" placeholder="e.g., 700.00">
-
-
-
 
       <input type="submit" class="input-button" value="Submit Order">
     </form>
   </div>
 
-
-
-
 <!-- CHAT -->
 <button class="chat-btn" onclick="funcChat()">Help Chat</button>
-
-
-
 
 <section id="chatwindow" class="chat-window" style="display: none;">
   <div class="chat-header">What can we help with</div>
@@ -149,22 +104,15 @@ if (!$response['success']) {
 </section>
 
 
-
-
 <script>
   function funcChat() {
     var chatwindow = document.getElementById('chatwindow');
     chatwindow.style.display = (chatwindow.style.display === 'none' || chatwindow.style.display === '') ? 'flex' : 'none';
   }
 
-
-
-
   function messageSend() {
     var inputfield = document.getElementById('chatinput');
     var chatcontent = document.getElementById('chatcontent');
-
-
 
 
     if (inputfield.value.trim() !== '') {
@@ -172,25 +120,16 @@ if (!$response['success']) {
       message.textContent = inputfield.value;
       chatcontent.appendChild(message);
 
-
-
-
       inputfield.value = '';
       chatcontent.scrollTop = chatcontent.scrollHeight;
     }
   }
 </script>
 
-
-
-
 <!-- FOOTER -->
 <footer class="footer">
   <p>&copy; 2024. Copyright by IT-490-Project</p>
 </footer>
-
-
-
 
 </body>
 </html>

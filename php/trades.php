@@ -5,53 +5,19 @@ require_once('path.inc');
 require_once('get_host_info.inc');
 require_once('rabbitMQLib.inc');
 
-
-
-
-
-
-
-
 if (!isset($_SESSION['session_id'])) {
   header("Location: ../index.html");
   exit();
 }
 
-
-
-
-
-
-
-
 $client = new rabbitMQClient("testRabbitMQ.ini", "testServer");
-
-
-
-
-
-
-
 
 $request = [
   'type' => "validate_session",
   'session_id' => $_SESSION['session_id']
 ];
 
-
-
-
-
-
-
-
 $response = json_decode($client->send_request($request), true);
-
-
-
-
-
-
 
 
 if (!$response['success']) {
@@ -109,6 +75,7 @@ if (!$response['success']) {
         <input id="buying-selling" type="range" value="0" class="bs-slider" min="0" max="1">
         <label for="buying-selling" class="sell-buy-label">Sell</label>
     </div>
+
     <div class="trade-container" id="buy-div">
         <h3 class="limit-orders">Buy Stocks</h3>
         <form action="" class="order-form" method="post">
