@@ -160,11 +160,12 @@ function doValidate($sessionId) {
 }
 
 function doGetBalance($userId) {
+    try {
         global $config;
         $dbhost = $config['DBHOST'];
         $stockdb = $config['STOCKDATABASE'];
         $dbStock = "mysql:host=$dbhost;dbname=$stockdb";
-        $dbUsername = $CONFIG['DBUSER'];
+        $dbUsername = $config['DBUSER'];
         $dbPassword = $config['DBPASSWORD'];
 
         $pdoStock = new PDO($dbStock, $dbUsername, $dbPassword);
@@ -176,13 +177,25 @@ function doGetBalance($userId) {
 
         $balance = $stmtStock->fetchColumn();
 
-	if($balance != null) {
-		return [
-			"success" = true,
-			"message" = "Get dat bag",
-			"balance" = $balance
-		];
-	}
+        if ($balance !== false) {
+            return [
+                "success" => true,
+                "message" => "Get dat bag",
+                "balance" => (float)$balance
+            ];
+        } else {
+            return [
+                "success" => false,
+                "message" => "Bag not found."
+            ];
+        }
+    } catch (PDOException $e) {
+        error_log('Database error: ' . $e->getMessage());
+        return [
+            "success" => false,
+            "message" => "An error occurred while retrieving the balance."
+        ];
+    }
 }
 
 function doLogout($sessionId) {
