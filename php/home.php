@@ -23,19 +23,19 @@ if (!$response['success']) {
     exit();
 }
 
-/*
+
 else {
 	$userId = $response['user_id'];
-	
+/*	
 	$request = [
   		'type' => 'get_balance',
   		'user_id' => $userId
 	];
 
 	$response = json_decode($client->send_request($request), true);
-	
+ */	
 	$current_balance = $response['balance'];	
-} */
+} 
 
 ?>
 

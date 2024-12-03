@@ -89,7 +89,7 @@ function doLogin($username, $password) {
             return [
                 "success" => true,
                 "message" => "Login successful!",
-                "session_id" => $sessionId
+		"session_id" => $sessionId
             ];
         } else {
             return [
@@ -105,6 +105,11 @@ function doLogin($username, $password) {
         ];
     }
 }
+
+
+//=====
+//doValidate
+//=====
 
 function doValidate($sessionId) {
     try {
@@ -123,7 +128,14 @@ function doValidate($sessionId) {
         $stmt->execute();
         $session = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        if ($session) {
+	if ($session) {
+		$stmt= $pdo->prepare("SELECT id FROM users WHERE username IN(SELECT username FROM sessions WHERE session_id = :sessionId)");
+		$stmt->bindParam(':sessionId', $sessionId);
+		$userId = $stmt->fetchColumn();
+		
+//select id from users where username in(select username from sessions where session_id = '27e43c0d5d4f0d1df3be4f307ff33027');
+
+
             $currentTime = time();
 
             if ($currentTime > $session['session_end']) {
@@ -138,10 +150,13 @@ function doValidate($sessionId) {
                 $stmt->bindParam(':session_id', $sessionId);
                 $stmt->execute();
 
+		$stmt = null;
+		$pdo = null;
                 return [
                     "success" => true,
 		    "message" => "Session validated.",
-		    "user_id" => $user['user_id']
+		    "user_id" => $userId,
+		    "balance" => showGetBalance($userId)
                 ];
             }
         } else {
@@ -158,13 +173,18 @@ function doValidate($sessionId) {
         ];
     }
 }
+function showGetBalance($userId){
+	$bal = doGetBalance($userId);
+	return $bal['balance'];
+}
 
 function doGetBalance($userId) {
+    try {
         global $config;
         $dbhost = $config['DBHOST'];
         $stockdb = $config['STOCKDATABASE'];
         $dbStock = "mysql:host=$dbhost;dbname=$stockdb";
-        $dbUsername = $CONFIG['DBUSER'];
+        $dbUsername = $config['DBUSER'];
         $dbPassword = $config['DBPASSWORD'];
 
         $pdoStock = new PDO($dbStock, $dbUsername, $dbPassword);
@@ -174,15 +194,29 @@ function doGetBalance($userId) {
         $stmtStock->bindParam(':user_id', $userId);
         $stmtStock->execute();
 
-        $balance = $stmtStock->fetchColumn();
+        $balance = $stmtStock->fetch(PDO::FETCH_ASSOC);
 
-	if($balance != null) {
-		return [
-			"success" = true,
-			"message" = "Get dat bag",
-			"balance" = $balance
-		];
-	}
+        if ($balance) {
+            return [
+                "success" => true,
+                "message" => "Get dat bag",
+                "balance" => $balance['current_balance']
+            ];
+        } else {
+            return [
+                "success" => false,
+		"message" => "Bag not found.",
+		"balance" => "31415" //TODO ERROR TEST
+            ];
+        }
+    } catch (PDOException $e) {
+        error_log('Database error: ' . $e->getMessage());
+        return [
+            "success" => false,
+	    "message" => "An error occurred while retrieving the balance.",
+	    "balance" => "404" //TODO ERROR TEST
+        ];
+    }
 }
 
 function doLogout($sessionId) {
