@@ -35,7 +35,7 @@ if (!$response['success']) {
     	<meta name="viewport" content="width=device-width, initial-scale=1.0">
     	<title>Funds</title>
 </head>
-<body class="body-home">
+<body>
 	<?php include 'partials/navbar.php'; ?>
 
 	<section class="section-text">
