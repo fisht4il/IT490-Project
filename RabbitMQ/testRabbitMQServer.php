@@ -129,12 +129,15 @@ function doValidate($sessionId) {
         $session = $stmt->fetch(PDO::FETCH_ASSOC);
 
 	if ($session) {
-		$stmt= $pdo->prepare("SELECT id FROM users WHERE username IN(SELECT username FROM sessions WHERE session_id = :sessionId)");
-		$stmt->bindParam(':sessionId', $sessionId);
-		$userId = $stmt->fetchColumn();
-		
-//select id from users where username in(select username from sessions where session_id = '27e43c0d5d4f0d1df3be4f307ff33027');
-
+		$query = ("SELECT u.id, uw.current_balance
+			FROM stockdb.user_wallet uw JOIN users u ON u.id = uw.user_id
+			WHERE u.username IN(SELECT username FROM sessions WHERE session_id = :sessionId)");	
+		$stmt= $pdo->prepare($query);
+		$stmt->bindParam(':sessionId', $sessionId, PDO::PARAM_STR);
+		$stmt->execute();
+		$fetched = $stmt->fetch(PDO::FETCH_ASSOC);
+		$userId = $fetched['id'];
+		$balance = $fetched['current_balance'];
 
             $currentTime = time();
 
@@ -150,13 +153,12 @@ function doValidate($sessionId) {
                 $stmt->bindParam(':session_id', $sessionId);
                 $stmt->execute();
 
-		$stmt = null;
-		$pdo = null;
+		
                 return [
                     "success" => true,
 		    "message" => "Session validated.",
 		    "user_id" => $userId,
-		    "balance" => showGetBalance($userId)
+		    "balance" => $balance
                 ];
             }
         } else {
@@ -172,10 +174,14 @@ function doValidate($sessionId) {
             "message" => "An error occurred during session validation."
         ];
     }
-}
-function showGetBalance($userId){
-	$bal = doGetBalance($userId);
-	return $bal['balance'];
+    finally {
+    	if ($stmt){
+		$stmt = null;
+	}
+	if ($pdo){
+		$pdo = null;
+	}
+    }
 }
 
 function doGetBalance($userId) {
