@@ -236,9 +236,6 @@ body {
     width: 100%;
 }
 
-input[type=number] {
-    -moz-appearance: textfield;
-}
 
 .input-button {
     background-color: #42dca3;
@@ -559,6 +556,7 @@ input[type=number] {
   width: 200px;
   background: #7f8c8d;
   border-radius: 20px;
+  border: #42dca3 solid 1px;
   outline: none;
 }
 
@@ -566,6 +564,7 @@ input[type=number] {
 .bs-slider::-moz-range-track {
     height: 50px;
     background: #42dca3;
+    border: #42dca3 solid 1px;
     border-radius: 20px;
     cursor: pointer;
     appearance: none;
@@ -597,4 +596,124 @@ input[type=number] {
     cursor: pointer;
 }
 
+
+/* -- FUNDS -- */
+
+
+.deposit-withdraw {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+.funds-container {
+    padding: 35px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
+    color: white;
+    border: 1px solid #42dca3;
+    position: relative;
+    width: 100%;
+    margin: 0 10px;
+    margin-bottom: 20px;
+    box-sizing: border-box;
+    position: relative;
+    display: flex;
+    width: 100%;
+    max-width: 350px;
+    flex-wrap: wrap;
+}
+
+
+
+
+
+
+.funds-container .dw-label {
+    padding-bottom: 15px;
+    margin: 0 100px;
+    background-color: #051a12;
+    position: absolute;
+    top: -15px;
+    padding: 0 8px;
+    color: white;
+    cursor: text;
+}
+
+
+.btn-div {
+    justify-content: center;
+    width: 100%;
+    margin-bottom: 20px;
+    box-sizing: border-box;
+    position: relative;
+    display: flex;
+    max-width: 350px;
+}
+/**/
+
+
+.dep-label  {
+    margin-left: 24px;
+    position: absolute;
+    color: #051a12;
+    font-size: 20px;
+}
+
+
+.with-label {
+    margin-left: 148px;
+    position: absolute;
+    color: #051a12;
+    font-size: 20px;
+}
+
+
+.dw-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 250px;
+  background: #7f8c8d;
+  border-radius: 20px;
+  border: #42dca3 solid 1px;
+  outline: none;
+}
+
+
+.dw-slider::-moz-range-track {
+    height: 50px;
+    background: #42dca3;
+    border: #42dca3 solid 1px;
+    border-radius: 20px;
+    cursor: pointer;
+    appearance: none;
+    width: 250px;
+    background: #7f8c8d;
+    border-radius: 20px;
+    outline: none;
+}
+
+
+.dw-slider::-moz-range-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 125px;
+    height: 50px;
+    background: #42dca3;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+
+.dw-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 125px;
+    height: 50px;
+    background: #42dca3;
+    border-radius: 20px;
+    cursor: pointer;
+}
 

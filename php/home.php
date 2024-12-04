@@ -58,7 +58,7 @@ if (!$response['success']) {
       <input type="search" id="searchInput" class="search-input" placeholder="Search...">
       <input type="submit" class="submit-search">
     </form>-->
-    <a href="recommendations.php" class="nav-link">Recommendations</a>
+    <a href="funds.php" class="nav-link">Funds</a>
     <a href="trades.php" class="nav-link">Trades</a>
     <a href="orders.php" class="nav-link">Orders</a>
     <a href="logout.php" class="nav-link">Logout</a>
