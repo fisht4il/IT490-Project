@@ -78,7 +78,7 @@
             </div>
             <div class="form-div">
               <input type="submit" class="input-button" value="Signup">
-              <p class="signup-link">Already have an account? <a href="../index.html" class="link-signup">Login</a></p>
+              <p class="signup-link">Already have an account? <a href="index.html" class="link-signup">Login</a></p>
             </div>
             <label class="json-r">
                 <br><br>Raw JSON Response<input type="checkbox" id="show-json">
@@ -90,7 +90,7 @@
 
   <div id="footer"></div>
   <script>
-        fetch('partials/footer.php')
+        fetch('php/partials/footer.php')
                 .then(response => response.text())
                 .then(data => {document.getElementById('footer').innerHTML = data});
   </script>
