@@ -9,6 +9,22 @@ $dotenv->load();
 
 $apiKey = $_ENV['API_KEY']; //global
 
+$dbHost = $_ENV['DB_HOST'];
+$dbUser = $_ENV['DB_USER'];
+$dbPass = $_ENV['DB_PASS'];
+$dbName = $_ENV['DB_API'];
+
+try{
+        $dbLogin = "mysql:host=$dbHost;dbname=$dbName";
+        $pdo = new PDO($dbLogin, $dbUser, $dbPass);
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+} catch (PDOException $e) {
+        echo "Exception " . $e->getMessage();
+        exit();
+}
+
+
+
 /* this works
 $json = file_get_contents('https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=IBM&apikey=' . $apiKey);
 
@@ -20,6 +36,60 @@ print_r($data);
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~`
 //
 //
+
+//=====
+//quoteEndpoint
+//=====
+function quoteEndpoint($stockSym){
+	global $apiKey;
+
+	$json = file_get_contents(
+                'https://www.alphavantage.co/query?function=GLOBAL_QUOTE' . 
+                '&symbol=' . $stockSym  .
+                '&apikey=' . $apiKey
+        );
+        $data = json_decode($json, true);
+
+
+	if (!empty($data)){
+		//TODO stuff to get data parse
+		$globalQuote = $data['Global Quote'];
+		
+		$symbol = $stockSym;
+		$open = $globalQuote['02. open'];
+		$high = $globalQuote['03. high'];
+		$low = $globalQuote['04. low'];
+		$price = $globalQuote['05. price'];
+		$volume = $globalQuote['06. volume'];
+		$ltd = $globalQuote['07. latest trading day'];
+		$prevClose = $globalQuote['08. previous close'];
+		$changePoint = $globalQuote['09. change'];
+		$changePercent = $globalQuote['10. change percent'];
+		
+		$insertQuery = "
+		INSERT INTO stock_quotes
+		(symbol, open, high, low, price, volume, latest_trading_day, prev_close, change_point, change_percent) 
+		VALUES 
+		('$symbol', '$open', '$high', '$low', '$price', '$volume', '$ltd', '$prevClose', '$changePoint', '$changePercent')
+		ON DUPLICATE KEY UPDATE 
+		open = VALUES(open),
+		high = VALUES(high),
+		low = VALUES(low),
+		price = VALUES(price),
+		volume = VALUES(volume),
+		latest_trading_day = VALUES(latest_trading_day),
+		prev_close = VALUES(prev_close),
+		change_point = VALUES(change_point),
+		change_percent = VALUES(change_percent)
+		";       
+                insertData($insertQuery);
+                
+
+
+        }
+
+
+}
 
 
 //=====
@@ -38,9 +108,9 @@ function seriesInterval($duration, $stockSym){
         if (!empty($data)){
               //return $data; // this line is for testing console-output
 
-                        $symbol = $data['Meta Data']['2. Symbol'];
+                        $symbol = $stockSym;
                         //$lastRefreshed = $data['Meta Data']['3. Last Refreshed'];
-                        $timeSeries = $data['Time Series (Daily)'];
+			$timeSeries = $data['Time Series (Daily)'];
                         $dates = array_keys($timeSeries);
 
                 for ($i = 0 ; $i < count($dates) ; $i++){
@@ -52,16 +122,10 @@ function seriesInterval($duration, $stockSym){
                         $close = $timeSeries[$date]['4. close'];
                         $volume = $timeSeries[$date]['5. volume'];
                         $insertQuery = "
-                                INSERT INTO stock_prices 
+                                INSERT IGNORE INTO stock_prices 
                                 (symbol, date, open, high, low, close, volume) 
                                 VALUES 
                                 ('$symbol', '$date', '$open', '$high', '$low', '$close', '$volume')
-				ON DUPLICATE KEY UPDATE
-				open = VALUES(open),
-				high = VALUES(high),
-				low = VALUES(low),
-				close = VALUES(close),
-				volume = VALUES(volume)
 				";
                         insertData($insertQuery);
                 }
@@ -87,19 +151,9 @@ function seriesIntraday($stockSym, //TODO theres options for outputsize and mont
 //=====
 //all the functions will call this at end to have $data inserted into table
 function insertData($insertQuery){
-        $dbHost = $_ENV['DB_HOST'];
-        $dbUser = $_ENV['DB_USER'];
-        $dbPass = $_ENV['DB_PASS'];
-        $dbName = $_ENV['DB_API'];
-
-
+	global $pdo;
         try{
-                $dbLogin = "mysql:host=$dbHost;dbname=$dbName";
-                $pdo = new PDO($dbLogin, $dbUser, $dbPass);
-                $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
                 $stmt = $pdo->prepare($insertQuery);
-
                 $stmt->execute();
 
         } catch (PDOException $e) {
@@ -135,7 +189,10 @@ function requestApi($request){
 				break;
 			case 'MONTHLY':
 				$results = seriesInterval($request['type'], $stockSym);
-	  			break;
+				break;
+			case 'QUOTE':
+				$results = quoteEndpoint($stockSym);
+				break;
 		}
 		print_r($results);
 	} else {
