@@ -49,45 +49,29 @@ if (!$response['success']) {
             <label for="buying-selling" class="sell-buy-label">Sell</label>
         </div>
 
-        <div class="container" id="buy-div">
-            <h2 class="h2-title">Buy Stocks</h2>
+        <div class="form-container" id="buy-div">
+            <h3>Buy Stocks</h3>
 	    <form action="" class="form" method="post">
-	        <div class="form-div">
-                    <label for="" class="con-label">Stock Symbol</label>
+                    <label for="">Stock Symbol</label>
                     <input type="text" class="input-field" placeholder="Enter stock symbol">
-		</div>
-		<div class="form-div">
-		    <label for="" class="con-label">Quantity</label>
+		    <label for="">Quantity</label>
                     <input type="number" class="input-field" placeholder="Enter quantity">
-		</div>
-		<div class="form-div">
-		    <label for="" class="con-label">Price</label>
+		    <label for="">Price</label>
                     <input type="text" class="input-field" placeholder="Enter price">
-		</div>
-		<div class="form-div">
 		    <input type="submit" class="input-button" value="Buy">
-	        </div>
 	    </form>
         </div>
 
-        <div class="container" id="sell-div" style="display: none;">
-            <h2 class="h2-title">Sell Stocks</h2>
+        <div class="form-container" id="sell-div" style="display: none;">
+            <h3>Sell Stocks</h3>
 	    <form action="" class="form" method="post">
-	        <div class="form-div">
-                    <label for="" class="con-label">Stock Symbol</label>
+                    <label for="">Stock Symbol</label>
 		    <input type="text" class="input-field" placeholder="Enter stock symbol">
-		</div>
-		<div class="form-div">
-                    <label for="" class="con-label">Quantity</label>
+                    <label for="">Quantity</label>
                     <input type="number" class="input-field" placeholder="Enter quantity">
-		</div>
-		<div class="form-div">		
-		    <label for="" class="con-label">Price</label>
+		    <label for="">Price</label>
                     <input type="text" class="input-field" placeholder="Enter price">
-		</div>
-		<div class="form-div">		
 		    <input type="submit" class="input-button" value="Sell">
-		</div>
             </form>
         </div>
     </section>

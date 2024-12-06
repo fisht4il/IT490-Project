@@ -42,15 +42,51 @@ if (!$response['success']) {
 		<h2>Funds</h2>
     	</section> 
 
-	<div class="container">
-   		<h3>Balance: $<?php echo number_format((float)$balance, 2, '.', ','); ?></h3>
-	<button>Deposit $100</button>
-	<button>Withdraw $100</button>
-	</div>
+    <div class="container">
+         <h3>Balance: $<?php echo number_format((float)$current_balance, 2, '.', ','); ?></h3>
+    </div>
 
-	<button class="chat-btn">
-		
-    	</button>
+
+	<section class="deposit-withdraw">
+
+    <div class="div-slider">
+        <label for="depositing-dithdrawing" class="dep-label">Deposit</label>
+        <input id="depositing-dithdrawing" type="range" value="0" class="dw-slider" min="0" max="1" autocomplete="off">
+        <label for="depositing-dithdrawing" class="with-label">Withdraw</label>
+    </div>
+
+    <div class="form-container" id="deposit-div">
+        <h3 class="dw-label">Deposit</h3>
+        <form>
+	    <input type="number" class="input-field" placeholder="Enter amount to deposit">
+	    <input type="submit" class="input-button" value="Submit">
+	</form>
+    </div>
+
+    <div class="form-container" id="withdraw-div" style="display: none;">
+        <h3 class="dw-label">Withdraw</h3>
+	<form>	
+	    <input type="number" class="input-field" placeholder="Enter amount to withdraw">
+	    <input type="submit" class="input-button" value="Submit">
+	</form>
+    </div>
+    </section>
+
+<script>
+    document.getElementById('depositing-dithdrawing').addEventListener('input', function(){
+ 
+        const depositdiv = document.getElementById('deposit-div');
+        const withdrawdiv = document.getElementById('withdraw-div');
+ 
+        if(this.value == 0) {
+            depositdiv.style.display = 'block';
+            withdrawdiv.style.display = 'none';
+        } else {
+            depositdiv.style.display = 'none';
+            withdrawdiv.style.display = 'block';
+        }
+    });
+  </script>
 
   <!--  <?php include 'partials/chat.php'; ?> -->
 
