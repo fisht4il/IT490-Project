@@ -12,20 +12,32 @@ function doRegister($username, $password) {
     try {
         global $config;
         $dbhost = $config['DBHOST'];
-        $logindb = $config['LOGINDATABASE'];
-        $dbLogin = "mysql:host=$dbhost;dbname=$logindb";
+	$logindb = $config['LOGINDATABASE'];
+	$stockdb = $config['STOCKDATABASE'];
+	$dbLogin = "mysql:host=$dbhost;dbname=$logindb";
+	$dbStock = "mysql:host=$dbhost;dbname=$stockdb";
         $dbUsername = $config['DBUSER'];
         $dbPassword = $config['DBPASSWORD'];
 
         $pdo = new PDO($dbLogin, $dbUsername, $dbPassword);
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+        $pdoStock = new PDO($dbStock, $dbUsername, $dbPassword);
+        $pdoStock->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+	$hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
         $stmt = $pdo->prepare("INSERT INTO users (username, password, last_login) VALUES (:username, :password, NULL)");
         $stmt->bindParam(':username', $username);
         $stmt->bindParam(':password', $hashedPassword);
         $stmt->execute();
+
+        $userId = $pdo->lastInsertId();
+
+        $stmtStock = $pdoStock->prepare("INSERT INTO user_wallet (user_id, current_balance) VALUES (:user_id, :current_balance)");
+        $stmtStock->bindParam(':user_id', $userId);
+        $stmtStock->bindValue(':current_balance', 1000.00);
+        $stmtStock->execute();
 
         return [
             "success" => true,
@@ -33,7 +45,7 @@ function doRegister($username, $password) {
         ];
 
     } catch (PDOException $e) {
-        error_log('Database error: ' . $e->getMessage());
+     	error_log('Database error: ' . $e->getMessage());
         return [
             "success" => false,
             "message" => "An error occurred during registeration. Please try again later."
@@ -72,12 +84,12 @@ function doLogin($username, $password) {
             $stmt->bindParam(':username', $username);
             $stmt->bindParam(':session_id', $sessionId);
             $stmt->bindParam(':timelimit', $timeLimit);
-             $stmt->execute();
+            $stmt->execute();
 
             return [
                 "success" => true,
                 "message" => "Login successful!",
-                "session_id" => $sessionId
+		"session_id" => $sessionId
             ];
         } else {
             return [
@@ -94,6 +106,10 @@ function doLogin($username, $password) {
     }
 }
 
+
+//=====
+//doValidate
+//=====
 
 function doValidate($sessionId) {
     try {
@@ -112,7 +128,17 @@ function doValidate($sessionId) {
         $stmt->execute();
         $session = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        if ($session) {
+	if ($session) {
+		$query = ("SELECT u.id, uw.current_balance
+			FROM stockdb.user_wallet uw JOIN users u ON u.id = uw.user_id
+			WHERE u.username IN(SELECT username FROM sessions WHERE session_id = :sessionId)");	
+		$stmt= $pdo->prepare($query);
+		$stmt->bindParam(':sessionId', $sessionId, PDO::PARAM_STR);
+		$stmt->execute();
+		$fetched = $stmt->fetch(PDO::FETCH_ASSOC);
+		$userId = $fetched['id'];
+		$balance = $fetched['current_balance'];
+
             $currentTime = time();
 
             if ($currentTime > $session['session_end']) {
@@ -127,9 +153,12 @@ function doValidate($sessionId) {
                 $stmt->bindParam(':session_id', $sessionId);
                 $stmt->execute();
 
+		
                 return [
                     "success" => true,
-                    "message" => "Session validated."
+		    "message" => "Session validated.",
+		    "user_id" => $userId,
+		    "balance" => $balance
                 ];
             }
         } else {
@@ -145,8 +174,56 @@ function doValidate($sessionId) {
             "message" => "An error occurred during session validation."
         ];
     }
+    finally {
+    	if ($stmt){
+		$stmt = null;
+	}
+	if ($pdo){
+		$pdo = null;
+	}
+    }
 }
 
+function doGetBalance($userId) {
+    try {
+        global $config;
+        $dbhost = $config['DBHOST'];
+        $stockdb = $config['STOCKDATABASE'];
+        $dbStock = "mysql:host=$dbhost;dbname=$stockdb";
+        $dbUsername = $config['DBUSER'];
+        $dbPassword = $config['DBPASSWORD'];
+
+        $pdoStock = new PDO($dbStock, $dbUsername, $dbPassword);
+        $pdoStock->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+        $stmtStock = $pdoStock->prepare("SELECT current_balance FROM user_wallet WHERE user_id = :user_id");
+        $stmtStock->bindParam(':user_id', $userId);
+        $stmtStock->execute();
+
+        $balance = $stmtStock->fetch(PDO::FETCH_ASSOC);
+
+        if ($balance) {
+            return [
+                "success" => true,
+                "message" => "Get dat bag",
+                "balance" => $balance['current_balance']
+            ];
+        } else {
+            return [
+                "success" => false,
+		"message" => "Bag not found.",
+		"balance" => "31415" //TODO ERROR TEST
+            ];
+        }
+    } catch (PDOException $e) {
+        error_log('Database error: ' . $e->getMessage());
+        return [
+            "success" => false,
+	    "message" => "An error occurred while retrieving the balance.",
+	    "balance" => "404" //TODO ERROR TEST
+        ];
+    }
+}
 
 function doLogout($sessionId) {
     try {
@@ -177,7 +254,6 @@ function doLogout($sessionId) {
     }
 }
 
-
 function requestProcessor($request) {
     if (!isset($request['type'])) {
         return json_encode([
@@ -187,19 +263,22 @@ function requestProcessor($request) {
     }
 
     switch ($request['type']) {
-        case "register":
-            $response = doRegister($request['username'], $request['password']);
-            break;
+	case "register":
+	    $response = doRegister($request['username'], $request['password']);
+	    break;
         case "login":
             $response = doLogin($request['username'], $request['password']);
             break;
         case "validate_session":
             $response = doValidate($request['session_id']);
             break;
-        case "logout":
-            $response = doLogout($request['session_id']);
+        case "get_balance":
+            $response = doGetBalance($request['user_id']);
             break;
-        default:
+	case "logout":
+            $response = doLogout($request['session_id']);
+	    break;
+	default:
             $response = [
                 "success" => false,
                 "message" => "ERROR: Unknown request type"
@@ -211,4 +290,3 @@ function requestProcessor($request) {
 $server = new rabbitMQServer("testRabbitMQ.ini", "testServer");
 $server->process_requests('requestProcessor');
 ?>
-
