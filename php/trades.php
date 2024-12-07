@@ -4,25 +4,31 @@ require_once('path.inc');
 require_once('get_host_info.inc');
 require_once('rabbitMQLib.inc');
 
+
 if (!isset($_SESSION['session_id'])) {
     header("Location: ../index.html");
     exit();
 }
 
+
 $client = new rabbitMQClient("testRabbitMQ.ini", "testServer");
+
 
 $request = [
     'type' => "validate_session",
     'session_id' => $_SESSION['session_id']
 ];
 
+
 $response = json_decode($client->send_request($request), true);
+
 
 if (!$response['success']) {
     header("Location: ../index.html");
     exit();
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -38,9 +44,11 @@ if (!$response['success']) {
 <body>
     <?php include 'partials/navbar.php'; ?>
 
+
     <section class="section-text">
         <h2>Trades</h2>
     </section>
+
 
     <section class="buy-sell">
         <div class="div-slider">
@@ -49,54 +57,43 @@ if (!$response['success']) {
             <label for="buying-selling" class="sell-buy-label">Sell</label>
         </div>
 
-        <div class="container" id="buy-div">
-            <h2 class="h2-title">Buy Stocks</h2>
-	    <form action="" class="form" method="post">
-	        <div class="form-div">
-                    <label for="" class="con-label">Stock Symbol</label>
+
+        <div class="form-container" id="buy-div">
+            <h3>Buy Stocks</h3>
+        <form action="" class="form" method="post">
+                    <label for="">Stock Symbol</label>
                     <input type="text" class="input-field" placeholder="Enter stock symbol">
-		</div>
-		<div class="form-div">
-		    <label for="" class="con-label">Quantity</label>
+            <label for="">Quantity</label>
                     <input type="number" class="input-field" placeholder="Enter quantity">
-		</div>
-		<div class="form-div">
-		    <label for="" class="con-label">Price</label>
+            <label for="">Price</label>
                     <input type="text" class="input-field" placeholder="Enter price">
-		</div>
-		<div class="form-div">
-		    <input type="submit" class="input-button" value="Buy">
-	        </div>
-	    </form>
+            <input type="submit" class="input-button" value="Buy">
+        </form>
         </div>
 
-        <div class="container" id="sell-div" style="display: none;">
-            <h2 class="h2-title">Sell Stocks</h2>
-	    <form action="" class="form" method="post">
-	        <div class="form-div">
-                    <label for="" class="con-label">Stock Symbol</label>
-		    <input type="text" class="input-field" placeholder="Enter stock symbol">
-		</div>
-		<div class="form-div">
-                    <label for="" class="con-label">Quantity</label>
+
+        <div class="form-container" id="sell-div" style="display: none;">
+            <h3>Sell Stocks</h3>
+        <form action="" class="form" method="post">
+                    <label for="">Stock Symbol</label>
+            <input type="text" class="input-field" placeholder="Enter stock symbol">
+                    <label for="">Quantity</label>
                     <input type="number" class="input-field" placeholder="Enter quantity">
-		</div>
-		<div class="form-div">		
-		    <label for="" class="con-label">Price</label>
+            <label for="">Price</label>
                     <input type="text" class="input-field" placeholder="Enter price">
-		</div>
-		<div class="form-div">		
-		    <input type="submit" class="input-button" value="Sell">
-		</div>
+            <input type="submit" class="input-button" value="Sell">
             </form>
         </div>
     </section>
 
+
     <script>
       document.getElementById('buying-selling').addEventListener('input', function(){
 
+
         const buydiv = document.getElementById('buy-div');
         const selldiv = document.getElementById('sell-div');
+
 
         if(this.value == 0) {
           buydiv.style.display = 'block';
@@ -108,8 +105,11 @@ if (!$response['success']) {
       });
     </script>
 
+
     <!--  <?php include 'partials/chat.php'; ?> -->
+
 
     <?php include 'partials/footer.php'; ?>
 </body>
 </html>
+
