@@ -98,10 +98,6 @@ body {
     margin: 0;
 }
 
-.home-body {
-    margin-top: 4px;
-}
-
 .body-form {
     overflow: hidden;
 }
@@ -437,6 +433,7 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
     width: 100%;
     margin: 0 auto;
     padding: 10px 0;
+    box-sizing: border-box;
 }
 
 .header-nav {
@@ -448,6 +445,7 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
     height: 65px;
     width: 65px;
     margin: 0 auto;
+    display: block;
 }
 
 .nav-logo:hover {
