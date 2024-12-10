@@ -43,29 +43,26 @@ if (!$response['success']) {
     </section> 
 
     <main>
-	<form id="" class="form">
-		<h2 class="h2-title">Limit Orders</h2>
-		<div class="form-div">
-			<label class="input-label" for="stock-symbol">Stock Symbol</label>
-			<input type="text" class="input-field" id="stock-symbol" name="stock_symbol" required placeholder="Enter stock symbol">
-		</div>
-		<div class="form-div">
-			 <label class="input-label" for="order-type">Order Type</label>
-		         <select name="order-type=" id="order-type" class="input-field">
-				<option value="" selected>Select order type</option>
-				<option value="buy">Buy</option>
-				<option value="sell">Sell</option>
-		 	</select>
-		</div>
-                <div class="form-div">
-                        <label class="input-label" for="quantity">Quantity</label>
-                        <input type="number" class="input-field" id="quantity" name="quantity" required placeholder="Enter quantity">
-                </div>
-                <div class="form-div">
-                        <label class="input-label" for="total-price">Total Price</label>
-                        <input type="number" class="input-field" id="total-price" name="total-price" required placeholder="Enter total price">
-                </div>
-	</form>
+	
+        <div class="form-container">
+	    <h3 class="h2-title">Limit Orders</h3>
+            <form action="" class="form" method="post">
+                <label for="">Stock Symbol</label>
+                <input type="text" class="input-field" placeholder="Enter stock symbol">
+                <label for="">Order Type</label>
+                <select name="" id="" class="input-field">
+		    <option value="" selected>Select order type</option>
+                    <option value="" class="options">Buy</option>
+                    <option value="" class="options">Sell</option>
+                </select>
+                <label for="">Quantity</label>
+                <input type="number" class="input-field" placeholder="Enter quantity">
+                <label for="">Total Price</label>
+                <input type="number" class="input-field" placeholder="Enter total price">
+                <input type="submit" class="input-button" value="Submit Order">
+            </form>
+        </div>
+
     </main>
 
     <!--  <?php include 'partials/chat.php'; ?> -->
