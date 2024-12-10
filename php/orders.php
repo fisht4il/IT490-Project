@@ -45,7 +45,7 @@ if (!$response['success']) {
     <main>
 	
         <div class="form-container">
-	    <h2 class="h2-title">Limit Orders</h2>
+	    <h3 class="h2-title">Limit Orders</h3>
             <form action="" class="form" method="post">
                 <label for="">Stock Symbol</label>
                 <input type="text" class="input-field" placeholder="Enter stock symbol">
