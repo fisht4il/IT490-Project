@@ -1,7 +1,7 @@
 
 <header class="main-header">
     <a href="home.php">
-        <img src="../media/logo.png" alt="Logo" class="logo-image">
+        <img src="../media/logo.png" alt="Logo" class="nav-logo">
     </a>
     <?php echo "Welcome, " . htmlspecialchars($_SESSION['username']) . "."; ?>
 
