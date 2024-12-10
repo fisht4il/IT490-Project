@@ -9,6 +9,7 @@ if (!isset($_SESSION['session_id'])) {
     exit();
 }
 
+
 $client = new rabbitMQClient("testRabbitMQ.ini", "testServer");
 
 $request = [
