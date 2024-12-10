@@ -22,6 +22,9 @@ if (!$response['success']) {
     header("Location: ../index.html");
     exit();
 }
+
+// Get stocks list from the response
+$stocks = $response['stocks']; // stocks fetched in doValidate function
 ?>
 
 <!DOCTYPE html>
@@ -45,8 +48,8 @@ if (!$response['success']) {
     <main>
         <div class="form-container">
             <form action="" class="form" method="post">
-                <label for="">Stock Symbol</label>
-                <input type="text" class="input-field" placeholder="Enter stock symbol">
+                <label for="stock-symbol">Stock Symbol</label>
+                <input type="text" id="stock-symbol" class="input-field" name="stock-symbol" placeholder="Enter stock symbol">
                 <label for="">Order Type</label>
                 <select name="" id="" class="input-field">
                     <option value="" class="options">Buy</option>
@@ -60,6 +63,50 @@ if (!$response['success']) {
             </form>
         </div>
     </main>
+
+    <script>
+        document.getElementById('stock-symbol').addEventListener('input', function() {
+            const input = this.value.toLowerCase();
+            const suggestionsContainer = document.getElementById('suggestions');
+            suggestionsContainer.innerHTML = ''; // Clear previous suggestions
+
+            if (input.length > 0) {
+                const stocks = <?= json_encode($stocks); ?>;
+                const filteredStocks = stocks.filter(stock => 
+                    stock.symbol.toLowerCase().startsWith(input) || 
+                    stock.name.toLowerCase().startsWith(input)
+                );
+
+                if (filteredStocks.length > 0) {
+                    filteredStocks.forEach(stock => {
+                        const suggestion = document.createElement('div');
+                        suggestion.classList.add('stock-dropdown-item');
+                        suggestion.textContent = `${stock.symbol} - ${stock.name}`;
+                        suggestion.addEventListener('click', function() {
+                            document.getElementById('stock-symbol').value = stock.symbol;
+                            suggestionsContainer.innerHTML = '';
+                            suggestionsContainer.style.display = 'none';
+                        });
+                        suggestionsContainer.appendChild(suggestion);
+                    });
+                    suggestionsContainer.style.display = 'block';
+                } else {
+                    suggestionsContainer.style.display = 'none';
+                }
+            } else {
+                suggestionsContainer.style.display = 'none';
+            }
+        });
+
+        
+        document.addEventListener('click', function(event) {
+            const suggestionsContainer = document.getElementById('suggestions');
+            if (!document.getElementById('stock-symbol').contains(event.target) &&
+                !suggestionsContainer.contains(event.target)) {
+                suggestionsContainer.style.display = 'none';
+            }
+        });
+    </script>
 
     <!--  <?php include 'partials/chat.php'; ?> -->
 
