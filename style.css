@@ -278,6 +278,10 @@ body {
 
 /* -- SLIDER STYLING --*/
 
+.form-container input[type="number"] {
+    margin-bottom: 25px;
+}
+
 .buy-sell, .deposit-withdraw {
     display: flex;
     flex-direction: column;
@@ -288,6 +292,7 @@ body {
     padding-bottom: 50px;
     display: flex;
     align-items: center;
+    margin-top: 30px;
 }
 
 .buy-sell-label  {
