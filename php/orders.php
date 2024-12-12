@@ -37,6 +37,39 @@ $stocks = $response['stocks']; // stocks fetched in doValidate function
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Orders</title>
+    <style>
+
+       .stock-dropdown {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            background-color: #051a12;
+            border: 1px solid #31bc80;
+            border-radius: 5px;
+            max-height: 150px;
+            overflow-y: auto;
+            z-index: 1000;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .stock-dropdown-item {
+            padding: 10px;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .stock-dropdown-item:hover {
+            background-color: #31bc80;
+            color: #051a12;
+        }
+
+        .stock-dropdown-item.selected {
+            background-color: #2ea972;
+            color: #ffffff;
+        }
+    </style>
 </head>
 <body>
     <?php include 'partials/navbar.php'; ?>
@@ -46,22 +79,30 @@ $stocks = $response['stocks']; // stocks fetched in doValidate function
     </section> 
 
     <main>
-        <div class="form-container">
-            <form action="" class="form" method="post">
-                <label for="stock-symbol">Stock Symbol</label>
+        <form id="" class="form">
+            <h2 class="h2-title">Limit Orders</h2>
+            <div class="form-div" style="position: relative;">
+                <label class="input-label" for="stock-symbol">Stock Symbol</label>
                 <input type="text" id="stock-symbol" class="input-field" name="stock-symbol" placeholder="Enter stock symbol">
-                <label for="">Order Type</label>
-                <select name="" id="" class="input-field">
-                    <option value="" class="options">Buy</option>
-                    <option value="" class="options">Sell</option>
+                <div id="suggestions" class="stock-dropdown"></div>
+            </div>
+            <div class="form-div">
+                <label class="input-label" for="order-type">Order Type</label>
+                <select name="order-type" id="order-type" class="input-field">
+                    <option value="" selected>Select order type</option>
+                    <option value="buy">Buy</option>
+                    <option value="sell">Sell</option>
                 </select>
-                <label for="">Quantity</label>
-                <input type="number" class="input-field" placeholder="Enter quantity">
-                <label for="">Total Price</label>
-                <input type="number" class="input-field" placeholder="Enter total price">
-                <input type="submit" class="input-button" value="Submit Order">
-            </form>
-        </div>
+            </div>
+            <div class="form-div">
+                <label class="input-label" for="quantity">Quantity</label>
+                <input type="number" class="input-field" id="quantity" name="quantity" required placeholder="Enter quantity">
+            </div>
+            <div class="form-div">
+                <label class="input-label" for="total-price">Total Price</label>
+                <input type="number" class="input-field" id="total-price" name="total-price" required placeholder="Enter total price">
+            </div>
+        </form>
     </main>
 
     <script>
