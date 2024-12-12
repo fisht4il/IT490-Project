@@ -1,0 +1,19 @@
+# enable this with `crontab /var/www/html/cron/cron-jobs.txt`
+# verify cronjobs with `crontab -l`
+# test run with 'php cron_update_stock.php dailyPrices`
+# run `ls -l` to see if log files are updated correctly upon commands running
+
+#THIS ONE CURRENTLY NOT USED. keeping here because unsure if repurposing
+#for updating historical prices (daily)
+#0 23 * * 0 /usr/bin/php /var/www/html/cron/cron_update_stock.php dailyPrices && touch /var/www/html/cron/cron-prices.log
+# 0min|11pmUTC|eachDay|eachMonth|sunday
+
+
+#for updating the current immediate price
+0 14 * * 1-6 /usr/bin/php /var/www/html/cron/cron_update_stock.php quotes && touch /var/www/html/cron/cron-quotes.log 2>&1
+# 0min|2pmUTC|eachDay|eachMonth|eachWeekday+sat
+
+
+#for updating the popular stocks list
+0 14-21 * * * /usr/bin/php /var/www/html/cron/cron_update_stock.php popular && touch /var/www/html/cron/cron-popular.log 2>&1
+# 0min|2pm-9pmUTC|eachDay|eachMonth|eachWeekday
