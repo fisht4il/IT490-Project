@@ -1,7 +1,6 @@
 /* --GENERAL-- */
 
 @media screen and (max-width: 480px) {
-    /* --HEADER-- */
     .main-header {
         padding: 10px;
     }
@@ -119,8 +118,8 @@ body {
 }
 
 .nav-logo {
-    height: 55px;
-    width: 55px;
+    height: 65px;
+    width: 65px;
     opacity: 0.75;
 }
 
