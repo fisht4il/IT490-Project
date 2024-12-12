@@ -37,39 +37,6 @@ $stocks = $response['stocks']; // stocks fetched in doValidate function
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Orders</title>
-    <style>
-
-       .stock-dropdown {
-            position: absolute;
-            top: 100%;
-            left: 0;
-            width: 100%;
-            background-color: #051a12;
-            border: 1px solid #31bc80;
-            border-radius: 5px;
-            max-height: 150px;
-            overflow-y: auto;
-            z-index: 1000;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .stock-dropdown-item {
-            padding: 10px;
-            color: white;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-
-        .stock-dropdown-item:hover {
-            background-color: #31bc80;
-            color: #051a12;
-        }
-
-        .stock-dropdown-item.selected {
-            background-color: #2ea972;
-            color: #ffffff;
-        }
-    </style>
 </head>
 <body>
     <?php include 'partials/navbar.php'; ?>
