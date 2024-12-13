@@ -169,9 +169,9 @@ body {
     margin-right: auto;
 }
 
-.form input {
+.form-container input {
     margin-bottom: 20px;
-}
+} 
 
 .form-div {
     position: relative;
