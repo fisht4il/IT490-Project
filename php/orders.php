@@ -45,31 +45,28 @@ $stocks = $response['stocks']; // stocks fetched in doValidate function
         <h2>Orders</h2>
     </section> 
 
+
     <main>
-        <form id="" class="form">
-            <h2 class="h2-title">Limit Orders</h2>
-            <div class="form-div" style="position: relative;">
-                <label class="input-label" for="stock-symbol">Stock Symbol</label>
-                <input type="text" id="stock-symbol" class="input-field" name="stock-symbol" placeholder="Enter stock symbol">
-                <div id="suggestions" class="stock-dropdown"></div>
-            </div>
-            <div class="form-div">
-                <label class="input-label" for="order-type">Order Type</label>
+	<div class="form-container">
+	    <h3>Limit Orders</h3>
+            <form action="" class="form" method="post">
+                <label for="stock-symbol">Stock Symbol</label>
+                <div style="position: relative;">
+                    <input type="text" id="stock-symbol" class="input-field" placeholder="Enter stock symbol">
+                    <div id="suggestions" class="stock-dropdown"></div>
+                </div>
+                <label for="order-type">Order Type</label>
                 <select name="order-type" id="order-type" class="input-field">
-                    <option value="" selected>Select order type</option>
-                    <option value="buy">Buy</option>
-                    <option value="sell">Sell</option>
+                    <option value="buy" class="options">Buy</option>
+                    <option value="sell" class="options">Sell</option>
                 </select>
-            </div>
-            <div class="form-div">
-                <label class="input-label" for="quantity">Quantity</label>
-                <input type="number" class="input-field" id="quantity" name="quantity" required placeholder="Enter quantity">
-            </div>
-            <div class="form-div">
-                <label class="input-label" for="total-price">Total Price</label>
-                <input type="number" class="input-field" id="total-price" name="total-price" required placeholder="Enter total price">
-            </div>
-        </form>
+                <label for="quantity">Quantity</label>
+                <input type="number" id="quantity" class="input-field" placeholder="Enter quantity">
+                <label for="total-price">Total Price</label>
+                <input type="number" id="total-price" class="input-field" placeholder="Enter total price">
+                <input type="submit" class="input-button" value="Submit Order">
+            </form>
+        </div>
     </main>
 
     <script>
