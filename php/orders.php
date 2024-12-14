@@ -38,62 +38,61 @@ $stocks = $response['stocks']; // stocks fetched in doValidate function
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Orders</title>
 
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#order-form').on('submit', function (e) {
+                e.preventDefault();
 
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script>
-    $(document).ready(function () {
-      $('#order-form').on('submit', function (e) {
-        e.preventDefault();
+                var stocksymbol = $('#stock-symbol').val();
+                var ordertype = $('#order-type').val();
+                var quantity = $('#quantity').val();
+                var totalprice = $('#total-price').val();
+                var showRawJson = $('#show-json').is(':checked');
 
-        var stocksymbol = $('#stock-symbol').val();
-	var ordertype = $('#order-type').val();
-	var quantity = $('#quantity').val();
-	var totalprice = $('#total-price').val();
-        var showRawJson = $('#show-json').is(':checked');
+                $.ajax({
+                    url: '/php/transaction.php',
+                    type: 'POST',
+                    data: {
+                        stocksymbol: stocksymbol,
+                        ordertype: ordertype,
+                        quantity: quantity,
+                        totalprice: totalprice
+                    },
+                    success: function (response) {
+                        try {
+                            let result = typeof response === 'string' ? JSON.parse(response) : response;
+                            let color = result.success ? 'green' : 'red';
 
-        $.ajax({
-          url: '/php/transaction.php',
-          type: 'POST',
-          data: {
-            stocksymbol: stocksymbol,
-	    ordertype: ordertype,
-	    quantity: quantity,
-	    totalprice: totalprice
-          },
-          success: function (response) {
-            try {
-              let result = typeof response === 'string' ? JSON.parse(response) : response;
-              let color = result.success ? 'green' : 'red';
+                            let formattedResponse = `
+                                <pre><strong style="color:${color};">${result.message}</strong></pre><br>
+                            `;
 
-              let formattedResponse = `
-                <pre><strong style="color:${color};">${result.message}</strong></pre><br>
-              `;
+                            let rawJsonResponse = showRawJson
+                                ? `<h4>Raw JSON Response:</h4><pre>${JSON.stringify(result, null, 2)}</pre>`
+                                : '';
 
-              let rawJsonResponse = showRawJson
-                ? `<h4>Raw JSON Response:</h4><pre>${JSON.stringify(result, null, 2)}</pre>`
-                : '';
+                            $('#response').html(formattedResponse + rawJsonResponse);
 
-              $('#response').html(formattedResponse + rawJsonResponse);
-                
-              if (result.success && result.redirect) {
-                window.location.href = result.redirect;
-                return;
-              }
+                            if (result.success && result.redirect) {
+                                window.location.href = result.redirect;
+                                return;
+                            }
 
-            } catch (error) {
-              console.error("JSON parse error:", error);
-              $('#response').html(
-                `<pre><strong style='color:red;'>Invalid JSON response.</strong></pre>`
-              );
-            }
-          },
-          error: function () {
-            $('#response').html("<strong style='color:red;'>An error occurred. Please try again.</strong>");
-          }
+                        } catch (error) {
+                            console.error("JSON parse error:", error);
+                            $('#response').html(
+                                `<pre><strong style='color:red;'>Invalid JSON response.</strong></pre>`
+                            );
+                        }
+                    },
+                    error: function () {
+                        $('#response').html("<strong style='color:red;'>An error occurred. Please try again.</strong>");
+                    }
+                });
+            });
         });
-      });
-    });
-  </script>
+    </script>
 
 </head>
 <body>
