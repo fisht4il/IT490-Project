@@ -276,11 +276,41 @@ body {
     cursor: text;
 }
 
-/* -- SLIDER STYLING --*/
+/* Stock Search Dropdown Styling */
 
-.form-container input[type="number"] {
-    margin-bottom: 25px;
+.stock-dropdown {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: #051a12;
+    border: 1px solid #31bc80;
+    border-radius: 5px;
+    max-height: 150px;
+    overflow-y: auto;
+    z-index: 1000;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
+
+.stock-dropdown-item {
+    padding: 10px;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.stock-dropdown-item:hover {
+    background-color: #31bc80;
+    color: #051a12;
+}
+
+.stock-dropdown-item.selected {
+    background-color: #2ea972;
+    color: #ffffff;
+}
+
+/* -- SLIDER STYLING --*/
 
 .buy-sell, .deposit-withdraw {
     display: flex;
@@ -289,10 +319,10 @@ body {
 }
 
 .div-slider {
+    padding-top: 20px;
     padding-bottom: 50px;
     display: flex;
     align-items: center;
-    margin-top: 30px;
 }
 
 .buy-sell-label  {
@@ -418,12 +448,15 @@ body {
     cursor: pointer;
 }
 
-input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-inner-spin-button, input[type="number"] {
+input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-inner-spin-button {
   -webkit-appearance: none;
-  -moz-appearance: textfield;
-  appearance: none;
   margin: 0;
 }
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
 
     /* ---- */
 /* --PARTIALS-- */
@@ -438,7 +471,6 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
     width: 100%;
     margin: 0 auto;
     padding: 10px 0;
-    box-sizing: border-box;
 }
 
 .header-nav {
@@ -450,7 +482,6 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
     height: 65px;
     width: 65px;
     margin: 0 auto;
-    display: block;
 }
 
 .nav-logo:hover {

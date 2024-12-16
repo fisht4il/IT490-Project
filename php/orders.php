@@ -22,6 +22,9 @@ if (!$response['success']) {
     header("Location: ../index.html");
     exit();
 }
+
+// Get stocks list from the response
+$stocks = $response['stocks']; // stocks fetched in doValidate function
 ?>
 
 <!DOCTYPE html>
@@ -34,6 +37,63 @@ if (!$response['success']) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Orders</title>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#order-form').on('submit', function (e) {
+                e.preventDefault();
+
+                var stocksymbol = $('#stock-symbol').val();
+                var ordertype = $('#order-type').val();
+                var quantity = $('#quantity').val();
+                var totalprice = $('#total-price').val();
+                var showRawJson = $('#show-json').is(':checked');
+
+                $.ajax({
+                    url: '/php/transaction.php',
+                    type: 'POST',
+                    data: {
+                        stocksymbol: stocksymbol,
+                        ordertype: ordertype,
+                        quantity: quantity,
+                        totalprice: totalprice
+                    },
+                    success: function (response) {
+                        try {
+                            let result = typeof response === 'string' ? JSON.parse(response) : response;
+                            let color = result.success ? 'green' : 'red';
+
+                            let formattedResponse = `
+                                <pre><strong style="color:${color};">${result.message}</strong></pre><br>
+                            `;
+
+                            let rawJsonResponse = showRawJson
+                                ? `<h4>Raw JSON Response:</h4><pre>${JSON.stringify(result, null, 2)}</pre>`
+                                : '';
+
+                            $('#response').html(formattedResponse + rawJsonResponse);
+
+                            if (result.success && result.redirect) {
+                                window.location.href = result.redirect;
+                                return;
+                            }
+
+                        } catch (error) {
+                            console.error("JSON parse error:", error);
+                            $('#response').html(
+                                `<pre><strong style='color:red;'>Invalid JSON response.</strong></pre>`
+                            );
+                        }
+                    },
+                    error: function () {
+                        $('#response').html("<strong style='color:red;'>An error occurred. Please try again.</strong>");
+                    }
+                });
+            });
+        });
+    </script>
+
 </head>
 <body>
     <?php include 'partials/navbar.php'; ?>
@@ -42,28 +102,73 @@ if (!$response['success']) {
         <h2>Orders</h2>
     </section> 
 
+
     <main>
-	
-        <div class="form-container">
-	    <h3 class="h2-title">Limit Orders</h3>
-            <form action="" class="form" method="post">
-                <label for="">Stock Symbol</label>
-                <input type="text" class="input-field" placeholder="Enter stock symbol">
-                <label for="">Order Type</label>
-                <select name="" id="" class="input-field">
-		    <option value="" selected>Select order type</option>
-                    <option value="" class="options">Buy</option>
-                    <option value="" class="options">Sell</option>
+	<div class="form-container">
+	    <h3>Limit Orders</h3>
+            <form id="order-form" class="form" method="post">
+                <label for="stock-symbol">Stock Symbol</label>
+                <div style="position: relative;">
+                    <input type="text" id="stock-symbol" class="input-field" placeholder="Enter stock symbol">
+                    <div id="suggestions" class="stock-dropdown"></div>
+                </div>
+                <label for="order-type">Order Type</label>
+                <select name="order-type" id="order-type" class="input-field">
+                    <option value="buy" class="options">Buy</option>
+                    <option value="sell" class="options">Sell</option>
                 </select>
-                <label for="">Quantity</label>
-                <input type="number" class="input-field" placeholder="Enter quantity">
-                <label for="">Total Price</label>
-                <input type="number" class="input-field" placeholder="Enter total price">
+                <label for="quantity">Quantity</label>
+                <input type="number" id="quantity" class="input-field" placeholder="Enter quantity">
+                <label for="total-price">Total Price</label>
+                <input type="number" id="total-price" class="input-field" placeholder="Enter total price">
                 <input type="submit" class="input-button" value="Submit Order">
             </form>
         </div>
-
     </main>
+
+    <script>
+        document.getElementById('stock-symbol').addEventListener('input', function() {
+            const input = this.value.toLowerCase();
+            const suggestionsContainer = document.getElementById('suggestions');
+            suggestionsContainer.innerHTML = ''; // Clear previous suggestions
+
+            if (input.length > 0) {
+                const stocks = <?= json_encode($stocks); ?>;
+                const filteredStocks = stocks.filter(stock => 
+                    stock.symbol.toLowerCase().startsWith(input) || 
+                    stock.name.toLowerCase().startsWith(input)
+                );
+
+                if (filteredStocks.length > 0) {
+                    filteredStocks.forEach(stock => {
+                        const suggestion = document.createElement('div');
+                        suggestion.classList.add('stock-dropdown-item');
+                        suggestion.textContent = `${stock.symbol} - ${stock.name}`;
+                        suggestion.addEventListener('click', function() {
+                            document.getElementById('stock-symbol').value = stock.symbol;
+                            suggestionsContainer.innerHTML = '';
+                            suggestionsContainer.style.display = 'none';
+                        });
+                        suggestionsContainer.appendChild(suggestion);
+                    });
+                    suggestionsContainer.style.display = 'block';
+                } else {
+                    suggestionsContainer.style.display = 'none';
+                }
+            } else {
+                suggestionsContainer.style.display = 'none';
+            }
+        });
+
+        
+        document.addEventListener('click', function(event) {
+            const suggestionsContainer = document.getElementById('suggestions');
+            if (!document.getElementById('stock-symbol').contains(event.target) &&
+                !suggestionsContainer.contains(event.target)) {
+                suggestionsContainer.style.display = 'none';
+            }
+        });
+    </script>
 
     <!--  <?php include 'partials/chat.php'; ?> -->
 
