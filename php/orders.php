@@ -24,7 +24,7 @@ if (!$response['success']) {
 }
 
 // Get stocks list from the response
-$stocks = $response['stocks']; // Ensure this array contains {symbol, name} pairs
+$stocks = $response['stocks']; // stocks fetched in doValidate function
 ?>
 
 <!DOCTYPE html>
@@ -32,80 +32,99 @@ $stocks = $response['stocks']; // Ensure this array contains {symbol, name} pair
 <head>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Titillium+Web:wght@200..700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Titillium+Web:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../style.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Orders</title>
-    <style>
-      
-       .stock-dropdown {
-            position: absolute;
-            top: 100%;
-            left: 0;
-            width: 100%;
-            background-color: #051a12;
-            border: 1px solid #31bc80;
-            border-radius: 5px;
-            max-height: 150px;
-            overflow-y: auto;
-            z-index: 1000;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-        }
 
-        .stock-dropdown-item {
-            padding: 10px;
-            color: white;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#order-form').on('submit', function (e) {
+                e.preventDefault();
 
-        .stock-dropdown-item:hover {
-            background-color: #31bc80;
-            color: #051a12;
-        }
+                var stocksymbol = $('#stock-symbol').val();
+                var ordertype = $('#order-type').val();
+                var quantity = $('#quantity').val();
+                var totalprice = $('#total-price').val();
+                var showRawJson = $('#show-json').is(':checked');
 
-        .stock-dropdown-item.selected {
-            background-color: #2ea972;
-            color: #ffffff;
-        }
-    </style>
+                $.ajax({
+                    url: '/php/transaction.php',
+                    type: 'POST',
+                    data: {
+                        stocksymbol: stocksymbol,
+                        ordertype: ordertype,
+                        quantity: quantity,
+                        totalprice: totalprice
+                    },
+                    success: function (response) {
+                        try {
+                            let result = typeof response === 'string' ? JSON.parse(response) : response;
+                            let color = result.success ? 'green' : 'red';
+
+                            let formattedResponse = `
+                                <pre><strong style="color:${color};">${result.message}</strong></pre><br>
+                            `;
+
+                            let rawJsonResponse = showRawJson
+                                ? `<h4>Raw JSON Response:</h4><pre>${JSON.stringify(result, null, 2)}</pre>`
+                                : '';
+
+                            $('#response').html(formattedResponse + rawJsonResponse);
+
+                            if (result.success && result.redirect) {
+                                window.location.href = result.redirect;
+                                return;
+                            }
+
+                        } catch (error) {
+                            console.error("JSON parse error:", error);
+                            $('#response').html(
+                                `<pre><strong style='color:red;'>Invalid JSON response.</strong></pre>`
+                            );
+                        }
+                    },
+                    error: function () {
+                        $('#response').html("<strong style='color:red;'>An error occurred. Please try again.</strong>");
+                    }
+                });
+            });
+        });
+    </script>
+
 </head>
-<body class="body-home">
+<body>
     <?php include 'partials/navbar.php'; ?>
 
     <section class="section-text">
         <h2>Orders</h2>
     </section> 
 
-    <main>
-        <form id="" class="form">
-            <h2 class="h2-title">Limit Orders</h2>
-            <div class="form-div" style="position: relative;">
-                <label class="input-label" for="stock-symbol">Stock Symbol</label>
-                <input type="text" id="stock-symbol" class="input-field" name="stock-symbol" placeholder="Enter stock symbol">
-                <div id="suggestions" class="stock-dropdown"></div>
-            </div>
-            <div class="form-div">
-                <label class="input-label" for="order-type">Order Type</label>
-                <select name="order-type" id="order-type" class="input-field">
-                    <option value="" selected>Select order type</option>
-                    <option value="buy">Buy</option>
-                    <option value="sell">Sell</option>
-                </select>
-            </div>
-            <div class="form-div">
-                <label class="input-label" for="quantity">Quantity</label>
-                <input type="number" class="input-field" id="quantity" name="quantity" required placeholder="Enter quantity">
-            </div>
-            <div class="form-div">
-                <label class="input-label" for="total-price">Total Price</label>
-                <input type="number" class="input-field" id="total-price" name="total-price" required placeholder="Enter total price">
-            </div>
-        </form>
-    </main>
 
-    <?php include 'partials/footer.php'; ?>
+    <main>
+	<div class="form-container">
+	    <h3>Limit Orders</h3>
+            <form id="order-form" class="form" method="post">
+                <label for="stock-symbol">Stock Symbol</label>
+                <div style="position: relative;">
+                    <input type="text" id="stock-symbol" class="input-field" placeholder="Enter stock symbol">
+                    <div id="suggestions" class="stock-dropdown"></div>
+                </div>
+                <label for="order-type">Order Type</label>
+                <select name="order-type" id="order-type" class="input-field">
+                    <option value="buy" class="options">Buy</option>
+                    <option value="sell" class="options">Sell</option>
+                </select>
+                <label for="quantity">Quantity</label>
+                <input type="number" id="quantity" class="input-field" placeholder="Enter quantity">
+                <label for="total-price">Total Price</label>
+                <input type="number" id="total-price" class="input-field" placeholder="Enter total price">
+                <input type="submit" class="input-button" value="Submit Order">
+            </form>
+        </div>
+    </main>
 
     <script>
         document.getElementById('stock-symbol').addEventListener('input', function() {
@@ -150,6 +169,9 @@ $stocks = $response['stocks']; // Ensure this array contains {symbol, name} pair
             }
         });
     </script>
+
+    <!--  <?php include 'partials/chat.php'; ?> -->
+
+    <?php include 'partials/footer.php'; ?>
 </body>
 </html>
-
