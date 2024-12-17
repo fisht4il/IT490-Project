@@ -1,7 +1,6 @@
 /* --GENERAL-- */
 
 @media screen and (max-width: 480px) {
-    /* --HEADER-- */
     .main-header {
         padding: 10px;
     }
@@ -119,8 +118,8 @@ body {
 }
 
 .nav-logo {
-    height: 55px;
-    width: 55px;
+    height: 65px;
+    width: 65px;
     opacity: 0.75;
 }
 
@@ -170,6 +169,10 @@ body {
     margin-right: auto;
 }
 
+.form-container input {
+    margin-bottom: 20px;
+} 
+
 .form-div {
     position: relative;
     display: flex;
@@ -179,6 +182,7 @@ body {
     margin-right: auto;
     margin-bottom: 20px;
 }
+
 
 .h2-title {
     text-align: center;
@@ -378,4 +382,195 @@ body {
     color: #7f8c8d;
     border-radius: 10px; /*--> changed radius.*/
     box-sizing: border-box;
+}
+
+.form-container {
+    padding: 35px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
+    color: white;
+    border: 1px solid #42dca3;
+    position: relative;
+    width: 100%;
+    margin: 0 auto;
+    margin-bottom: 20px;
+    box-sizing: border-box;
+    position: relative;
+    display: flex;
+    width: 100%;
+    max-width: 350px;
+}
+
+.form-container h3 {
+    padding-bottom: 15px;
+    margin: 0 88px;
+    background-color: #051a12;
+    position: absolute;
+    top: -15px;
+    padding: 0 8px;
+    color: white;
+    cursor: text;
+}
+
+/* -- SLIDER STYLING --*/
+
+.div-slider {
+    padding-bottom: 50px;
+    display: flex;
+    align-items: center;
+}
+
+.buy-sell {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.buy-sell-label  {
+    margin-left: 36px;
+    position: absolute;
+    color: #051a12;
+    font-size: 20px;
+}
+
+.sell-buy-label {
+    margin-left: 138px;
+    position: absolute;
+    color: #051a12;
+    font-size: 20px;
+}
+
+.bs-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 200px;
+  background: #7f8c8d;
+  border-radius: 20px;
+  border: #42dca3 solid 1px;
+  outline: none;
+}
+
+.bs-slider::-moz-range-track {
+    height: 50px;
+    background: #42dca3;
+    border: #42dca3 solid 1px;
+    border-radius: 20px;
+    cursor: pointer;
+    appearance: none;
+    width: 200px;
+    background: #7f8c8d;
+    border-radius: 20px;
+    outline: none;
+}
+
+.bs-slider::-moz-range-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100px;
+    height: 50px;
+    background: #42dca3;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.bs-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100px;
+    height: 50px;
+    background: #42dca3;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.dep-label  {
+    margin-left: 24px;
+    position: absolute;
+    color: #051a12;
+    font-size: 20px;
+}
+
+.with-label {
+    margin-left: 148px;
+    position: absolute;
+    color: #051a12;
+    font-size: 20px;
+}
+
+.dw-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 250px;
+  background: #7f8c8d;
+  border-radius: 20px;
+  border: #42dca3 solid 1px;
+  outline: none;
+}
+
+.dw-slider::-moz-range-track {
+    height: 50px;
+    background: #42dca3;
+    border: #42dca3 solid 1px;
+    border-radius: 20px;
+    cursor: pointer;
+    appearance: none;
+    width: 250px;
+    background: #7f8c8d;
+    border-radius: 20px;
+    outline: none;
+}
+
+.dw-slider::-moz-range-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 125px;
+    height: 50px;
+    background: #42dca3;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.dw-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 125px;
+    height: 50px;
+    background: #42dca3;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+/* Stock Search Dropdown Styling */
+
+.stock-dropdown {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: #051a12;
+    border: 1px solid #31bc80;
+    border-radius: 5px;
+    max-height: 150px;
+    overflow-y: auto;
+    z-index: 1000;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.stock-dropdown-item {
+    padding: 10px;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.stock-dropdown-item:hover {
+    background-color: #31bc80;
+    color: #051a12;
+}
+
+.stock-dropdown-item.selected {
+    background-color: #2ea972;
+    color: #ffffff;
 }
