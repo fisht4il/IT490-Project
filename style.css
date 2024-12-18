@@ -102,52 +102,6 @@ body {
     overflow: hidden;
 }
 
-/* --HEADER-- */
-
-.main-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
-    margin: 0 auto;
-}
-
-.header-nav {
-    display: flex;
-    gap: 15px;
-}
-
-.nav-logo {
-    height: 65px;
-    width: 65px;
-    opacity: 0.75;
-}
-
-.nav-logo:hover {
-    opacity: 1;
-}
-
-.php-welcome {
-    position: absolute;
-    margin-left: 100px;
-    font-family: "Titiliam Web", sans-serif;
-    color: white;
-    font-weight: bold;
-    font-size: 20px;
-}
-
-.nav-link {
-        text-decoration: none;
-        color: rgba(225, 225, 225, 0.75);
-        font-size: 25px;
-        font-weight: bold;
-        color: rgba(225, 225, 225, 0.75);
-}
-
-.nav-link:hover {
-        color: rgba(49, 188, 128, 1);
-}
-
 /* --MAIN-- */
 
 .main-section {
@@ -243,18 +197,6 @@ body {
     color: #42dca3;
 }
 
-/* --FOOTER-- */
-
-.footer {
-    width: 100%;
-    margin-top: auto;
-    padding-top: 20px;
-    padding-bottom: 20px;
-    text-align: center;
-    position: relative;
-    bottom: 0;
-}
-
 /* --PAGES-- */
 
 .section-text {
@@ -269,78 +211,6 @@ body {
     text-align: center;
     margin: 0 auto;
     inline-size: 650px;
-}
-
-/* --CHAT-- */
-
-.chat-btn {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    padding: 15px;
-    background-color: #59b142;
-    color: white;
-    border: none;
-    border-radius: 10px;
-    font-size: 10px;
-    cursor: pointer;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-}
-
-.chat-window {
-    position: fixed;
-    bottom: 80px;
-    right: 20px;
-    width: 340px;
-    height: 600px;
-    background: #59b142;
-    border: 2px solid #59b142;
-    border-radius: 10px;
-    display: flex;
-    flex-direction: column;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    padding: 10px;
-}
-
-.chat-header {
-    background-color: #59b142;
-    border-radius: 5px;
-    color: white;
-    padding: 10px;
-    text-align: center;
-    font-weight: bold;
-}
-
-.chat-content {
-    flex-grow: 1;
-    padding: 10px;
-    overflow-y: auto;
-}
-
-.input-chat {
-    display: flex;
-    flex-direction: column;
-    padding: 10px;
-}
-
-.input-chat textarea {
-    width: 100%;
-    padding: 8px;
-    margin-bottom: 4px;
-    border-radius: 5px;
-    border: 1px solid #59b142;
-    min-height: 100px;
-    resize: none;
-}
-
-.input-chat button {
-    padding: 8px 12px;
-    margin-top: 10px;
-    background-color: #59b142;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
 }
 
 /* --WEBSITE ELEMENTS-- */
@@ -367,7 +237,6 @@ body {
        /* padding: 0 8px; /*--> added padding.*/
         margin: 0;
         background-color: #051a12; /*--> added background color.*/
-
 }
 
 .chart {
@@ -539,6 +408,15 @@ body {
     cursor: pointer;
 }
 
+input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
 /* Stock Search Dropdown Styling */
 
 .stock-dropdown {
@@ -572,3 +450,138 @@ body {
     background-color: #2ea972;
     color: #ffffff;
 }
+
+    /* ---- */
+/* --PARTIALS-- */
+   /* ---- */
+
+/* --HEADER-- */
+
+.main-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.header-nav {
+    display: flex;
+    gap: 15px;
+}
+
+.nav-logo {
+    height: 65px;
+    width: 65px;
+    opacity: 0.75;
+}
+
+.nav-logo:hover {
+    opacity: 1;
+}
+
+.php-welcome {
+    position: absolute;
+    margin-left: 100px;
+    font-family: "Titiliam Web", sans-serif;
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.nav-link {
+        text-decoration: none;
+        color: rgba(225, 225, 225, 0.75);
+        font-size: 25px;
+        font-weight: bold;
+        color: rgba(225, 225, 225, 0.75);
+}
+
+.nav-link:hover {
+        color: rgba(49, 188, 128, 1);
+}
+
+/* --CHAT-- */
+
+.chat-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    padding: 15px;
+    background-color: #59b142;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 10px;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.chat-window {
+    position: fixed;
+    bottom: 80px;
+    right: 20px;
+    width: 340px;
+    height: 600px;
+    background: #59b142;
+    border: 2px solid #59b142;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+}
+
+.chat-header {
+    background-color: #59b142;
+    border-radius: 5px;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.chat-content {
+    flex-grow: 1;
+    padding: 10px;
+    overflow-y: auto;
+}
+
+.input-chat {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+}
+
+.input-chat textarea {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 4px;
+    border-radius: 5px;
+    border: 1px solid #59b142;
+    min-height: 100px;
+    resize: none;
+}
+
+.input-chat button {
+    padding: 8px 12px;
+    margin-top: 10px;
+    background-color: #59b142;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* --FOOTER-- */
+
+.footer {
+    width: 100%;
+    margin-top: auto;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    text-align: center;
+    position: relative;
+    bottom: 0;
+}
+
