@@ -22,6 +22,10 @@ if (!$response['success']) {
     header("Location: ../index.html");
     exit();
 }
+
+// Fetch historical stock data
+$historicalData = $response['historicalData']; // Assuming it's part of the response
+
 ?>
 
 <!DOCTYPE html>
@@ -34,6 +38,7 @@ if (!$response['success']) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trades</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body class="body-home">
     <?php include 'partials/navbar.php'; ?>
@@ -42,8 +47,78 @@ if (!$response['success']) {
         <h2>Trades</h2>
     </section>
 
-    <!--  <?php include 'partials/chat.php'; ?> -->
+    <section id="stock-history">
+        <h2>Stock Historical Data (AAPL)</h2>
+        <canvas id="historicalChart"></canvas>
+    </section>
 
     <?php include 'partials/footer.php'; ?>
+
+    <script>
+        // Prepare the data for the chart
+        const historicalData = <?php echo json_encode($historicalData); ?>;
+        
+        const dates = historicalData.map(data => data.date);
+        const openPrices = historicalData.map(data => data.open);
+        const highPrices = historicalData.map(data => data.high);
+        const lowPrices = historicalData.map(data => data.low);
+        const closePrices = historicalData.map(data => data.close);
+
+        // Create the chart
+        const ctx = document.getElementById('historicalChart').getContext('2d');
+        const historicalChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: dates,
+                datasets: [
+                    {
+                        label: 'Open Price',
+                        data: openPrices,
+                        borderColor: 'rgba(255, 99, 132, 1)',
+                        fill: false
+                    },
+                    {
+                        label: 'High Price',
+                        data: highPrices,
+                        borderColor: 'rgba(54, 162, 235, 1)',
+                        fill: false
+                    },
+                    {
+                        label: 'Low Price',
+                        data: lowPrices,
+                        borderColor: 'rgba(255, 159, 64, 1)',
+                        fill: false
+                    },
+                    {
+                        label: 'Close Price',
+                        data: closePrices,
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        fill: false
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    x: {
+                        type: 'category',
+                        labels: dates,
+                        title: {
+                            display: true,
+                            text: 'Date'
+                        }
+                    },
+                    y: {
+                        beginAtZero: false,
+                        title: {
+                            display: true,
+                            text: 'Price ($)'
+                        }
+                    }
+                }
+            }
+        });
+    </script>
 </body>
 </html>
+
