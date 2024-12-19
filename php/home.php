@@ -52,13 +52,18 @@ if (!$response['success']) {
     </div>
 
     <div class="container">
+        <h3>Portfolio Evaluation</h3>
+        <label>Value:</label><br><br> <!-- php account value -->
+        <label>Day's gain/loss:</label><br><br> <!-- php gain/loss -->
+        <label>Cash & sweep funds</label><br><br>
         <h3>Portfolio</h3>
         <table>
             <tr>
                 <th>Stock</th>
+                <th>Quantity</th>
+                <th>Value</th>
+                <th>Gain/Loss</th>
                 <th>Chart</th>
-                <th>Day Change</th>
-                <th>Overall Change</th>
             </tr>
         </table>
     </div>
