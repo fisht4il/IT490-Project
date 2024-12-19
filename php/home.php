@@ -47,6 +47,15 @@ if (!$response['success']) {
     </div>
 
     <div class="container">
+        <h3>Portfolio Evaluation</h3>
+        <h2>PHP Value Ammount</h2><br>
+        <label>Value</label><br><br>
+        <label>Day's gain/loss</label> <p>PHP gains/loss Ammount</p>
+        <label>Cash & sweep funds</label> <p>Balance: $<?php echo number_format((float)$current_balance, 2, '.', ','); ?></p>
+   </div>
+
+
+    <div class="container">
         <h3>Portfolio</h3>
         <table>
                 <tr>
