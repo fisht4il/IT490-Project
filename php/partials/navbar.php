@@ -7,6 +7,7 @@
 	</span>
 	<!-- <h1 class="nav-title">IT-490-Project</h1> -->
 	<nav class="header-nav">
+		<a href="graph.php" class="nav-link">Graph</a>
 		<a href="funds.php" class="nav-link">Funds</a>
 		<a href="trades.php" class="nav-link">Trades</a>
             	<a href="orders.php" class="nav-link">Orders</a>
