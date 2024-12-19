@@ -23,9 +23,7 @@ if (!$response['success']) {
     exit();
 }
 
-
 $historicalData = $response['historicalData'];
-
 ?>
 
 <!DOCTYPE html>
@@ -44,79 +42,93 @@ $historicalData = $response['historicalData'];
     <?php include 'partials/navbar.php'; ?>
 
     <section class="section-text">
-        <h2>Graphs</h2>
+        <h2>Graph</h2>
+        <label for="stockSelector">Select Stock:</label>
+        <select id="stockSelector">
+            <option value="" disabled>Select a stock</option>
+            <?php foreach ($historicalData as $symbol => $data): ?>
+                <option value="<?= $symbol ?>" <?= $symbol == 'AAPL' ? 'selected' : '' ?>><?= $symbol ?></option>
+            <?php endforeach; ?>
+        </select>
     </section>
 
     <section id="stock-history">
-        <h2>Stock Historical Data (AAPL)</h2>
-        <canvas id="historicalChart"></canvas>
+        <canvas id="stockChart" style="background-color: white;"></canvas>
     </section>
 
     <?php include 'partials/footer.php'; ?>
 
     <script>
-       
         const historicalData = <?php echo json_encode($historicalData); ?>;
-        
-        const dates = historicalData.map(data => data.date);
-        const openPrices = historicalData.map(data => data.open);
-        const highPrices = historicalData.map(data => data.high);
-        const lowPrices = historicalData.map(data => data.low);
-        const closePrices = historicalData.map(data => data.close);
+        const stockSelector = document.getElementById('stockSelector');
+        const ctx = document.getElementById('stockChart').getContext('2d');
+        let stockChart;
 
-        // Create the chart
-        const ctx = document.getElementById('historicalChart').getContext('2d');
-        const historicalChart = new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels: dates,
-                datasets: [
-                    {
-                        label: 'Open Price',
-                        data: openPrices,
-                        borderColor: 'rgba(255, 99, 132, 1)',
-                        fill: false
-                    },
-                    {
-                        label: 'High Price',
-                        data: highPrices,
-                        borderColor: 'rgba(54, 162, 235, 1)',
-                        fill: false
-                    },
-                    {
-                        label: 'Low Price',
-                        data: lowPrices,
-                        borderColor: 'rgba(255, 159, 64, 1)',
-                        fill: false
-                    },
-                    {
-                        label: 'Close Price',
-                        data: closePrices,
-                        borderColor: 'rgba(75, 192, 192, 1)',
-                        fill: false
-                    }
-                ]
-            },
-            options: {
-                responsive: true,
-                scales: {
-                    x: {
-                        type: 'category',
-                        labels: dates,
-                        title: {
-                            display: true,
-                            text: 'Date'
+        function renderChart(stockData) {
+            const reversedData = stockData.slice().reverse();
+            const dates = reversedData.map(data => data.date);
+            const highPrices = reversedData.map(data => data.high);
+            const lowPrices = reversedData.map(data => data.low);
+
+            if (stockChart) {
+                stockChart.destroy();
+            }
+
+            stockChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: dates,
+                    datasets: [
+                        {
+                            label: 'High Price',
+                            data: highPrices,
+                            borderColor: 'green',
+                            backgroundColor: 'rgba(0, 128, 0, 0.1)',
+                            fill: false,
+                            tension: 0.4
+                        },
+                        {
+                            label: 'Low Price',
+                            data: lowPrices,
+                            borderColor: 'red',
+                            backgroundColor: 'rgba(255, 0, 0, 0.1)',
+                            fill: false,
+                            tension: 0.4
                         }
-                    },
-                    y: {
-                        beginAtZero: false,
-                        title: {
-                            display: true,
-                            text: 'Price ($)'
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        x: {
+                            type: 'category',
+                            title: {
+                                display: true,
+                                text: 'Date'
+                            }
+                        },
+                        y: {
+                            beginAtZero: false,
+                            title: {
+                                display: true,
+                                text: 'Price ($)'
+                            }
                         }
                     }
                 }
-            }
+            });
+        }
+
+        stockSelector.addEventListener('change', function () {
+            const selectedStock = stockSelector.value;
+            const stockData = historicalData[selectedStock];
+            renderChart(stockData);
+        });
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const selectedStock = stockSelector.value || 'AAPL';
+            const stockData = historicalData[selectedStock];
+            renderChart(stockData);
         });
     </script>
 </body>
