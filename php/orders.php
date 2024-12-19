@@ -51,7 +51,7 @@ $stocks = $response['stocks']; // stocks fetched in doValidate function
                 var showRawJson = $('#show-json').is(':checked');
 
                 $.ajax({
-                    url: '/php/transaction.php',
+                    url: '/php/transaction-order.php',
                     type: 'POST',
                     data: {
                         stocksymbol: stocksymbol,

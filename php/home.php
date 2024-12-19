@@ -79,6 +79,8 @@ if (!$response['success']) {
         <?php endif; ?>
     </div>
 
+    <!--  <?php include 'partials/chat.php'; ?> -->
+
     <?php include 'partials/footer.php'; ?>
 
 </body>
