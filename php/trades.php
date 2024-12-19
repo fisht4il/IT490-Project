@@ -30,9 +30,6 @@ if (!$response['success']) {
 $stocks = $response['stocks']; // stocks fetched in doValidate function
 ?>
 
-
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
