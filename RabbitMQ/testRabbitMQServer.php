@@ -164,12 +164,24 @@ function doValidate($sessionId) {
                 $stockStmt->execute();
                 $stocksrecommendation = $stockStmt->fetchAll(PDO::FETCH_ASSOC);
 
+                $symbol = 'AAPL';
+                $historicalQuery = "SELECT date, open, high, low, close, volume 
+                                    FROM stock_prices 
+                                    WHERE symbol = :symbol
+                                    ORDER BY date DESC 
+                                    LIMIT 10";
+                $historicalStmt = $stockpdo->prepare($historicalQuery);
+                $historicalStmt->bindParam(':symbol', $symbol);
+                $historicalStmt->execute();
+                $historicalData = $historicalStmt->fetchAll(PDO::FETCH_ASSOC);
+
                 return [
                     "success" => true,
                     "message" => "Session validated.",
                     "user_id" => $userId,
                     "balance" => $balance,
-                    "stocksrecommendation" => $stocksrecommendation
+                    "stocksrecommendation" => $stocksrecommendation,
+                    "historicalData" => $historicalData
                 ];
             }
         } else {
@@ -196,6 +208,7 @@ function doValidate($sessionId) {
         }
     }
 }
+
 
 
 

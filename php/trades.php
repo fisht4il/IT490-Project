@@ -23,8 +23,8 @@ if (!$response['success']) {
     exit();
 }
 
-// Fetch historical stock data
-$historicalData = $response['historicalData']; // Assuming it's part of the response
+
+$historicalData = $response['historicalData'];
 
 ?>
 
@@ -55,7 +55,7 @@ $historicalData = $response['historicalData']; // Assuming it's part of the resp
     <?php include 'partials/footer.php'; ?>
 
     <script>
-        // Prepare the data for the chart
+       
         const historicalData = <?php echo json_encode($historicalData); ?>;
         
         const dates = historicalData.map(data => data.date);
