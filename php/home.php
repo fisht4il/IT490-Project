@@ -21,22 +21,11 @@ $response = json_decode($client->send_request($request), true);
 if (!$response['success']) {
     header("Location: ../index.html");
     exit();
+} else {
+    $userId = $response['user_id'];
+    $current_balance = $response['balance'];
+    $stocksrecommendation = $response['stocksrecommendation'];
 }
-
-
-else {
-	$userId = $response['user_id'];
-/*	
-	$request = [
-  		'type' => 'get_balance',
-  		'user_id' => $userId
-	];
-
-	$response = json_decode($client->send_request($request), true);
- */	
-	$current_balance = $response['balance'];	
-} 
-
 ?>
 
 <html lang="en">
@@ -50,6 +39,7 @@ else {
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Titillium+Web:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../style.css">
 </head>
+
 <body class="body-home">
     <?php include 'partials/navbar.php'; ?>
 
@@ -64,12 +54,12 @@ else {
     <div class="container">
         <h3>Portfolio</h3>
         <table>
-                <tr>
-                        <th>Stock</th>
-                        <th>Chart</th>
-                        <th>Day Change</th>
-                        <th>Overall Change</th>
-                </tr>
+            <tr>
+                <th>Stock</th>
+                <th>Chart</th>
+                <th>Day Change</th>
+                <th>Overall Change</th>
+            </tr>
         </table>
     </div>
 
@@ -80,15 +70,22 @@ else {
 
     <div class="container">
         <h3>Recommendations</h3>
-	Growth:<br>
-	Recommendation 1<br>
-        Recommendation 2<br>
-	Recommendation 3<br>
+        <?php if (!empty($stocksrecommendation)): ?>
+            <ul>
+                <?php foreach ($stocksrecommendation as $stock): ?>
+                    <li>
+                        <?php echo $stock['symbol']; ?> - Price: $<?php echo $stock['price']; ?>, 
+                        Change: <?php echo $stock['change_percent']; ?>
+                    </li>
+                <?php endforeach; ?>
+            </ul>
+        <?php else: ?>
+            <p>No recommendations available at the moment.</p>
+        <?php endif; ?>
     </div>
-
-    <!-- <?php include 'partials/chat.php'; ?> -->
 
     <?php include 'partials/footer.php'; ?>
 
 </body>
 </html>
+
