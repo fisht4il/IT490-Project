@@ -12,10 +12,10 @@ function doRegister($username, $password) {
     try {
         global $config;
         $dbhost = $config['DBHOST'];
-	$logindb = $config['LOGINDATABASE'];
-	$stockdb = $config['STOCKDATABASE'];
-	$dbLogin = "mysql:host=$dbhost;dbname=$logindb";
-	$dbStock = "mysql:host=$dbhost;dbname=$stockdb";
+        $logindb = $config['LOGINDATABASE'];
+        $stockdb = $config['STOCKDATABASE'];
+        $dbLogin = "mysql:host=$dbhost;dbname=$logindb";
+        $dbStock = "mysql:host=$dbhost;dbname=$stockdb";
         $dbUsername = $config['DBUSER'];
         $dbPassword = $config['DBPASSWORD'];
 
@@ -25,7 +25,7 @@ function doRegister($username, $password) {
         $pdoStock = new PDO($dbStock, $dbUsername, $dbPassword);
         $pdoStock->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-	$hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
         $stmt = $pdo->prepare("INSERT INTO users (username, password, last_login) VALUES (:username, :password, NULL)");
         $stmt->bindParam(':username', $username);
@@ -45,7 +45,7 @@ function doRegister($username, $password) {
         ];
 
     } catch (PDOException $e) {
-     	error_log('Database error: ' . $e->getMessage());
+        error_log('Database error: ' . $e->getMessage());
         return [
             "success" => false,
             "message" => "An error occurred during registeration. Please try again later."
@@ -89,7 +89,7 @@ function doLogin($username, $password) {
             return [
                 "success" => true,
                 "message" => "Login successful!",
-		"session_id" => $sessionId
+                "session_id" => $sessionId
             ];
         } else {
             return [
@@ -164,16 +164,21 @@ function doValidate($sessionId) {
                 $stockStmt->execute();
                 $stocksrecommendation = $stockStmt->fetchAll(PDO::FETCH_ASSOC);
 
-                $symbol = 'AAPL';
-                $historicalQuery = "SELECT date, open, high, low, close, volume 
-                                    FROM stock_prices 
-                                    WHERE symbol = :symbol
-                                    ORDER BY date DESC 
-                                    LIMIT 10";
-                $historicalStmt = $stockpdo->prepare($historicalQuery);
-                $historicalStmt->bindParam(':symbol', $symbol);
-                $historicalStmt->execute();
-                $historicalData = $historicalStmt->fetchAll(PDO::FETCH_ASSOC);
+                $symbols = ['AAPL', 'MSFT', 'GOOGL', 'AMZN', 'TSLA'];
+                $historicalData = [];
+
+                foreach ($symbols as $symbol) {
+                    $historicalQuery = "SELECT date, open, high, low, close, volume 
+                                        FROM stock_prices 
+                                        WHERE symbol = :symbol
+                                        ORDER BY date DESC 
+                                        LIMIT 10";
+                    $historicalStmt = $stockpdo->prepare($historicalQuery);
+                    $historicalStmt->bindParam(':symbol', $symbol);
+                    $historicalStmt->execute();
+                    $data = $historicalStmt->fetchAll(PDO::FETCH_ASSOC);
+                    $historicalData[$symbol] = $data;
+                }
 
                 return [
                     "success" => true,
@@ -208,7 +213,6 @@ function doValidate($sessionId) {
         }
     }
 }
-
 
 
 
