@@ -64,6 +64,11 @@ if (!$response['success']) {
     </div>
 
     <div class="container">
+        <h3>Stock Performance</h3>
+        <div class="chart">CHART GOES HERE</div>
+    </div>
+
+    <div class="container">
         <h3>Recommendations</h3>
         <?php if (!empty($stocksrecommendation)): ?>
             <ul>
@@ -83,3 +88,4 @@ if (!$response['success']) {
 
 </body>
 </html>
+
