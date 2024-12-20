@@ -23,8 +23,8 @@ if (!$response['success']) {
     exit();
 }
 
-// Get stocks list from the response
-$stocks = $response['stocks']; // stocks fetched in doValidate function
+
+$stocks = $response['stocks']; 
 ?>
 
 <!DOCTYPE html>
