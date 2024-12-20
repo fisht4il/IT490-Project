@@ -1,0 +1,12 @@
+[Unit]
+Description=Test RabbitMQ Server
+After=network.target
+
+[Service]
+ExecStart=/usr/bin/php /var/www/html/deployment/deploymentServer.php
+Restart=always
+PIDFile=/var/run/deploymentServer.pid
+
+[Install]
+WantedBy=multi-user.target
+
