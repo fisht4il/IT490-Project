@@ -1,26 +1,59 @@
 /* --GENERAL-- */
 
 @media screen and (max-width: 480px) {
+
     .main-header {
         padding: 10px;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        display: flex;
+        flex-wrap: wrap;
     }
 
-    .page-title {
+    .nav-logo {
+        height: 50px;
+        width: 50px;
+        margin-bottom: 10px;
+    }
+
+    .php-welcome {
+        font-size: 16px;
+        margin-top: 10px;
+        text-align: center;
+        margin-bottom: 10px;
+    }
+
+    .header-nav {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        align-items: center;
+        width: 100%;
+    }
+
+    .nav-link {
+        text-decoration: none;
+        color: rgba(225, 225, 225, 0.75);
         font-size: 18px;
+        font-weight: bold;
+        padding: 8px 0;
+        width: 100%;
+        text-align: center;
+    }
+
+    .nav-link:hover {
+        color: rgba(49, 188, 128, 1);
+        background-color: rgba(49, 188, 128, 0.1);
+    }
+
+    .header-nav a {
+        display: inline-block;
+        width: auto;
     }
 
     .form {
         max-width: 90%;
-    }
-
-    .logo-image {
-        height: 50px;
-        width: 50px;
-        margin-top: 30px;
-    }
-
-    .home-title {
-        font-size: 40px;
     }
 
     .place-text {
