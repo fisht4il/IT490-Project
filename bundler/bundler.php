@@ -24,7 +24,7 @@ $request = [
 	//'tarball' => $bundleFile
 ];
 
-$cllient = newRabbitMQClient("testRabbitMQ.ini","devDeploy");
+$cllient = new RabbitMQClient("testRabbitMQ.ini","devDeploy");
 $response = $client->send_request($request);
 
 
@@ -37,7 +37,7 @@ $response = $client->send_request($request);
 //require_once('test-deploy-bundler.php');
 //bundler($request);
 
-echo json_decode($response['message']);
+//return json_decode($response['message']);
 
 
 ?>
