@@ -70,7 +70,7 @@ function doLogin($username, $password) {
         $stmt->execute();
 
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
-        if ($user && password_verify($password, $user['password'])) {
+        if ($user&& password_verify($password, $user['password'])) {
 
             $stmt = $pdo->prepare("UPDATE users SET last_login = NOW() WHERE username = :username");
             $stmt->bindParam(':username', $username);
@@ -81,7 +81,8 @@ function doLogin($username, $password) {
 
             $stmt = $pdo->prepare("REPLACE INTO sessions (username, session_id, session_start, session_end) 
                                    VALUES (:username, :session_id, UNIX_TIMESTAMP(), UNIX_TIMESTAMP() + :timelimit)");
-            $stmt->bindParam(':username', $username);
+	
+	    $stmt->bindParam(':username', $username);
             $stmt->bindParam(':session_id', $sessionId);
             $stmt->bindParam(':timelimit', $timeLimit);
             $stmt->execute();
@@ -89,7 +90,7 @@ function doLogin($username, $password) {
             return [
                 "success" => true,
                 "message" => "Login successful!",
-		"session_id" => $sessionId
+                "session_id" => $sessionId
             ];
         } else {
             return [
@@ -106,11 +107,6 @@ function doLogin($username, $password) {
     }
 }
 
-
-//=====
-//doValidate
-//=====
-
 function doValidate($sessionId) {
     try {
         global $config;
@@ -120,46 +116,15 @@ function doValidate($sessionId) {
         $dbUsername = $config['DBUSER'];
         $dbPassword = $config['DBPASSWORD'];
 
-        
         $pdo = new PDO($dbLogin, $dbUsername, $dbPassword);
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-        
         $stmt = $pdo->prepare("SELECT session_end FROM sessions WHERE session_id = :session_id");
         $stmt->bindParam(':session_id', $sessionId);
         $stmt->execute();
         $session = $stmt->fetch(PDO::FETCH_ASSOC);
 
         if ($session) {
-            // Fetch user wallet balance and user ID
-            $query = "SELECT u.id, uw.current_balance
-                      FROM stockdb.user_wallet uw 
-                      JOIN users u ON u.id = uw.user_id
-                      WHERE u.username IN (SELECT username FROM sessions WHERE session_id = :sessionId)";
-            $stmt = $pdo->prepare($query);
-            $stmt->bindParam(':sessionId', $sessionId, PDO::PARAM_STR);
-            $stmt->execute();
-            $fetched = $stmt->fetch(PDO::FETCH_ASSOC);
-            $userId = $fetched['id'];
-            $balance = $fetched['current_balance'];
-
-            
-            $stockQuery = "SELECT symbol, name FROM stockdb.popular_stocks ORDER BY popular_on DESC";  
-            $stockStmt = $pdo->prepare($stockQuery);
-            $stockStmt->execute();
-            $stocks = $stockStmt->fetchAll(PDO::FETCH_ASSOC);
-
-	if ($session) {
-		$query = ("SELECT u.id, uw.current_balance
-			FROM stockdb.user_wallet uw JOIN users u ON u.id = uw.user_id
-			WHERE u.username IN(SELECT username FROM sessions WHERE session_id = :sessionId)");	
-		$stmt= $pdo->prepare($query);
-		$stmt->bindParam(':sessionId', $sessionId, PDO::PARAM_STR);
-		$stmt->execute();
-		$fetched = $stmt->fetch(PDO::FETCH_ASSOC);
-		$userId = $fetched['id'];
-		$balance = $fetched['current_balance'];
-
             $currentTime = time();
 
             if ($currentTime > $session['session_end']) {
@@ -168,31 +133,26 @@ function doValidate($sessionId) {
                     "message" => "Session expired. Please log in again."
                 ];
             } else {
-                
-                $endTime = $currentTime + 600;
+                $endTime = $currentTime + 30;
                 $stmt = $pdo->prepare("UPDATE sessions SET session_end = :end_time WHERE session_id = :session_id");
                 $stmt->bindParam(':end_time', $endTime);
                 $stmt->bindParam(':session_id', $sessionId);
-                $stmt->execute();
+		$stmt->execute();
 
+		$userId = doGetId($sessionId, $pdo);
 
-                // Return session validation and stock data
-                return [
-                    "success" => true,
-                    "message" => "Session validated.",
-                    "user_id" => $userId,
-                    "balance" => $balance,
-                    "stocks" => $stocks  // Include the list of stocks
-		];/*	
+		//this is only for debug test
+		if (!$userId){
+			$userId = 3;
+		}
+
                 return [
                     "success" => true,
 		    "message" => "Session validated.",
 		    "user_id" => $userId,
-		    "balance" => $balance
-
-		];*/
-	    }
-	}
+		    "balance" => showTextBalance($userId)//doGetId($sessionId))
+                ];
+            }
         } else {
             return [
                 "success" => false,
@@ -205,19 +165,46 @@ function doValidate($sessionId) {
             "success" => false,
             "message" => "An error occurred during session validation."
         ];
-    } finally {
-        if ($stmt) {
-            $stmt = null;
-        }
-        if ($pdo) {
-            $pdo = null;
-        }
     }
 }
 
+function doGetId($sessionId, $pdo){
+	try{
+		$stmt = $pdo->prepare("SELECT u.id FROM sessions s JOIN users u ON s.username = u.username WHERE s.id = :session");
+		$stmt->bindParam(':session', $sessionId, PDO::PARAM_INT);
+		$stmt->execute();
+		$user = $stmtId->fetchColumn();
+		
+		if ($userId){
+			return $userId;
+		} else {
+			return 3;
+		}
+	} catch (PDOException $e){
+                error_log('Database error: ' . $e->getMessage());
+                return [
+                	"success" => false,
+                    	"message" => "An error occurred during session validation."
+                ];
+
+	} finally {
+		if ($stmt){
+			$stmt = null;
+		}
+		if ($pdo){
+			$pdo = null;
+		}
+	}
+
+}
+
+//rabbitmq required for frontend interaction. dogetbalance is rabbitmq, this just updates based on what is already returned
+function showTextBalance($userId){
+	$reply = doGetBalance($userId);
+	return $reply['balance'];
+}
 
 function doGetBalance($userId) {
-    try {
         global $config;
         $dbhost = $config['DBHOST'];
         $stockdb = $config['STOCKDATABASE'];
@@ -225,48 +212,48 @@ function doGetBalance($userId) {
         $dbUsername = $config['DBUSER'];
         $dbPassword = $config['DBPASSWORD'];
 
-        $pdoStock = new PDO($dbStock, $dbUsername, $dbPassword);
-        $pdoStock->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+	try{
 
-        $stmtStock = $pdoStock->prepare("SELECT current_balance FROM user_wallet WHERE user_id = :user_id");
-        $stmtStock->bindParam(':user_id', $userId);
-        $stmtStock->execute();
+        	$pdoStock = new PDO($dbStock, $dbUsername, $dbPassword);
+        	$pdoStock->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-        $balance = $stmtStock->fetch(PDO::FETCH_ASSOC);
+        	$stmtStock = $pdoStock->prepare("SELECT current_balance FROM user_wallet WHERE user_id = :user_id");
+        	$stmtStock->bindParam(':user_id', $userId);
+        	$stmtStock->execute();
 
-        if ($balance) {
-            return [
-                "success" => true,
-                "message" => "Get dat bag",
-                "balance" => $balance['current_balance']
-            ];
-        } else {
-            return [
-                "success" => false,
-		"message" => "Bag not found.",
-		"balance" => "31415" //TODO ERROR TEST
-            ];
-        }
-    } catch (PDOException $e) {
-        error_log('Database error: ' . $e->getMessage());
-        return [
-            "success" => false,
-	    "message" => "An error occurred while retrieving the balance.",
-	    "balance" => "404" //TODO ERROR TEST
-        ];
-    }
-    finally {
-    	if ($stmt){
-		$stmt = null;
+		$balance = $stmtStock->fetch(PDO::FETCH_ASSOC);
+	
+
+		if($balance) {
+			return [
+				"success" => true,
+				"message" => "Get dat bag",
+				"balance" => $balance['current_balance']
+			];
+		} else{
+			return [
+				"success" => false,
+				"message" => "ERROR: CANNOT GET BALANCE!"
+			];
+		}
+	} catch (PDOException $e){
+		error_log('Database error: ' . $e->getMessage());
+        	return [
+            	"success" => false,
+        	    "message" => "An error occurred during session validation."
+	        ];
+
+	} finally{
+		if ($stmtStock){
+			$stmtStock=null;
+		}
+		if ($pdoStock){
+			$pdoStock = null;
+		}
+	
 	}
-	if ($pdo){
-		$pdo = null;
-	}
-    }
 }
 
-
-  
 function doLogout($sessionId) {
     try {
         global $config;
@@ -320,12 +307,6 @@ function requestProcessor($request) {
 	case "logout":
             $response = doLogout($request['session_id']);
 	    break;
-	/*
-	case "bundler":
-	    $client = newRabbitMQClient("testRabbitMQini", "dev-deploy");
-	    $response = $client->send-request($request);
-	    break;
-	 */
 	default:
             $response = [
                 "success" => false,

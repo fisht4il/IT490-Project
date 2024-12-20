@@ -1,5 +1,7 @@
 #!/usr/bin/php
 <?php
+//THIS FILE SHOULD BE ON DEV SIDE
+//test-deploy-bundler.php should be on Deploy's side, but for test it is all same place
 
 require_once('../path.inc');
 //require_once('../get_host_info.inc');
@@ -27,8 +29,10 @@ $request = [
 //$client = new RabbitMQClient("testRabbitMQ.ini", "dev-deploy");
 //$response = $client->send_request($request);
 
-require_once('test-deploy-bundler.php');
-bundler($request);
+
+shell_exec("");
+//require_once('test-deploy-bundler.php');
+//bundler($request);
 
 //echo json_decode($response);
 

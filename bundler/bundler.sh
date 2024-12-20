@@ -15,7 +15,7 @@ if [ ! -d "$SOURCE" ]; then
 fi
 
 TARBALL_NAME="${NAME}.tar.gz"
-BUNDLE_NAME="encoded_${NAME}.b64"
+#BUNDLE_NAME="encoded_${NAME}.b64"
 
 echo "Creating Bundle [$TARBALL_NAME]"
 
@@ -28,6 +28,10 @@ fi
 
 #base64 "$TARBALL_NAME" > "$BUNDLE_NAME"
 
-echo "$NAME $BUNDLE_NAME"
-#php bundler.php "$NAME" "$BUNDLE_NAME"
-php bundler.php "$NAME" "$TARBALL_NAME"
+#echo "$NAME $BUNDLE_NAME"
+
+#this is for if rabbitmq integrated
+#php bundler.php "$NAME" "$TARBALL_NAME"
+
+scp test@deploynode "$TARBALL_NAME /var/www/html/bundles/$TARBALL_NAME"
+ssh test@deploynode "php /var/www/html/deploy-bundler.php $NAME"

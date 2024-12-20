@@ -1,0 +1,12 @@
+# enable this with `crontab /var/www/html/cron/cron-jobs.txt`
+# verify cronjobs with `crontab -l`
+
+#for updating historical prices (daily)
+0 23 * * 1-5 /usr/bin/php /var/www/html/cron/cron_update_stock.php dailyPrices && touch /var/www/html/cron/cron-prices.log
+# 0min|11pmUTC|eachDay|eachMonth|mon-fri
+
+
+#for updating the current immediate price
+0 14-21 * * * /usr/bin/php /car/www/html/cron/cron_update_stock.php quotes && touch /var/www/html/cron/cron-quotes.log
+# 0min|2PM-9PMUTC|eachDay|eachMonth|eachWeekday
+

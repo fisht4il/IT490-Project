@@ -120,34 +120,13 @@ function doValidate($sessionId) {
         $dbUsername = $config['DBUSER'];
         $dbPassword = $config['DBPASSWORD'];
 
-        
         $pdo = new PDO($dbLogin, $dbUsername, $dbPassword);
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-        
         $stmt = $pdo->prepare("SELECT session_end FROM sessions WHERE session_id = :session_id");
         $stmt->bindParam(':session_id', $sessionId);
         $stmt->execute();
         $session = $stmt->fetch(PDO::FETCH_ASSOC);
-
-        if ($session) {
-            // Fetch user wallet balance and user ID
-            $query = "SELECT u.id, uw.current_balance
-                      FROM stockdb.user_wallet uw 
-                      JOIN users u ON u.id = uw.user_id
-                      WHERE u.username IN (SELECT username FROM sessions WHERE session_id = :sessionId)";
-            $stmt = $pdo->prepare($query);
-            $stmt->bindParam(':sessionId', $sessionId, PDO::PARAM_STR);
-            $stmt->execute();
-            $fetched = $stmt->fetch(PDO::FETCH_ASSOC);
-            $userId = $fetched['id'];
-            $balance = $fetched['current_balance'];
-
-            
-            $stockQuery = "SELECT symbol, name FROM stockdb.popular_stocks ORDER BY popular_on DESC";  
-            $stockStmt = $pdo->prepare($stockQuery);
-            $stockStmt->execute();
-            $stocks = $stockStmt->fetchAll(PDO::FETCH_ASSOC);
 
 	if ($session) {
 		$query = ("SELECT u.id, uw.current_balance
@@ -168,31 +147,20 @@ function doValidate($sessionId) {
                     "message" => "Session expired. Please log in again."
                 ];
             } else {
-                
-                $endTime = $currentTime + 600;
+                $endTime = $currentTime + 30;
                 $stmt = $pdo->prepare("UPDATE sessions SET session_end = :end_time WHERE session_id = :session_id");
                 $stmt->bindParam(':end_time', $endTime);
                 $stmt->bindParam(':session_id', $sessionId);
                 $stmt->execute();
 
-
-                // Return session validation and stock data
-                return [
-                    "success" => true,
-                    "message" => "Session validated.",
-                    "user_id" => $userId,
-                    "balance" => $balance,
-                    "stocks" => $stocks  // Include the list of stocks
-		];/*	
+		
                 return [
                     "success" => true,
 		    "message" => "Session validated.",
 		    "user_id" => $userId,
 		    "balance" => $balance
-
-		];*/
-	    }
-	}
+                ];
+            }
         } else {
             return [
                 "success" => false,
@@ -205,16 +173,16 @@ function doValidate($sessionId) {
             "success" => false,
             "message" => "An error occurred during session validation."
         ];
-    } finally {
-        if ($stmt) {
-            $stmt = null;
-        }
-        if ($pdo) {
-            $pdo = null;
-        }
+    }
+    finally {
+    	if ($stmt){
+		$stmt = null;
+	}
+	if ($pdo){
+		$pdo = null;
+	}
     }
 }
-
 
 function doGetBalance($userId) {
     try {
@@ -255,18 +223,8 @@ function doGetBalance($userId) {
 	    "balance" => "404" //TODO ERROR TEST
         ];
     }
-    finally {
-    	if ($stmt){
-		$stmt = null;
-	}
-	if ($pdo){
-		$pdo = null;
-	}
-    }
 }
 
-
-  
 function doLogout($sessionId) {
     try {
         global $config;
@@ -320,12 +278,6 @@ function requestProcessor($request) {
 	case "logout":
             $response = doLogout($request['session_id']);
 	    break;
-	/*
-	case "bundler":
-	    $client = newRabbitMQClient("testRabbitMQini", "dev-deploy");
-	    $response = $client->send-request($request);
-	    break;
-	 */
 	default:
             $response = [
                 "success" => false,
