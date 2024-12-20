@@ -43,6 +43,10 @@ if (!$response['success']) {
 <body class="body-home">
     <?php include 'partials/navbar.php'; ?>
 
+    <div class="section-text">
+        <?php echo "Welcome, " . htmlspecialchars($_SESSION['username']) . "."; ?>
+    </div>
+
     <section class="section-text">
         <h2>Dashboard</h2>
     </section>
@@ -57,7 +61,7 @@ if (!$response['success']) {
         <label>Day's gain/loss:</label><br><br> <!-- php gain/loss -->
         <label>Cash & sweep funds</label><br><br>
         <h3>Portfolio</h3>
-        <table>
+        <table id="home-portfolio">
             <tr>
                 <th>Stock</th>
                 <th>Quantity</th>

@@ -38,6 +38,10 @@ if (!$response['success']) {
 <body>
 	<?php include 'partials/navbar.php'; ?>
 
+        <div class="section-text">
+            <?php echo "Welcome, " . htmlspecialchars($_SESSION['username']) . "."; ?>
+        </div>
+
 	<section class="section-text">
 		<h2>Funds</h2>
     	</section> 

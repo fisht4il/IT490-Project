@@ -23,8 +23,8 @@ if (!$response['success']) {
     exit();
 }
 
-// Get stocks list from the response
-$stocks = $response['stocks']; // stocks fetched in doValidate function
+
+$stocks = $response['stocks']; 
 ?>
 
 <!DOCTYPE html>
@@ -97,6 +97,10 @@ $stocks = $response['stocks']; // stocks fetched in doValidate function
 </head>
 <body>
     <?php include 'partials/navbar.php'; ?>
+
+    <div class="section-text">
+        <?php echo "Welcome, " . htmlspecialchars($_SESSION['username']) . "."; ?>
+    </div>
 
     <section class="section-text">
         <h2>Orders</h2>
