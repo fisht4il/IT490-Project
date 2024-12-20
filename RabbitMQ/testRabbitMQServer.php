@@ -123,10 +123,10 @@ function doValidate($sessionId) {
         $pdo = new PDO($dbLogin, $dbUsername, $dbPassword);
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
+	$pdo->beginTransaction();
+
         $stockdb = $config['STOCKDATABASE'];
         $stockLogin = "mysql:host=$dbhost;dbname=$stockdb";
-        $stockpdo = new PDO($stockLogin, $dbUsername, $dbPassword);
-        $stockpdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
         $stmt = $pdo->prepare("SELECT session_end FROM sessions WHERE session_id = :session_id");
         $stmt->bindParam(':session_id', $sessionId);
@@ -145,6 +145,22 @@ function doValidate($sessionId) {
             $userId = $fetched['id'];
             $balance = $fetched['current_balance'];
 
+	                $stockQuery = "SELECT symbol, name FROM stockdb.popular_stocks ORDER BY popular_on DESC";  
+            $stockStmt = $pdo->prepare($stockQuery);
+            $stockStmt->execute();
+            $stocks = $stockStmt->fetchAll(PDO::FETCH_ASSOC);
+
+	if ($session) {
+		$query = ("SELECT u.id, uw.current_balance
+			FROM stockdb.user_wallet uw JOIN users u ON u.id = uw.user_id
+			WHERE u.username IN(SELECT username FROM sessions WHERE session_id = :sessionId)");	
+		$stmt= $pdo->prepare($query);
+		$stmt->bindParam(':sessionId', $sessionId, PDO::PARAM_STR);
+		$stmt->execute();
+		$fetched = $stmt->fetch(PDO::FETCH_ASSOC);
+		$userId = $fetched['id'];
+		$balance = $fetched['current_balance'];
+
             $currentTime = time();
 
             if ($currentTime > $session['session_end']) {
@@ -159,8 +175,8 @@ function doValidate($sessionId) {
                 $stmt->bindParam(':session_id', $sessionId);
                 $stmt->execute();
 
-                $stockQuery = "SELECT symbol, price, change_percent FROM stock_quotes ORDER BY RAND() LIMIT 3";
-                $stockStmt = $stockpdo->prepare($stockQuery);
+                $stockQuery = "SELECT symbol, price, change_percent FROM stockdb.stock_quotes ORDER BY RAND() LIMIT 3";
+                $stockStmt = $pdo->prepare($stockQuery);
                 $stockStmt->execute();
                 $stocksrecommendation = $stockStmt->fetchAll(PDO::FETCH_ASSOC);
 
@@ -169,16 +185,18 @@ function doValidate($sessionId) {
 
                 foreach ($symbols as $symbol) {
                     $historicalQuery = "SELECT date, open, high, low, close, volume 
-                                        FROM stock_prices 
+                                        FROM stockdb.stock_prices 
                                         WHERE symbol = :symbol
                                         ORDER BY date DESC 
                                         LIMIT 10";
-                    $historicalStmt = $stockpdo->prepare($historicalQuery);
+                    $historicalStmt = $pdo->prepare($historicalQuery);
                     $historicalStmt->bindParam(':symbol', $symbol);
                     $historicalStmt->execute();
                     $data = $historicalStmt->fetchAll(PDO::FETCH_ASSOC);
                     $historicalData[$symbol] = $data;
                 }
+
+		$pdo->commit();
 
                 return [
                     "success" => true,
@@ -194,8 +212,10 @@ function doValidate($sessionId) {
                 "success" => false,
                 "message" => "Invalid session ID."
             ];
-        }
+	}
+      }
     } catch (PDOException $e) {
+	$pdo->rollBack();
         error_log('Database error: ' . $e->getMessage());
         return [
             "success" => false,
