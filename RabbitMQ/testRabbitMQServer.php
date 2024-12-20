@@ -124,7 +124,8 @@ function doValidate($sessionId) {
         $pdo = new PDO($dbLogin, $dbUsername, $dbPassword);
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-        
+	$pdo->beginTransaction();
+
         $stmt = $pdo->prepare("SELECT session_end FROM sessions WHERE session_id = :session_id");
         $stmt->bindParam(':session_id', $sessionId);
         $stmt->execute();
@@ -175,6 +176,7 @@ function doValidate($sessionId) {
                 $stmt->bindParam(':session_id', $sessionId);
                 $stmt->execute();
 
+		$pdo->commit();
 
                 // Return session validation and stock data
                 return [
@@ -183,14 +185,7 @@ function doValidate($sessionId) {
                     "user_id" => $userId,
                     "balance" => $balance,
                     "stocks" => $stocks  // Include the list of stocks
-		];/*	
-                return [
-                    "success" => true,
-		    "message" => "Session validated.",
-		    "user_id" => $userId,
-		    "balance" => $balance
-
-		];*/
+		];
 	    }
 	}
         } else {
@@ -201,7 +196,8 @@ function doValidate($sessionId) {
         }
     } catch (PDOException $e) {
         error_log('Database error: ' . $e->getMessage());
-        return [
+	$pdo->rollBack();
+	return [
             "success" => false,
             "message" => "An error occurred during session validation."
         ];
