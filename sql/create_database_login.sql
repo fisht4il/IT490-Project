@@ -1,0 +1,5 @@
+CREATE DATABASE IF NOT EXISTS logindb;
+GRANT ALL PRIVLEGES ON logindb.* TO 'rabbit'@'%' WITH GRANT OPTION;
+use logindb;
+FLUSH PRIVILEGES;
+
