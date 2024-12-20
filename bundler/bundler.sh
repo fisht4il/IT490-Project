@@ -19,14 +19,15 @@ BUNDLE_NAME="encoded_${NAME}.b64"
 
 echo "Creating Bundle [$TARBALL_NAME]"
 
-tar -czf "$TARBALL_NAME" -C "$SOURCE" .
+tar -czvf "$TARBALL_NAME" -C "$SOURCE" .
 
 if [ $? -ne 0 ]; then
 	echo "ERROR: could not create bundle"
 	exit 1
 fi
 
-base64 "$TARBALL_NAME" > "$BUNDLE_NAME"
+#base64 "$TARBALL_NAME" > "$BUNDLE_NAME"
 
 echo "$NAME $BUNDLE_NAME"
-php bundler.php "$NAME" "$BUNDLE_NAME"
+#php bundler.php "$NAME" "$BUNDLE_NAME"
+php bundler.php "$NAME" "$TARBALL_NAME"

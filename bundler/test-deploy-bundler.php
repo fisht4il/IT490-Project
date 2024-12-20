@@ -84,8 +84,10 @@ function bundler($request){
 		$tarballPath = '../bundles/'. $nameFormat;
 
 		$tarball = $request['tarball'];
-		$tarballData = base64_decode($tarball);
-
+		//TODO testing
+		//$tarballData = base64_decode($tarball);
+		$tarballData = $tarball;
+		/*
 		if (file_put_contents($tarballPath, $tarballData)){
 			
 			return[
@@ -99,6 +101,10 @@ function bundler($request){
 				"message" => "ERROR: could not save tarball"
 			];
 		}
+		 */
+		$deployAdd = $_ENV['deployAdd'];
+		$deployTarg = $_ENV['deployTarg'];
+		shell_exec("scp $nameFormat $deployTarg@$deployAdd:$tarballPath;");
         	
     	} catch (PDOException $e) {
         	error_log('Database error: ' . $e->getMessage());
