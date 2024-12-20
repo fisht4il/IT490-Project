@@ -45,12 +45,16 @@ function requestProcessor($request) {
             "message" => "ERROR: Unsupported message type"
         ]);
     }
+    require_once('deploy-bundler.php');
 
     switch ($request['type']) {
 	case "bundle":
-	    require_once('deploy-bundler.php');
+	    
             $response = bundler($request);
 	    break;
+	case "deploy":
+		
+	    $response = deployer($request);
 	/*
 	case "bundler":
 	    $client = newRabbitMQClient("testRabbitMQini", "dev-deploy");

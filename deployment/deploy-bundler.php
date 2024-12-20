@@ -122,6 +122,65 @@ function bundler($request){
 
 }
 
+function deployer($request){
+	if (!isset($request['name'])){
+		return [
+			"success" => false,
+			"message" => "ERROR: no valid name set!"
+		];
+	}//else
+	try {
+		global $dbHost;
+                global $dbUser;
+                global $dbPass;
+                global $dbName;
+
+                $dbLogin = "mysql:host=$dbHost;dbname=$dbName";
+
+                $pdo = new PDO($dbLogin, $dbUser, $dbPass);
+                $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+                $stmt = $pdo->prepare("SELECT bundle_name, version FROM bundles WHERE bundle_name = :name ORDER BY version DESC LIMIT 1");
+
+                $stmt->bindParam(':name', $name);
+                $stmt->execute();
+		$response = $stmt->fetch(PDO::FETCH_ASSOC);
+		
+		$version = $response['version'];
+		$versionFormat = number_format($version, 1);
+                $nameFormat = $name . '_' . $versionFormat. '.tar.gz';
+                $tarballPath = '../bundles/'. $nameFormat;
+
+                //TODO replace with scp
+                //$tarball = $request['tarball'];
+
+                $tarball = '../bundles/' . $name . '.tar.gz';
+		$targetAdd = $request['targetAdd'];
+
+		shell_exec("scp install@$targetAdd '$tarballPath /var/www/html/bundles/$tarballPath'");
+
+		//shell_exec("mv $tarball $tarballPath");
+		//
+		return [
+			"success" => true,
+			"message" => "Deployed " . $nameFormat . " to the target!\n"
+		];
+
+	} catch (PDOException $e){
+		error_log('DB error: ' . $e->getMessage());
+		return [
+			"success" => false,
+			"message" => "ERROR: " . $e->getMessage();
+		];
+	} finally {
+		if ($stmt){
+			$stmt=null;
+		}
+		$pdo=null;
+	}
+}
+
+
 //
 /* TODO re-implement properly
 function requestProcessor($request) {
