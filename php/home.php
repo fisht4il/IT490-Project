@@ -25,6 +25,9 @@ if (!$response['success']) {
     $userId = $response['user_id'];
     $current_balance = $response['balance'];
     $stocksrecommendation = $response['stocksrecommendation'];
+    $portfolio = $response['portfolio'];
+
+
 }
 ?>
 
@@ -56,7 +59,8 @@ if (!$response['success']) {
         <label>Value:</label><br><br> <!-- php account value -->
         <label>Day's gain/loss:</label><br><br> <!-- php gain/loss -->
         <label>Cash & sweep funds</label><br><br>
-        <h3>Portfolio</h3>
+	<h3>Portfolio</h3>
+	<h3 id="no-portfolio"> Start trading now! </h3>
         <table id="home-portfolio">
             <tr>
                 <th>Stock</th>
@@ -83,10 +87,30 @@ if (!$response['success']) {
             <p>No recommendations available at the moment.</p>
         <?php endif; ?>
     </div>
-
+	
     <!--  <?php include 'partials/chat.php'; ?> -->
 
     <?php include 'partials/footer.php'; ?>
 
 </body>
+<script>
+	document.addEventListener('DOMContentLoaded', function(){
+		<?php
+		global $portfolio;
+		if (!$portfolio){
+			hideElement('home-pportfolio');	
+		} else { hideElement('no-portfolio'); }
+		?>
+	});
+
+        function hideElement(elementId){
+                var element = document.getElementById(elementId);
+                if (element){
+                        element.style.display = 'none';
+                }
+        }
+        
+</script>
+
+
 </html>

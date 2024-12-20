@@ -38,9 +38,9 @@ function doRegister($username, $password) {
         $stmtBalance->bindValue(':current_balance', 1000.00);
         $stmtBalance->execute();
 
-        $stmtPortfolio = $pdo->prepare("INSERT INTO stockdb.user_portfolio (user_id, symbol) VALUES (:user_id, 'APPL')");
-	$stmtPortfolio->bindParam(':user_id', $userId);
-        $stmtPortfolio->execute();
+        //$stmtPortfolio = $pdo->prepare("INSERT INTO stockdb.user_portfolio (user_id, symbol) VALUES (:user_id, 'APPL')");
+	//$stmtPortfolio->bindParam(':user_id', $userId);
+        //$stmtPortfolio->execute();
 
 	$pdo->commit();
 
@@ -199,8 +199,17 @@ function doValidate($sessionId) {
                     $historicalStmt->execute();
                     $data = $historicalStmt->fetchAll(PDO::FETCH_ASSOC);
                     $historicalData[$symbol] = $data;
-                }
+		}
 
+			
+		$stmtPortfolio = $pdo->prepare("SELECT * FROM stockdb.user_portfolio WHERE user_id = :user_id");
+		$stmtPortfolio->bindParam(':user_id', $userId);
+		$stmtPortfolio->execute();
+		$portfolio = $stmtPortfolio->fetchAll(PDO::FETCH_ASSOC);
+
+		if (empty($portfolio)){
+			$portfolio = false;
+		}
 		$pdo->commit();
 
                 return [
@@ -209,7 +218,8 @@ function doValidate($sessionId) {
                     "user_id" => $userId,
                     "balance" => $balance,
                     "stocksrecommendation" => $stocksrecommendation,
-                    "historicalData" => $historicalData
+		    "historicalData" => $historicalData,
+		    "portfolio" => $portfolio
                 ];
             }
         } else {
