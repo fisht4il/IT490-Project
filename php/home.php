@@ -26,7 +26,10 @@ if (!$response['success']) {
     $current_balance = $response['balance'];
     $stocksrecommendation = $response['stocksrecommendation'];
     $portfolio = $response['portfolio'];
-
+    $isnotEmpty = true;
+    if (!$portfolio){
+    	$isnotEmpty = false;
+    }
 
 }
 ?>
@@ -60,16 +63,18 @@ if (!$response['success']) {
         <label>Day's gain/loss:</label><br><br> <!-- php gain/loss -->
         <label>Cash & sweep funds</label><br><br>
 	<h3>Portfolio</h3>
-	<h3 id="no-portfolio"> Start trading now! </h3>
-        <table id="home-portfolio">
-            <tr>
+	<p style="display: <?php echo ($isnotEmpty) ? 'none' : 'block';?>"> Start trading now! </h3>
+	
+	<table style="display: <?php echo ($isnotEmpty) ? 'block' : 'none'; ?>">
+            <tr >
                 <th>Stock</th>
                 <th>Quantity</th>
                 <th>Value</th>
                 <th>Gain/Loss</th>
                 <th>Chart</th>
             </tr>
-        </table>
+	</table>
+	
     </div>
 
     <div class="container">
@@ -92,25 +97,8 @@ if (!$response['success']) {
 
     <?php include 'partials/footer.php'; ?>
 
+
+
 </body>
-<script>
-	document.addEventListener('DOMContentLoaded', function(){
-		<?php
-		global $portfolio;
-		if (!$portfolio){
-			hideElement('home-pportfolio');	
-		} else { hideElement('no-portfolio'); }
-		?>
-	});
-
-        function hideElement(elementId){
-                var element = document.getElementById(elementId);
-                if (element){
-                        element.style.display = 'none';
-                }
-        }
-        
-</script>
-
 
 </html>
