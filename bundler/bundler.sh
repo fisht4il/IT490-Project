@@ -36,4 +36,5 @@ fi
 #php bundler.php "$NAME" "$TARBALL_NAME"
 
 scp test@deploynode "$TARBALL_NAME /var/www/html/bundles/$TARBALL_NAME"
-sshpass -p "$DEPLOY_PASS" ssh test@deploynode "php /var/www/html/deploy-bundler.php $NAME"
+php bundler.php "$NAME"
+#sshpass -p "$DEPLOY_PASS" ssh test@deploynode "php /var/www/html/deploy-bundler.php $NAME"

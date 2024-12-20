@@ -10,19 +10,22 @@ require_once('../RabbitMQ/rabbitMQLib.inc');
 
 date_default_timezone_set('America/New_York');
 
-if ($argc != 3){
+if ($argc != 2){
 	echo "something wrong: wrong bundler argument!\n";
 	exit(1);
 }
 
 $bundleName = $argv[1];
-$bundleFile = $argv[2];
+//$bundleFile = $argv[2];
 
 $request = [
 	'type' => "bundler",
-	'name' => $bundleName,
-	'tarball' => $bundleFile
+	'name' => $bundleName//,
+	//'tarball' => $bundleFile
 ];
+
+$cllient = newRabbitMQClient("testRabbitMQ.ini","devDeploy");
+$response = $client->send_request($request);
 
 
 //TODO implement rabbitmq testing betweem VMs, using one vm is not working
@@ -30,11 +33,11 @@ $request = [
 //$response = $client->send_request($request);
 
 
-shell_exec("");
+//shell_exec("");
 //require_once('test-deploy-bundler.php');
 //bundler($request);
 
-//echo json_decode($response);
+echo json_decode($response['message']);
 
 
 ?>
