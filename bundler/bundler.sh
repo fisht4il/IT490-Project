@@ -1,5 +1,7 @@
 #!/bin/bash
 
+source /var/www/html/.env
+
 if [ $# -lt 2 ]; then
 	echo "No arguments. Usage: <bundle name> <bundle source path>"
 	exit 1
@@ -34,4 +36,4 @@ fi
 #php bundler.php "$NAME" "$TARBALL_NAME"
 
 scp test@deploynode "$TARBALL_NAME /var/www/html/bundles/$TARBALL_NAME"
-ssh test@deploynode "php /var/www/html/deploy-bundler.php $NAME"
+sshpass -p "$DEPLOY_PASS" ssh test@deploynode "php /var/www/html/deploy-bundler.php $NAME"
