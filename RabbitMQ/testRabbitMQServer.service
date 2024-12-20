@@ -9,7 +9,7 @@ Restart=always
 RestartSec=10
 
 #  change the  path to the file
-ExecStart=/usr/bin/php /home/it-rtg/RabbitMQ/testRabbitMQServer.php
+ExecStart=/usr/bin/php /var/www/html/RabbitMQ/testRabbitMQServer.php
 
 
 [Install]
