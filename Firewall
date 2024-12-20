@@ -1,0 +1,12 @@
+sudo ufw allow 9993/tcp
+sudo ufw allow 22/tcp
+sudo ufw allow 3306/tcp
+sudo ufw allow 80/tcp
+sudo ufw allow 443/tcp
+sudo ufw allow 5672/tcp
+sudo ufw deny 5060/tcp
+sudo ufw deny 5061/tcp
+sudo ufw deny 3128/tcp
+sudo ufw allow from 128.235.159.35 to any port 22
+sudo ufw deny 3306/tcp
+sudo ufw deny in on eth0 from 172.23.0.0/16
